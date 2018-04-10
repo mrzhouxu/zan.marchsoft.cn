@@ -4,6 +4,15 @@ import Vue from 'vue'
 import App from './App'
 import router from './router' 
 
+import axios from 'axios'
+window.axios = axios;
+// window.axios = require('axios');
+
+// window.axios.defaults.headers.common = {
+//     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf"]').content,
+//     'X-Requested-With': 'XMLHttpRequest'
+// };
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
