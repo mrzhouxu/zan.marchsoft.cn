@@ -5,7 +5,14 @@ import App from './App'
 import router from './router' 
 
 import axios from 'axios'
-window.axios = axios;
+window.axios = axios
+
+import Mock from 'mockjs'
+window.Mock = Mock
+require('../util/mock/pc_mock')
+require('../util/mock/mobile_mock')
+
+
 // window.axios = require('axios');
 
 // window.axios.defaults.headers.common = {
