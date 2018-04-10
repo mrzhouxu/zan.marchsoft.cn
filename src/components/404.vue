@@ -1,7 +1,6 @@
 <template>
   <div>
-    <img src="../../static/pc/img/logo.png">
-    迷路了
+    <h1 style="text-align:center;">迷路了</h1>
   </div>
 </template>
 
