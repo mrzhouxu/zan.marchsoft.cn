@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- <img src="./assets/logo.png"> -->
-    <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -25,9 +25,8 @@ export default {
         return flag;
     }
     if(IsPC()){
-      this.$router.push('/pc/test')
     }else{
-      this.$router.push('/mobile/test')
+      location.href = '/mobile.html'
     }
   }
 }

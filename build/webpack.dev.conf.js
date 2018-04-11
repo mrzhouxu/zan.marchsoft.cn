@@ -55,7 +55,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'index.html',
-      inject: true
+      inject: true,
+      chunks: ['pc']//需要引入的Chunk，不配置就会引入所有页面的资源
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'mobile.html',
+      template: 'mobile.html',
+      inject: true,
+      chunks: ['mobile']//需要引入的Chunk，不配置就会引入所有页面的资源
     }),
     // copy custom static assets
     new CopyWebpackPlugin([
