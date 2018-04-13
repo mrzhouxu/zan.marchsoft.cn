@@ -9,8 +9,7 @@ window.axios = axios
 
 import Mock from 'mockjs'
 window.Mock = Mock
-require('../util/mock/pc_mock')
-require('../util/mock/mobile_mock')
+require('../../util/mock/mobile_mock')
 
 // 引入全部组件
 import 'mint-ui/lib/style.css'
@@ -18,18 +17,6 @@ import Mint from 'mint-ui';
 
 Vue.use(Mint);
 
-
-import iView from 'iview';
-import 'iview/dist/styles/iview.css';
-Vue.use(iView);
-
-
-// window.axios = require('axios');
-
-// window.axios.defaults.headers.common = {
-//     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf"]').content,
-//     'X-Requested-With': 'XMLHttpRequest'
-// };
 
 Vue.config.productionTip = false
 
