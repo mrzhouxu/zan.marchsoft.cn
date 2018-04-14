@@ -16,6 +16,12 @@ import Mint from 'mint-ui';
 Vue.use(Mint);
 import 'mint-ui/lib/style.css'
 
+import {filters} from './filter'
+Object.keys(filters).forEach(key => {
+    Vue.filter(key, filters[key])
+})
+
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

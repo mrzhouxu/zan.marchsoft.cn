@@ -1,7 +1,6 @@
 <template>
   <div>
-        pc
-        <mt-button @click.native="handleClick">按钮</mt-button>
+        <h1>我是后台</h1>
         
 
   </div>
