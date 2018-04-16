@@ -8,12 +8,28 @@ let all_router = {
   routes:[
     {
       path: '/',
-      component: resolve =>void(require(['../components/Test'], resolve))
+      component: resolve =>void(require(['../components/home/Record'], resolve))
     },
     {
-      path: '/test',
-      component: resolve =>void(require(['../components/Test'], resolve))
-    }
+      path: '/home/record',
+      name: '点赞记录',
+      component: resolve =>void(require(['../components/home/Record'], resolve))
+    },
+    {
+      path: '/home/recive',
+      name: '收到的赞',
+      component: resolve =>void(require(['../components/home/Recive'], resolve))
+    },
+    {
+      path: '/home/mine',
+      name: '我的赞',
+      component: resolve =>void(require(['../components/home/Mine'], resolve))
+    },
+    {
+      path: '/home/center',
+      name: '个人中心',
+      component: resolve =>void(require(['../components/home/Center'], resolve))
+    },
   ]
 }
 

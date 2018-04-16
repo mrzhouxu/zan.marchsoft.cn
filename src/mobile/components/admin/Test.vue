@@ -1,7 +1,13 @@
 <template>
   <div>
+<<<<<<< HEAD:src/mobile/components/Test.vue
         pc
         <mt-button @click.native="handleClick">按钮</mt-button>
+=======
+        <h1>我是后台</h1>
+        
+
+>>>>>>> 01d3f8177bc07d7939babe49014b5f0d6a58a7fd:src/mobile/components/admin/Test.vue
   </div>
 </template>
 
