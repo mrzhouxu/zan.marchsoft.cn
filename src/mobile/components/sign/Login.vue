@@ -2,7 +2,7 @@
     <div v-bind:style="{height:clientHeight + 'px'}" class="bg0">
         <div class="hTop">
             <!-- <img v-bind:style="{background-image: url(../../assets/img/bg.jpg)"> -->
-            <span>March</span>
+            <span>Mar</span>
         </div>
         <mt-field placeholder="账号" class="input"></mt-field>
         <mt-field placeholder="密码" type="password" class="input"></mt-field>
