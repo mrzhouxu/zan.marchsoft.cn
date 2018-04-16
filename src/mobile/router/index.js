@@ -30,6 +30,11 @@ let all_router = {
       name: '个人中心',
       component: resolve =>void(require(['../components/home/Center'], resolve))
     },
+    {
+      path: '/sign/login',
+      name: '登录',
+      component: resolve =>void(require(['../components/sign/Login'], resolve))
+    },
   ]
 }
 
