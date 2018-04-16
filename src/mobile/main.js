@@ -4,6 +4,8 @@ import Vue from 'vue'
 import App from './App'
 import router from './router' 
 
+import 'normalize.css'
+
 import axios from 'axios'
 window.axios = axios
 axios.defaults.withCredentials = true
