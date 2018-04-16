@@ -13,8 +13,13 @@
     "axios": "^0.18.0",
     "cube-ui": "^1.7.3",
     "iview": "^2.12.0",
+    "less": "^3.0.1",
+    "less-loader": "^4.1.0",
     "mint-ui": "^2.2.13",
     "mockjs": "^1.0.1-beta3",
+    "normalize.css": "^8.0.0",
+    "sass": "^1.2.0",
+    "sass-loader": "^7.0.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
