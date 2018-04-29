@@ -13,11 +13,13 @@ axios.defaults.withCredentials = true
 import Mock from 'mockjs'
 window.Mock = Mock
 require('../../util/mock/mobile_mock')
+require('../../util/mock/xuhong_mock.js')
 
 // 引入全部组件
-import Mint from 'mint-ui';
-Vue.use(Mint);
 import 'mint-ui/lib/style.css'
+import Mint from 'mint-ui';
+
+Vue.use(Mint);
 
 import {filters} from './filter'
 Object.keys(filters).forEach(key => {
