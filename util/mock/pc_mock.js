@@ -5,3 +5,4 @@ var data = Mock.mock('baidu.com',{
             'id|+1': 1
         }]
     })
+
