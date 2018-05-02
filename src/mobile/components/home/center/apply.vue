@@ -21,7 +21,7 @@
           </mt-popup>
         </div>
         <p class="about">关于申请</p>
-        <div v-for="n in data" class="apply-userinfor">
+        <div v-for="n in data" class="apply-userinfor" :key="n">
           <div class="name">
             <p>*</p>
             <mt-field label="姓名" v-model="name" placeholder="请输入"></mt-field>

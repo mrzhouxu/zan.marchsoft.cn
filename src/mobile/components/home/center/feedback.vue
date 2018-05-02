@@ -11,7 +11,7 @@
           <mt-loadmore :top-method="loadTop" 
           :bottom-method="loadBottom" :autoFill = "false"
           :bottom-all-loaded="allLoaded" ref="loadmore">
-            <div v-for="i in data" class="details" style="display:flex; border-bottom: 1px solid rgba(187,187,187, 0.2);">
+            <div v-for="i in data" class="details" style="display:flex; border-bottom: 1px solid rgba(187,187,187, 0.2);"  :key="i">
               <div class="feedback-user"><img :src="i.picture"></div>
               <p v-on:click="eject_applytype">{{i.content}}</p>
               <mt-popup v-model="popupVisible" popup-transition="popup-fade">
