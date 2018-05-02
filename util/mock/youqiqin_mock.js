@@ -1,5 +1,34 @@
+
+Mock.mock("https://localhost:8080/user/personalCenter/getApplyType",{
+	"code": "0",
+	"msg": "success",
+	"data": [
+        {
+          label: '项目',
+          value: '1'
+        },
+        {
+          label: '讲课',
+          value: '2'
+        },
+        {
+          label: '活动',
+          value: '3'
+        },
+        {
+          label: '英语口语',
+          value: '4'
+        }
+      ]
+})
+//退出登录
+Mock.mock("https://localhost:8080/user/login_out","get",{
+	"code":"0",
+	"msg":"成功"
+})
+
 // 添加匿名留言
-Mock.mock('/user/personalCenter/addTalk',{
+Mock.mock('https://localhost:8080/user/personalCenter/addTalk',{
     // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
         // 'list|1-10': [{
             // 属性 id 是一个自增数，起始值为 1，每次增 1
@@ -17,37 +46,73 @@ Mock.mock('/user/personalCenter/addTalk',{
 })
 
 // 获取匿名留言
-Mock.mock('/user/personalCenter/getTalk',{
+Mock.mock('https://localhost:8080/user/personalCenter/getTalk',{
         // "code": "0",
 		// "msg": "success",
 		"data": [
 			{
-				'content': '@cword(5, 30)',
-				'create_time|1-10': 10
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
 			},
 			{
-				'content': '@cword(5, 30)',
-				'create_time|1-10': 10
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
 			},
 			{
-				'content': '@cword(5, 30)',
-				'create_time|1-10': 10
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
 			},
 			{
-				'content': '@cword(5, 30)',
-				'create_time|1-10': 10
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
 			},
 			{
-				'content': '@cword(5, 30)',
-				'create_time|1-10': 10
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
 			},
 			{
-				'content': '@cword(5, 30)',
-				'create_time|1-10': 10
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
+			},
+			{
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
+			},
+			{
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
+			},
+			{
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
+			},
+			{
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
+			},
+			{
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
+			},
+			{
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
+			},
+			{
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
+			},
+			{
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
+			},
+			{
+				'content': '@cparagraph(20)',
+				'create_time': '@integer(1525273647, 1526273647)'
 			},
 		]
 })
-// Mock.mock('/new_infor',{
+// Mock.mock('https://localhost:8080/new_infor',{
 //     // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
 //         'list|5': [{
 //             // 属性 id 是一个自增数，起始值为 1，每次增 1
@@ -67,14 +132,15 @@ Mock.mock('/user/personalCenter/getTalk',{
 
 
 // 修改密码
-Mock.mock('/user/personalCenter/updatePassword',{
+Mock.mock('https://localhost:8080/user/personalCenter/updatePassword',{
 // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
     // 'list|1': [
         // {
             // 属性 id 是一个自增数，起始值为 1，每次增 1
             // 'id|+1': 1
 	"code":"0",
-	"msg":"成功"
+	"msg":"修改成功"
+	
 	        
    //  },
    //  {
@@ -88,21 +154,21 @@ Mock.mock('/user/personalCenter/updatePassword',{
 
 
 // 申请点赞币
-Mock.mock('/user/personalCenter/addApply',{
+Mock.mock('https://localhost:8080/user/personalCenter/addApply',{
 	"code":"0",
 	"msg":"成功"
 })
 
 
 // 购买点赞币
-Mock.mock('/alipay/wappay',{
+Mock.mock('https://localhost:8080/alipay/wappay',{
 	"code": "0",
 	"msg": "success",
 })
 
 
 
-Mock.mock('/order',{
+Mock.mock('https://localhost:8080/order',{
     // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
         'list|5': [{
             // 属性 id 是一个自增数，起始值为 1，每次增 1
@@ -121,7 +187,7 @@ Mock.mock('/order',{
 })
 
 // 我的订单
-Mock.mock('/user/personalCenter/getOrderList',{
+Mock.mock('https://localhost:8080/user/personalCenter/getOrderList',{
 	"code": "0",
 	"msg": "success",
 	"data": [
@@ -154,7 +220,7 @@ Mock.mock('/user/personalCenter/getOrderList',{
 
 
 
-Mock.mock('/order',{
+Mock.mock('https://localhost:8080/order',{
     // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
         'list|5': [{
             // 属性 id 是一个自增数，起始值为 1，每次增 1
@@ -175,7 +241,7 @@ Mock.mock('/order',{
 
 
 // 接受订单任务>历史记录
-Mock.mock('/user/personalCenter/getProcessOrderr',{
+Mock.mock('https://localhost:8080/user/personalCenter/getProcessOrderr',{
 	"data":[
 		{
 			'content':'@cword(10, 20)',
@@ -235,5 +301,4 @@ Mock.mock('/user/personalCenter/getProcessOrderr',{
 	]
 })
 // })
-
 

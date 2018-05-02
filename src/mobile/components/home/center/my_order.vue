@@ -14,7 +14,7 @@
             </div>
         </div>
         <p class="my-order"><span>我的</span>订单</p>
-        <div class="new-infor" v-for="i in new_infor"  :key="i"> 
+        <div class="new-infor" v-for="i,index in new_infor"  :key="index"> 
             <div class="new-text">
                 <p>最新订单</p>
                 <p>信息</p>
@@ -36,7 +36,7 @@
                 <mt-loadmore :top-method="loadTop" 
                 :bottom-method="loadBottom" :autoFill = "false"
                 :bottom-all-loaded="allLoaded" ref="loadmore">
-                  <div class="old" v-for="n in list"  style="display:flex; border-bottom: 1px solid rgba(187,187,187, 0.5); padding: 10px 0;" :key="n">
+                  <div class="old" v-for="n,index in list"  style="display:flex; border-bottom: 1px solid rgba(187,187,187, 0.5); padding: 10px 0;" :key="index">
                         <div class="order-infortime">
                             <p>{{n.year}}</p>
                             <p>{{n.hour}}</p>
