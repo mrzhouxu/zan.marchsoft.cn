@@ -14,19 +14,16 @@
             </div>
         </div>
         <p class="my-order"><span>我的</span>订单</p>
-        <div class="new-infor" v-for="i in new_infor"  :key="i"> 
+        <div class="new-infor"> 
             <div class="new-text">
                 <p>最新订单</p>
                 <p>信息</p>
             </div>
-            <div class="new-orderinfor">
+            <div class="new-orderinfor" v-if="list.length!=0" v-on:click="eject_applytype(list[0])">
                 <div><img src="../../../assets/img/order-userpic.png"></div>
                 <div>
-                    <p>{{i.states}}</p>
-                    <p v-on:click="eject_applytype">[原因]：{{i.contents}}</p>
-                    <mt-popup v-model="popupVisible" popup-transition="popup-fade">
-                        <div class="details">[原因]：您的金额不足，请审查！</div>
-                    </mt-popup>
+                    <p>{{list[0].states}}状态</p>
+                    <p>{{list[0].content}}</p>
                 </div>
             </div>
         </div>
@@ -36,19 +33,25 @@
                 <mt-loadmore :top-method="loadTop" 
                 :bottom-method="loadBottom" :autoFill = "false"
                 :bottom-all-loaded="allLoaded" ref="loadmore">
-                  <div class="old" v-for="n in list"  style="display:flex; border-bottom: 1px solid rgba(187,187,187, 0.5); padding: 10px 0;" :key="n">
+                  <div class="old" v-for="(n,index) in list"  style="display:flex; border-bottom: 1px solid rgba(187,187,187, 0.5); padding: 10px 0;" :key="index">
                         <div class="order-infortime">
-                            <p>{{n.year}}</p>
-                            <p>{{n.hour}}</p>
+                            <p>{{n.create_time}}</p>
+                            <!-- <p>{{n.hour}}</p> -->
                         </div>
-                        <div class="order-infor" style="display:flex;">
+                        <div class="order-infor" style="display:flex;" v-on:click="eject_applytype(n)">
                             <p>{{n.content}}</p>
-                            <p>{{n.state}}</p>
+                            <p>{{n.status}}</p>
                         </div>
                   </div>
                 </mt-loadmore>
             </div>
         </div>
+        <mt-popup v-model="popupVisible" popup-transition="popup-fade" class="mint-popup-2">
+            <div>[时间]：{{popup.create_time}}</div>
+            <div>[内容]：{{popup.content}}</div>
+            <div>[状态]：{{popup.status}}</div>
+            <div class="details">[原因]：{{popup.resaon}}</div>
+        </mt-popup>
     </div>
 </template>
 <script>
@@ -57,7 +60,7 @@ export default {
     data () {
         return {
             popupVisible:false,
-            new_infor:[],
+            popup:[],
             states:'',
             contents:'',
             list:[],
@@ -67,61 +70,67 @@ export default {
             state:'',
             allLoaded:false,
             loading:false,
+            page: 1,
+            flag: true,
         }
     },   
     methods:{
-        eject_applytype: function (){
+        eject_applytype: function (val){
           // console.log(123);
           this.popupVisible = true;
+          this.popup = val;
         },
         loadTop: function() {
             this.$refs.loadmore.onTopLoaded();
         },
-        infor: function(){
-            var that = this;
-            axios.get('/order')
-            .then(function (response) {
-                // console.log(that.loading,that.allLoaded)
-                var new_infor = response.data.list;
-                // console.log(response.data.list);
-                for (var i = 0; i < new_infor.length; i++) {
-                  // console.log(123);
-                  var L =[];
-                  // L.year = list[i].year;
-                  // L.hour = list[i].hour;
-                  L.contents = new_infor[i].content;
-                  L.states = new_infor[i].state.msg;
-                  // console.log(L.contents);
-                  that.new_infor.push(L);
-                };
-                // this.data = response;
-                that.loading = false;
-                // that.allLoaded = false;
-                that.$refs.loadmore.onBottomLoaded();
-            })
-            .catch(function (error) {
-                // console.log(error);
-            });
-        },
-        test:function(){
+        // infor: function(){
+        //     var that = this;
+        //     axios.get('/order')
+        //     .then(function (response) {
+        //         // console.log(that.loading,that.allLoaded)
+        //         var new_infor = response.data.list;
+        //         // console.log(response.data.list);
+        //         for (var i = 0; i < new_infor.length; i++) {
+        //           // console.log(123);
+        //           var L =[];
+        //           // L.year = list[i].year;
+        //           // L.hour = list[i].hour;
+        //           L.contents = new_infor[i].content;
+        //           L.states = new_infor[i].state.msg;
+        //           // console.log(L.contents);
+        //           that.new_infor.push(L);
+        //         };
+        //         // this.data = response;
+        //         that.loading = false;
+        //         // that.allLoaded = false;
+        //         that.$refs.loadmore.onBottomLoaded();
+        //     })
+        //     .catch(function (error) {
+        //         // console.log(error);
+        //     });
+        // },
+        infor:function(){
             var that = this;
             this.loading = true;
             // this.allLoaded = true;
-            axios.get('/order')
+            axios.get('/user/personalCenter/getOrderList')//,{params:{page:this.page}}
             .then(function (response) {
+                that.page++;
+                that.flag = true;
                 // console.log(that.loading,that.allLoaded)
-                var list = response.data.list;
-                // console.log(response.data.list);
+                var list = response.data.result;
+                console.log(response.data.result);
                 for (var i = 0; i < list.length; i++) {
-                  // console.log(123);
-                  var L =[];
-                  L.year = list[i].year;
-                  L.hour = list[i].hour;
+                  console.log(123);
+                  var L={};
+                  L.create_time = list[i].create_time;
                   L.content = list[i].content;
-                  L.state = list[i].state.msg;
+                  L.status = list[i].status;
+                  L.resaon = list[i].resaon;
                   // console.log(L.hour);
                   that.list.push(L);
                 };
+                console.log(that.list,456)
                 // this.data = response;
                 that.loading = false;
                 // that.allLoaded = false;
@@ -142,12 +151,15 @@ export default {
         },
         loadBottom:function() {  
             // console.log(123546)
-            this.test();
-            this.$refs.loadmore.onBottomLoaded();
+            if(this.flag){
+                this.flag = false;
+                this.infor();
+                this.$refs.loadmore.onBottomLoaded();
+            }
         }
     }, 
     mounted(){
-        this.test();
+        // this.test();
         this.infor();
     },
 }
@@ -294,15 +306,23 @@ export default {
     }
     .details {
         /*自动换行*/
-        height: auto;  
+        /* height: auto;  
         word-wrap:break-word;  
         word-break:break-all;  
-        overflow: hidden;
+        overflow: hidden; */
         /*自动换行*/
-        padding: 20px;       
+        /* padding: 20px;       
         width: 150px;
         text-indent: 30px;
-        line-height: 20px;
+        line-height: 20px; */
+    }
+    .mint-popup-2 {
+        width: 80%;
+        height: 70%;
+        top: 50%;
+        backface-visibility: hidden;
+        line-height: 35px;
+        padding: 5%;
     }
 </style>
 

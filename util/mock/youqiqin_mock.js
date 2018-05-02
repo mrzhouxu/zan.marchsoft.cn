@@ -124,30 +124,42 @@ Mock.mock('/order',{
 Mock.mock('/user/personalCenter/getOrderList',{
 	"code": "0",
 	"msg": "success",
-	"data": [
+	"result": [
 		{
 			'content': '@cword(5, 30)',
 			'create_time|1-10': 10,
+			'status':1,
+			'resaon':'@cword(5, 30)'
 	    },	
 		{
 			'content': '@cword(5, 30)',
-			'create_time|1-10': 10
+			'create_time|1-10': 10,
+			'status':1,
+			'resaon':'@cword(5, 30)'
 		},
 		{
 			'content': '@cword(5, 30)',
-			'create_time|1-10': 10
+			'create_time|1-10': 10,
+			'status':1,
+			'resaon':'@cword(5, 30)'
 		},
 		{
 			'content': '@cword(5, 30)',
-			'create_time|1-10': 10
+			'create_time|1-10': 10,
+			'status':1,
+			'resaon':'@cword(5, 30)'
 		},
 		{
 			'content': '@cword(5, 30)',
-			'create_time|1-10': 10
+			'create_time|1-10': 10,
+			'status':1,
+			'resaon':'@cword(5, 30)'
 		},
 		{
 			'content': '@cword(5, 30)',
-			'create_time|1-10': 10
+			'create_time|1-10': 10,
+			'status':1,
+			'resaon':'@cword(5, 30)'
 		},
 	]
 })

@@ -256,7 +256,7 @@
     }
 </style>
 <script>
-import { Toast } from 'mint-ui';
+import { Toast,Indicator } from 'mint-ui';
 import {filters} from '../../filter'
 import NavBottom from '../NavBottom.vue';
 export default {
@@ -295,7 +295,7 @@ export default {
         SetOpacity: function(ev, v){ 
            ev.filters ? ev.style.filter = 'alpha(opacity=' + v + ')' : ev.style.opacity = v / 100; 
         },
-        getData: function() {
+        getData: function(resolve, reject) {
             var zanwu = this.Id('reciveShort');
             var zanwu2 = this.Id('reciveShort2');
             var that = this;
@@ -323,12 +323,13 @@ export default {
                         that.Us.Vip++;
                     };
                 };
+                resolve();
             })
             .catch(function (error) {
                 console.log(error);
             });
         },
-        getDataUsed: function() {
+        getDataUsed: function(resolve, reject) {
             var zanwu11 = this.Id('reciveShort11');
             var zanwu12 = this.Id('reciveShort12');
             var that = this;
@@ -354,12 +355,13 @@ export default {
                         that.UsUsed.Vip++;
                     };
                 };
+                resolve();
             })
             .catch(function (error) {
                 console.log(error);
             });
         },
-        getDataOld: function() {
+        getDataOld: function(resolve, reject) {
             var zanwu31 = this.Id('reciveShort31');
             var that = this;
             axios.get('/user/seeCon',{
@@ -380,6 +382,7 @@ export default {
                         that.UsOld.Pu++;
                     };
                 };
+                resolve();
             })
             .catch(function (error) {
                 console.log(error);
@@ -501,10 +504,21 @@ export default {
         }
     },
     mounted(){
-        console.log(filters.xtoy("[1,2,3]"),filters.ytox('VjNwRmMwMXBkM3BZVVQwOQ=='));
-        this.getData();
-        this.getDataUsed();
-        this.getDataOld();
+        // console.log(filters.xtoy("[1,2,3]"),filters.ytox('VjNwRmMwMXBkM3BZVVQwOQ=='));
+        // this.getData();
+        // this.getDataUsed();
+        // this.getDataOld();
+        Indicator.open({
+            text: '等人家一下呗~',
+            spinnerType: 'fading-circle'
+        });
+        Promise.all([
+            new Promise(this.getData),
+            new Promise(this.getDataUsed),
+            new Promise(this.getDataOld)
+        ]).then(function(val){
+            Indicator.close();
+        });
     }
 }
 </script>

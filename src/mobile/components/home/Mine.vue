@@ -18,11 +18,11 @@
                     <p id="mineShort11"  class="reciveShort">
                         <span>暂没有使用该点赞币</span>
                     </p>
-                    <div v-for="d in dataUsed" v-if="d.type==1"  class="recive-card-operay">
+                    <div v-for="(d,index) in dataUsed" v-if="d.type==1"  class="recive-card-operay" :key="index">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
                                 <img src="../../assets/img/head.jpg" alt="头像">
-                                <span>{{d.name}} 给我点赞！</span>
+                                <span>我给{{d.name}}点赞！</span>
                             </div>
                             <span class="recive-card-time">已使用</span> 
                         </div>
@@ -41,12 +41,12 @@
                     <p id="mineShort12"  class="reciveShort">
                         <span>暂没有使用vip点赞币</span>
                     </p>
-                    <div class="reciveCardVip recive-card-operay2" v-for="d in dataUsed" 
-            v-if="d.type==2">
+                    <div class="reciveCardVip recive-card-operay2" v-for="(d,index) in dataUsed" 
+            v-if="d.type==2" :key="index">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
                                 <img src="../../assets/img/head.jpg" alt="头像">
-                                <span>{{d.name}} 给我点赞！</span>
+                                <span>我给{{d.name}}点赞！！</span>
                             </div>
                             <span class="recive-card-time">已使用</span> 
                         </div>
@@ -64,7 +64,7 @@
                     <p id="mineShort"  class="reciveShort">
                         <span>暂无该点赞币</span>
                     </p>
-                    <div v-for="d,index in data" v-if="d.type==1" v-on:click="doUse(index)">
+                    <div v-for="(d,index) in data" v-if="d.type==1" v-on:click="doUse(index)" :key="index">
                         <div class="Mine-card-message-up">
                             <div class="Mine-card-message">
                                 <span>普通点赞币</span>
@@ -85,7 +85,7 @@
                     <p id="mineShort2" class="reciveShort">
                         <span>暂无该点赞币</span>
                     </p>
-                    <div class="MineCardVip" v-for="d,index in data" v-if="d.type==2" v-on:click="doUse(index)">
+                    <div class="MineCardVip" v-for="(d,index) in data" v-if="d.type==2" v-on:click="doUse(index)" :key="index">
                         <div class="Mine-card-message-up">
                             <div class="Mine-card-message">
                                 <span>Vip点赞币</span>
@@ -104,7 +104,7 @@
                     <p id="mineShort31" class="reciveShort">
                         <span>暂无该点赞币</span>
                     </p>
-                    <div v-for="d in dataOld" v-if="d.type==1" class="Mine-card-old">
+                    <div v-for="(d,index) in dataOld" v-if="d.type==1" class="Mine-card-old" :key="index">
                         <div class="Mine-card-message-up">
                             <div class="Mine-card-message">
                                 <span>普通点赞币</span>
@@ -112,7 +112,7 @@
                             <img src="../../assets/img/old.png" class="Mine-card-time-old" alt="过期标志"> 
                         </div>
                         <div class="Mine-card-message-down">
-                            <span>2017年4月14日-2017年4月20日</span>
+                            <span>{{d.startTime}}-{{d.endTime}}</span>
                         </div>
                     </div>
                     
@@ -232,7 +232,7 @@
     }
 </style>
 <script>
-import { Toast } from 'mint-ui';
+import { Toast,Indicator } from 'mint-ui';
 import {filters} from '../../filter';
 import NavBottom from '../NavBottom.vue';
 export default {
@@ -273,15 +273,16 @@ export default {
         },
         doUse: function(index) {
             var ids = this.data[index].id;
-            this.$router.push({ path: '/home/mine/send' });
+            this.$router.push({ path: '/home/mine/send/'+filters.xtoy(ids) });
             // this.$router.push({ path: '/home/mine/send/'+filters.xtoy(this.ids) });
         },
-        getData: function() {
+        getData: function(resolve, reject) {
             var zanwu = this.Id('mineShort');
             var zanwu2 = this.Id('mineShort2');
             var that = this;
             axios.get('/user/thumbsUp/getCoinList')
             .then(function (response) {
+                console.log(123)
                 var list = response.data.list.list;
                 for (var i = 0; i < list.length; i++) {
                     var arr = [];
@@ -302,17 +303,19 @@ export default {
                         that.Us.Vip++;
                     };
                 };
+                resolve();
             })
             .catch(function (error) {
                 console.log(error);
             });
         },
-        getDataUsed: function() {
+        getDataUsed: function(resolve, reject) {
             var zanwu11 = this.Id('mineShort11');
             var zanwu12 = this.Id('mineShort12');
             var that = this;
             axios.get('/user/thumbsUp/getUsedCoinList')
             .then(function (response) {
+                console.log(123)
                 var list = response.data.list.list;
                 for (var i = 0; i < list.length; i++) {
                     var arr = [];
@@ -331,16 +334,18 @@ export default {
                         that.UsUsed.Vip++;
                     };
                 };
+                resolve();
             })
             .catch(function (error) {
                 console.log(error);
             });
         },
-        getDataOld: function() {
+        getDataOld: function(resolve, reject) {
             var zanwu31 = this.Id('mineShort31');
             var that = this;
             axios.get('/user/thumbsUp/getOverdueCoinList')
             .then(function (response) {
+                console.log(123)
                 var list = response.data.list.list;
                 for (var i = 0; i < list.length; i++) {
                     var arr = [];
@@ -355,6 +360,7 @@ export default {
                         that.UsOld.Pu++;
                     };
                 };
+                resolve();
             })
             .catch(function (error) {
                 console.log(error);
@@ -447,10 +453,21 @@ export default {
         }
     },
     mounted(){
-        console.log(filters.xtoy("[1,2,3]"),filters.ytox('VjNwRmMwMXBkM3BZVVQwOQ=='));
-        this.getData();
-        this.getDataUsed();
-        this.getDataOld();
+        // console.log(filters.xtoy("[1,2,3]"),filters.ytox('VjNwRmMwMXBkM3BZVVQwOQ=='));
+        // this.getData();
+        // this.getDataUsed();
+        // this.getDataOld();
+        Indicator.open({
+            text: '等人家一下呗~',
+            spinnerType: 'fading-circle'
+        });
+        Promise.all([
+            new Promise(this.getData),
+            new Promise(this.getDataUsed),
+            new Promise(this.getDataOld)
+        ]).then(function(val){
+            Indicator.close();
+        });
     }
 }
 </script>

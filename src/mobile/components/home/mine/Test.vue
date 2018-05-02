@@ -5,13 +5,13 @@
     </mt-header>
     <form>
       <h3 class="recive-min-input">请填写以下信息：</h3> 
-      <mt-field label="你要点赞给" placeholder="名称" @click.native="handleClick" v-model="tt" disabled class="MinePeople"></mt-field>
+      <mt-field label="你要点赞给" placeholder="姓名" @click.native="handleClick" v-model="tt" disabled class="MinePeople"></mt-field>
       <!-- <mt-field label="使用数量" placeholder="1张"></mt-field> -->
       <mt-popup
       v-model="popupVisible"
       position="bottom"
       modal=false>
-      <mt-picker v-bind:style="{width:clientWidth + 'px',padding: 20 + 'px'}" :slots="slots" @change="onValuesChange"></mt-picker>
+      <mt-picker v-bind:style="{width:clientWidth + 'px',padding: 20 + 'px'}" :slots="slots" @change="onValuesChange" valueKey="name"></mt-picker>
       </mt-popup>
       <mt-field label="点赞理由" placeholder="点赞理由要规范" type="textarea" rows="4" v-model="reason"></mt-field>
       <div class="recive-buttonBox">
@@ -50,6 +50,7 @@
 </style>
 <script>
 import { Toast } from 'mint-ui';
+import {filters} from '../../../filter';
 export default {
   data () {
     return {
@@ -64,13 +65,13 @@ export default {
             values: ['大一', '大二', '大三'],  
             className: 'slot1',  
             textAlign: 'left'  
-          }, {  
-            divider: true,  
-            content: '-',  
-            className: 'slot2'  
+          }, {
+            divider: true,
+            content: '-',
+            className: 'slot2'
           }, {  
             flex: 1,  
-            values: [],  
+            values: [{name:''}],  
             className: 'slot3',  
             textAlign: 'right'  
           }  
@@ -121,15 +122,15 @@ export default {
           console.log(date);
           var j = [];
           for (var i = 0; i < date.kk.length; i++) {
-            var j0 = [];
+            var j0 = {};
             j0.id = date.kk[i].id;
             j0.name = date.kk[i].name;
             j.push(j0);
           };
-          that.men.push( j);
+          that.men.push(j);
           var l = [];
           for (var i = 0; i < date.ll.length; i++) {
-            var j0 = [];
+            var j0 = {};
             j0.id = date.ll[i].id;
             j0.name = date.ll[i].name;
             l.push(j0);
@@ -137,12 +138,13 @@ export default {
           that.men.push(l);
           var p = [];
           for (var i = 0; i < date.pp.length; i++) {
-            var j0 = [];
+            var j0 = {};
             j0.id = date.pp[i].id;
             j0.name = date.pp[i].name;
             p.push(j0);
           };
           that.men.push(p);
+          console.log(that.men)
       })
       .catch(function (error) {
           console.log(error);
@@ -155,30 +157,32 @@ export default {
         return;
       }else if (this.reason == '') {
         Toast('请填写您要点赞的理由');
-      };
-      axios.post('/user/thumbsUp',{
-        ids: this.ids,
-        toUserId: this.id,
-        reason: this.reason
-      })
-      .then(function (response) {
-          var date = response.data.list;
-          console.log(date);
-          if (date.code) {
-              Toast('点赞成功！');
-              that.$router.push({ path: '/home/mine' });
-          }else {
-              Toast(date.msg);
-          };
-      })
-      .catch(function (error) {
-          console.log(error);
-      });
+      }else{
+        axios.post('/user/thumbsUp',{
+          ids: this.ids,
+          toUserId: this.id,
+          reason: this.reason
+        })
+        .then(function (response) {
+            var date = response.data.list;
+            console.log(date);
+            if (date.code) {
+                Toast('点赞成功！');
+                that.$router.push({ path: '/home/mine' });
+            }else {
+                Toast(date.msg);
+            };
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+      }
     }
   },
   mounted(){
     this.getPeople();
-    // this.ids = filters.ytox(this.$route.params.ids)
+    this.ids = filters.ytox(this.$route.params.ids)
+    console.log(this.ids)
   }
 }
 </script>

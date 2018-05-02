@@ -11,7 +11,7 @@
         :options="options">
       </mt-radio>
       <div class="mineMoney" id="ReciveMoney">
-        <span>¥ {{ count*2 }}</span>
+        <span>您将要使用{{ count }}张点赞币</span>
       </div>
       <mt-field class="recive-min-input" label="支付宝账号" placeholder="请输入支付宝账号" id="photoInput"  v-model="photo"></mt-field>
       <mt-field label="购买物品" placeholder="想要买的东西很多嘛，只需要在这里填写你想要买的物品哦！" type="textarea" rows="4" id="buyInput" v-model="buy"></mt-field>
@@ -25,7 +25,7 @@
 <style scoped>
   .mineMoney {
     width: 100%;
-    text-align: right;
+    text-align: center;
     color: orange;
     margin: 10px 0 5px;
   }
@@ -94,23 +94,23 @@ export default {
     value:function(val,oldval){
       var buy = this.Id("buyInput");
       var photo = this.Id("photoInput");
-      var Money = this.Id("ReciveMoney");
+      // var Money = this.Id("ReciveMoney");
       if (val=='A') {
         buy.style.display = "block";
         photo.style.display = "none";
-        Money.style.display = "block";
+        // Money.style.display = "block";
       }else if (val=='B') {
         buy.style.display = "none";
         photo.style.display = "none";
-        Money.style.display = "none";
+        // Money.style.display = "none";
       }else if (val=='C') {
         buy.style.display = "none";
         photo.style.display = "none";
-        Money.style.display = "none";
+        // Money.style.display = "none";
       }else if (val=='D') {
         buy.style.display = "none";
         photo.style.display = "block";
-        Money.style.display = "block";
+        // Money.style.display = "block";
       };      
     }
   },
@@ -134,7 +134,7 @@ export default {
           Toast('请填写您购买的物品');
           return;
         };
-        axios.post('/buy', {
+        axios.post('/user/insertCoinOrder', {
             coin_useful: that.value,
             coin_id_arr: that.ids,
             moneyNumber: that.ids.length,
@@ -144,7 +144,7 @@ export default {
             var date = response.data.list;
             if (date.code) {
                 Toast('购买成功！');
-                that.$router.push({ path: '/home/recive' });
+                // that.$router.push({ path: '/home/recive' });
             }else {
                 Toast(date.msg);
             };
@@ -153,15 +153,15 @@ export default {
             console.log(error);
         });
       }else if (this.value == 'B'||this.value == 'C') {
-        axios.post('/buy', {
-            way: that.value,
-            id: that.ids,
+        axios.post('/user/insertCoinOrder', {
+            coin_useful: that.value,
+            coin_id_arr: that.ids,
         })
         .then(function (response) {
             var date = response.data.list;
             if (date.code) {
                 Toast('使用成功！');
-                that.$router.push({ path: '/home/recive' });
+                // that.$router.push({ path: '/home/recive' });
             }else {
                 Toast(date.msg);
             };
@@ -174,17 +174,17 @@ export default {
           Toast('请填写您的支付宝账号！');
           return;
         };
-        axios.post('/buy', {
-            way: that.value,
-            id: that.ids,
+        axios.post('/user/insertCoinOrder', {
+            coin_useful: that.value,
+            coin_id_arr: that.ids,
             moneyNumber: that.ids.length*2,
-            photo: photo,
+            content: photo,
         })
         .then(function (response) {
             var date = response.data.list;
             if (date.code) {
                 Toast('兑换成功！');
-                that.$router.push({ path: '/home/recive' });
+                // that.$router.push({ path: '/home/recive' });
             }else {
                 Toast(date.msg);
             };
