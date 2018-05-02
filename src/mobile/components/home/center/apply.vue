@@ -1,34 +1,36 @@
 <template>
   <div> 
-      <mt-header fixed title="申请点赞币"></mt-header>
-      <router-link to="../home/center">
+      <mt-header fixed title="申请点赞币">
+        <router-link to="../home/center" slot="left">
           <div class="back"><img src="../../../assets/img/back.png"></div>
-      </router-link>
+        </router-link>
+      </mt-header>
+      
       <div class="apply-bg">
         <p>点赞币申请开放啦！</p>
       </div>
       <div class="apply-infor">
-        <p class="apply"><span>申请</span>点赞币</p>
-        <div class="type">
+        <!-- <p class="apply"><span>申请</span>点赞币</p> -->
+        <div class="type" >
           <p>*</p>
           <p>申请类型</p>
-          <p v-on:click="eject_applytype">></p>
-          <mt-popup v-model="popupVisible">
+          <p class="b-type" v-on:click="eject_applytype">{{this.bTypeName }} ></p>
+          <mt-popup v-model="popupVisible"  popup-transition="popup-fade">
             <mt-radio class="radio"
               v-model="value"
-              :options="options" @change="check">
+              :options="options" @change="check" style="height:auto;">
             </mt-radio>
           </mt-popup>
         </div>
         <p class="about">关于申请</p>
-        <div v-for="n in data" class="apply-userinfor" :key="n">
+        <div v-for="(n,index) in data" class="apply-userinfor" :key="index">
           <div class="name">
             <p>*</p>
-            <mt-field label="姓名" v-model="name" placeholder="请输入"></mt-field>
+            <mt-field label="工号" v-model="n.code" placeholder="请输入工号"></mt-field>
           </div>
           <div class="number">
             <p>*</p>
-            <mt-field label="张数" v-model="mout" placeholder="请输入"></mt-field>
+            <mt-field label="张数" v-model="n.num" placeholder="请输入个数"></mt-field>
           </div>
         </div>
         <div class="apply-increpeo"><img src="../../../assets/img/incre-peo.png" v-on:click="add_applypeople"></div>
@@ -38,7 +40,7 @@
             <p>申请理由</p>
           </div>
           <!-- <p>请输入申请理由</p> -->
-          <mt-field class="input-reason" v-model="reason"  placeholder="请输入申请理由" ></mt-field>
+          <mt-field class="input-reason" v-model="reason"  placeholder="请输入申请理由" type="textarea" rows="2"></mt-field>
         </div>
         <div class="button"><mt-button type="primary" size="large" @click.native="submission">提交</mt-button></div>
       </div>
@@ -54,91 +56,148 @@ import { Toast } from 'mint-ui';
 export default {
   data () {
     return {
-      data: [1],
+      data: [
+          {
+              code:"",
+              num:""
+          }
+        ],
       popupVisible:false,
       value:'',
       name:"",
       mout:"",
       reason:"",
+      bType:"",
+      bTypeName:"",
       options: [
-        {
-          label: '项目',
-          value: '1',
-          // disabled: true
-        },
-        {
-          label: '讲课',
-          value: '2'
-        },
-        {
-          label: '活动',
-          value: '3'
-        },
-        {
-          label: '英语口语',
-          value: '4'
-        }
+        // {
+        //   label: '项目',
+        //   value: '1'
+        // },
+        // {
+        //   label: '讲课',
+        //   value: '2'
+        // },
+        // {
+        //   label: '活动',
+        //   value: '3'
+        // },
+        // {
+        //   label: '英语口语',
+        //   value: '4'
+        // }
       ],
-      submission: function() {
+    //   submission: function() {
+    //     var that = this;
+    //     if (this.value=='') {
+    //       Toast("请选择申请类型");
+    //       return;     //如果为空，不提交判断
+    //     } else if (this.name=='') {
+    //       Toast("请输入姓名");
+    //       return;
+    //     } else if (this.mout=='') {
+    //       Toast("请输入张数");
+    //       return;
+    //     } else if (this.reason=='') {
+    //       Toast("请输入申请理由");
+    //       return;
+    //     };
+    //     axios.post('user/personalCenter/addApply',{
+    //       applyContent:[{
+    //         "reason":that.reason,
+    //         "name":that.name,
+    //         "mout":that.mout,
+    //       }],
+    //       applyType:that.popupVisible,
+    //     })
+    //         .then(function (response) {
+    //            var judge = response.data;
+    //            if (judge.code==0) {
+    //             Toast(judge.msg);
+    //             // that.$router.push({ path: '/home/record' });
+    //            } else {
+    //             Toast(judge.msg);
+    //            }; 
+    //         })
+    //         .catch(function (error) {
+    //             // console.log(error);
+    //         });
+    //   },
+    }
+  },
+  methods:{
+    add_applypeople: function(){
+        this.data.push({
+              code:"",
+              num:""
+          });
+    },
+    eject_applytype: function (){
+      this.popupVisible = true;
+    },
+    check: function(val){
+        this.bType = val;
+        this.options.forEach((v)=>{
+            if(v.value==val)this.bTypeName=v.label;
+        });
+        this.popupVisible = false;
+    },
+    getTyge(){
+        axios.get("/user/personalCenter/getApplyType").then((res)=>{
+            // console.log(res.data.data)
+            this.options = res.data.data;
+        })
+    },
+    submission: function() {
         var that = this;
-        if (this.value=='') {
-          Toast("请选择申请类型");
-          return;     //如果为空，不提交判断
-        } else if (this.name=='') {
-          Toast("请输入姓名");
-          return;
-        } else if (this.mout=='') {
-          Toast("请输入张数");
-          return;
+        if (this.bType=='') {
+            Toast("请选择申请类型");
+            return;     //如果为空，不提交判断
+        } else if (this.data[0].code=='') {
+            Toast("请填写工号");
+            return;
+        } else if (this.data[0].num=='') {
+            Toast("请填写个数");
+            return;
         } else if (this.reason=='') {
-          Toast("请输入申请理由");
-          return;
+            Toast("请输入申请理由");
+            return;
         };
         axios.post('user/personalCenter/addApply',{
-          applyContent:[{
-            "reason":that.reason,
-            "name":that.name,
-            "mout":that.mout,
-          }],
-          applyType:that.popupVisible,
+            applyContent:that.data,
+            applyType:that.bType,
         })
             .then(function (response) {
-               var judge = response.data;
-               if (judge.code==0) {
-                Toast(judge.msg);
+                var judge = response.data;
+                if (judge.code==0) {
+                    Toast(judge.msg);
+                    that.data = [{code:"",num:""}];
                 // that.$router.push({ path: '/home/record' });
-               } else {
-                Toast(judge.msg);
-               }; 
+                } else {
+                    Toast(judge.msg);
+                }; 
             })
             .catch(function (error) {
                 // console.log(error);
             });
-      },
-    }
-  },
-  methods:{
-    jump(url){
-        this.$router.push(url);
-      },
-    add_applypeople: function(){
-      // console.log(123);
-      this.data.push(1);
     },
-    eject_applytype: function (){
-      console.log(123);
-      this.popupVisible = true;
-    },
-    check: function(){
-      // console.log(this.value);
-    }
   },
 
   mounted(){
-    
+    this.getTyge()
   }
 }
 </script>
+<style>
+  .b-type{
+      line-height: 30px!important;
+      margin: 0!important;
+      width: 50%;
+      text-align: right;
+      padding: 0!important;
+  }
+</style>
+
 <style scoped>
   .back {
         z-index: 1;
@@ -270,4 +329,5 @@ export default {
       width: 200px;
       height: 200px;
     }
+    
 </style>

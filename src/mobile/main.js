@@ -9,6 +9,20 @@ import 'normalize.css'
 import axios from 'axios'
 window.axios = axios
 axios.defaults.withCredentials = true
+axios.defaults.baseURL = 'https://localhost:8080';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.interceptors.response.use(function (response) {
+  return response;
+}, function (error) {
+  let res = error.response;
+  if (res.status == 401) {
+      location.href = "http://localhost:8080/mobile.html#/sign/login";
+      return false;
+  }
+  // Do something with response error
+  return Promise.reject(error);
+});
+
 
 import Mock from 'mockjs'
 window.Mock = Mock

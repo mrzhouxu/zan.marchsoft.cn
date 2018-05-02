@@ -1,5 +1,5 @@
 //登录
-Mock.mock('/user/login',{
+Mock.mock('https://localhost:8080/user/login',{
 	"object|1": [{
 			"code": 0,
 			"msg": "success"
@@ -19,7 +19,7 @@ Mock.mock('/user/login',{
 	]
 })
 	
-Mock.mock('/user/seeCon', {
+Mock.mock('https://localhost:8080/user/seeCon', {
     'list|1-10': [{
         'coin_id|1-2': 2,
         'name': '@cname()',
@@ -30,14 +30,14 @@ Mock.mock('/user/seeCon', {
     }]
 })
 //无限加载
-Mock.mock('/rr', {
+Mock.mock('https://localhost:8080/rr', {
     'list|10': [{
         'name|1-500': 1
     }]
 })
 
 // 已过期
-Mock.mock('/user/thumbsUp/getOverdueCoinList', {
+Mock.mock('https://localhost:8080/user/thumbsUp/getOverdueCoinList', {
     'list|1': [
     {
         "code": 0,
@@ -63,7 +63,7 @@ Mock.mock('/user/thumbsUp/getOverdueCoinList', {
 })
 
 // 已使用
-Mock.mock('/user/thumbsUp/getUsedCoinList', {
+Mock.mock('https://localhost:8080/user/thumbsUp/getUsedCoinList', {
     'list|1': [
     {
         "code": 0,
@@ -93,7 +93,7 @@ Mock.mock('/user/thumbsUp/getUsedCoinList', {
 })
 
 // 未使用
-Mock.mock('/user/thumbsUp/getCoinList', {
+Mock.mock('https://localhost:8080/user/thumbsUp/getCoinList', {
     'list|1': [
     {
         "code": 0,
@@ -118,7 +118,7 @@ Mock.mock('/user/thumbsUp/getCoinList', {
     ]
 })
 
-Mock.mock('/buy', {
+Mock.mock('https://localhost:8080/buy', {
     'list|1': [
     {
         "code": 1,
@@ -132,7 +132,7 @@ Mock.mock('/buy', {
 })
 
 //点赞表单
-Mock.mock('/user/thumbsUp', {
+Mock.mock('https://localhost:8080/user/thumbsUp', {
     'list|1': [
     {
         "code": 0,
@@ -145,7 +145,7 @@ Mock.mock('/user/thumbsUp', {
     ]
 })
 
-Mock.mock('/getPeople', {
+Mock.mock('https://localhost:8080/getPeople', {
     'list': {
     'kk|10-15': [{'id|+1': 1,"name": '@cname'}],
     'll|10-15': [{'id|+1': 1,"name": '@cname'}],
@@ -153,7 +153,7 @@ Mock.mock('/getPeople', {
     }
 })
 
-Mock.mock('/group', {
+Mock.mock('https://localhost:8080/group', {
     'list|1': [
     {
         "code": 1,
@@ -166,7 +166,7 @@ Mock.mock('/group', {
     ]
 })
 
-Mock.mock('/getOrder', {
+Mock.mock('https://localhost:8080/getOrder', {
     'list|1-5': [{
         "name": '@cname',
 		"number|1-10": 1,
@@ -181,7 +181,7 @@ Mock.mock('/getOrder', {
     }]
 })
 
-Mock.mock('/grant', {
+Mock.mock('https://localhost:8080/grant', {
     'list|1': [
     {
         "code": 1,

@@ -10,7 +10,7 @@
       <div>
         <p class="accept-text"><span>接受</span>订单任务</p>
         <p class="new">新任务</p>
-        <div class="new-needaccept one" v-for="i in datas" :key="i">
+        <div class="new-needaccept one" v-for="i,index in datas" :key="index">
           <div class="accept-infor">
             <div class="accept-userpic"><img src="../../../assets/img/xuhong.jpg"></div>
             <div class="accept-userinfor">
@@ -32,7 +32,7 @@
             <mt-loadmore :top-method="loadTop" 
             :bottom-method="loadBottom" :autoFill = "false"
             :bottom-all-loaded="allLoaded" ref="loadmore">
-              <div class="old-acceptinfor" v-for="n in data" style="display:flex;" :key="n">
+              <div class="old-acceptinfor" v-for="n,index in data" style="display:flex;" :key="index">
                 <div class="old-userpic"><img src="../../../assets/img/xuhong.jpg"></div>
                 <div class="old">
                   <div class="old-userinfor">

@@ -3,10 +3,11 @@
         <mt-header fixed title="个人中心"></mt-header>
         <div id="test">
             <div class="bg-user">
-                <div class="user-picture"><img src="../../assets/img/user_picture.png"></div>
+                <!-- <div class="user-picture"><img src="../../assets/img/user_picture.png"></div> -->
+                <div class="user-picture"><img :src="'http://q1.qlogo.cn/g?b=qq&nk='+userInfo.qq+'&s=100'"></div>
                 <div class="per-infor">
-                    <p>{{name}}</p>
-                    <p>{{number}}</p>
+                    <p>{{userInfo.name}}</p>
+                    <!-- <p>{{userInfo.stuNumber}}</p> -->
                 </div>
             </div>
             <div class="per-center">
@@ -59,12 +60,12 @@
                     </div>
                 </router-link>
                 
-                <router-link to="/center/sign_out">
-                    <div class="my sign-out">
+                <!-- <router-link to="/center/sign_out"> -->
+                    <div class="my sign-out" @click="login_out">
                         <div class="small-icons"><img src="../../assets/img/user_eight.png"></div>
                         <div class="per-text"><p>退出登录</p></div>
                     </div>
-                </router-link>
+                <!-- </router-link> -->
                 <!-- <div style="height:100px"></div>  -->
             </div>
             <div class="baseline">
@@ -79,37 +80,42 @@
 
 <script>
 import NavBottom from '../NavBottom.vue'
+import { MessageBox } from 'mint-ui';
+import { Toast } from 'mint-ui';
 export default {
     components: {
         NavBottom
     },
     data() {
         return {
-            a:1,
-            name:'桑金超',
-            number:'2016010226',
+            userInfo:{
+                id:1,
+                name:'桑金超',
+                stuNumber:'20151515138',
+                qq:"794135759"
+            }
         }
     },
     methods: {
-        jump(url){
-          this.$router.push(url);
-      }
-    },
-    beforeCreate() {
-        console.log(this.a)
-        console.log('beforeCreate')
-    },
-    created() {
-        console.log('created')
-        console.log(this.a)
+        login_out(){
+            MessageBox.confirm('确定执行此操作?').then(action => {
+                axios.get("/user/login_out").then(res=>{
+                    if(res.data.code == 0){
+                        Toast({
+                            message: '操作成功',
+                            iconClass: 'fa fa-check fa-5x'
+                        });
+                        this.$router.push('/sign/login');
+                    }
+                }).catch(err=>{
+                    // console.log(12)
+                })
+            }).catch(err=>{
+                // console.log(112)
+            });
+        }
     },
     mounted() {
-        // axios.get('baidu.com').then(function (response) {
-        //     console.log(response.data);
-        // }).catch(function (error) {
-        //     console.log(error);
-        // });
-        
     }
 }
 </script>
@@ -133,14 +139,15 @@ export default {
     }
     .user-picture>img {
         width: 64px;
+        border-radius: 50%;
+        padding: 2px;
+        background: white;
     }
     .per-infor {
         width: 40%;
         margin: -20px 0 0 0;
     }
-    .per-infor>p {
-        text-align: center;
-    }
+    
     p:nth-child(1) {
         line-height: 0;
         font-size: 18px;
@@ -150,7 +157,12 @@ export default {
         font-size: 12px;
         line-height: 15px;
     }
-
+    .per-infor>p {
+        text-align: center;
+        line-height: 30px;
+        font-size: 18px;
+        margin: 20px 0 10px 0;
+    }
     /*个人中心*/
     .per-center {
         width: 100%;
@@ -177,7 +189,7 @@ export default {
         margin: 16px 0 0 16px;
     }
     .sign-out {
-        padding: 0 0 25px 0;
+        /* margin: 0 0 25px 0; */
     }
     .bottom {
         position: fixed;
@@ -192,7 +204,7 @@ export default {
     }
     .baseline {
         color: #c6c9cd;
-        background: #f5f5f5;
+        /* background: #f5f5f5; */
         justify-content: center;
         margin: 0 0 50px 0;
         padding: 5px 0 10px 0;
