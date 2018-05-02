@@ -1,34 +1,109 @@
 <template>
     <div>
         <mt-header fixed title="个人中心"></mt-header>
-        <div id="test" style="background:red;">123</div>
-        <NavBottom selected="4"></NavBottom>
+        <div id="test">
+            <div class="bg-user">
+                <div class="user-picture"><img src="../../assets/img/user_picture.png"></div>
+                <div class="per-infor">
+                    <p>{{name}}</p>
+                    <p>{{number}}</p>
+                </div>
+            </div>
+            <div class="per-center">
+                <router-link to="/center/purchase">
+                    <div class="my purchase">
+                        <div class="small-icons"><img src="../../assets/img/user_one.png"></div>
+                        <div class="per-text"><p>购买点赞币</p></div>
+                    </div>
+                </router-link>
+                
+                <router-link to="/center/my_order">
+                    <div class="my order">
+                        <div class="small-icons"><img src="../../assets/img/user_two.png"></div>
+                        <div class="per-text"><p>我的订单</p></div>
+                    </div>
+                </router-link>
+                
+                <router-link to="/center/apply">
+                    <div class="my apply">
+                        <div class="small-icons"><img src="../../assets/img/user_three.png"></div>
+                        <div class="per-text"><p>申请点赞币</p></div>
+                    </div>
+                </router-link>
+
+                <router-link to="/center/accept">
+                    <div class="my accept">
+                        <div class="small-icons"><img src="../../assets/img/user_four.png"></div>
+                        <div class="per-text"><p>接受订单任务</p></div>
+                    </div>
+                </router-link>
+
+                <router-link to="/center/feedback">
+                    <div class="my feedback">
+                        <div class="small-icons"><img src="../../assets/img/user_five.png"></div>
+                        <div class="per-text"><p>匿名反馈</p></div>
+                    </div>
+                </router-link>
+
+                <router-link to="/center/mody_pass">
+                    <div class="my mod-pass">
+                        <div class="small-icons"><img src="../../assets/img/user_six.png"></div>
+                        <div class="per-text"><p>修改密码</p></div>
+                    </div>
+                </router-link>
+
+                <router-link to="/center/rule_desc">
+                    <div class="my rule-desc">
+                        <div class="small-icons"><img src="../../assets/img/user_seven.png"></div>
+                        <div class="per-text"><p>规则说明</p></div>
+                    </div>
+                </router-link>
+                
+                <router-link to="/center/sign_out">
+                    <div class="my sign-out">
+                        <div class="small-icons"><img src="../../assets/img/user_eight.png"></div>
+                        <div class="per-text"><p>退出登录</p></div>
+                    </div>
+                </router-link>
+                <!-- <div style="height:100px"></div>  -->
+            </div>
+            <div class="baseline">
+                <p></p>
+                <p>我是有底线的</p>
+                <p></p>
+            </div>
+        </div>
+        <NavBottom selected="4" class="bottom"></NavBottom>
     </div>
 </template>
 
 <script>
 import NavBottom from '../NavBottom.vue'
 export default {
-    components:{
+    components: {
         NavBottom
     },
-    data () {
+    data() {
         return {
-            a:1
+            a:1,
+            name:'桑金超',
+            number:'2016010226',
         }
     },
-    methods:{
-        
+    methods: {
+        jump(url){
+          this.$router.push(url);
+      }
     },
-    beforeCreate(){
+    beforeCreate() {
         console.log(this.a)
         console.log('beforeCreate')
     },
-    created(){
+    created() {
         console.log('created')
         console.log(this.a)
     },
-    mounted(){
+    mounted() {
         // axios.get('baidu.com').then(function (response) {
         //     console.log(response.data);
         // }).catch(function (error) {
@@ -38,10 +113,89 @@ export default {
     }
 }
 </script>
+<style scoped>
+    #test {
+        /*background: yellow!important;*/
+    }
+    
+    /*用户信息*/
+    .bg-user {
+        width: 100%;
+        display: flex;
+        flex-direction:column;
+        align-items:center;
+        background: url(../../assets/img/bg_user.jpg) no-repeat center center;
+        background-size: 100% 100%;
+        border-bottom: 10px solid #f5f5f5;
+    }
+    .user-picture {
+        margin: 50px 0 0 0;
+    }
+    .user-picture>img {
+        width: 64px;
+    }
+    .per-infor {
+        width: 40%;
+        margin: -20px 0 0 0;
+    }
+    .per-infor>p {
+        text-align: center;
+    }
+    p:nth-child(1) {
+        line-height: 0;
+        font-size: 18px;
+        margin: 22px 0 0 0;
+    }
+    p:nth-child(2) {
+        font-size: 12px;
+        line-height: 15px;
+    }
 
-<style lang="less" scoped>
-#test{
-    background: yellow!important;
-}
+    /*个人中心*/
+    .per-center {
+        width: 100%;
+    }
+    .my,.baseline {
+        display: flex;
+    }
+    .per-text {
+        width: 88%;
+        border-bottom: 1px solid rgba(187,187,187, 0.43);
+        padding: 0 0 17px 0;
+        margin: 0 0 0 16px;
+    }
+    .per-center p {
+        color: #101010;
+        font-size: 15px;
+        margin: 28px 0 0 0;
+    }
+    a {
+        text-decoration:none;
+    }
+    .small-icons>img {
+        width: 25px;
+        margin: 16px 0 0 16px;
+    }
+    .sign-out {
+        padding: 0 0 25px 0;
+    }
+    .bottom {
+        position: fixed;
+    } 
+    .baseline p:nth-child(1),.baseline p:nth-child(3) {
+        width: 110px;
+        margin: 20px 5px 0 0;
+        border-top: 0.7px solid rgba(187,187,187, 0.43);
+    }
+    .baseline p:nth-child(3) {
+        margin: 20px 0 0 5px;
+    }
+    .baseline {
+        color: #c6c9cd;
+        background: #f5f5f5;
+        justify-content: center;
+        margin: 0 0 50px 0;
+        padding: 5px 0 10px 0;
+    }
 </style>
 

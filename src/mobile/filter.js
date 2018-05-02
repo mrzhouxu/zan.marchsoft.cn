@@ -36,6 +36,12 @@ const filters = {
         var minutes = parseInt((mss % ( 60 * 60)) /  60 );
         var seconds = mss %  60  ;
         return days + " 天 " + hours + " 小时 " + minutes + " 分钟 ";
+    },
+    xtoy:function(value){
+        return btoa(btoa(btoa(value)));
+    },
+    ytox:function(value){
+        return atob(atob(atob(value)));
     }
 }
 
