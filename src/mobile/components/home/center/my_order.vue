@@ -1,17 +1,19 @@
 <template>
     <div>
-        <mt-header fixed title="我的订单"></mt-header>
-        <router-link to="../home/center">
-            <div class="back"><img src="../../../assets/img/back.png"></div>
-        </router-link>
+        <mt-header fixed title="我的订单">
+             <router-link to="../home/center" slot="left">
+                <div class="back"><img src="../../../assets/img/back.png"></div>
+            </router-link>
+        </mt-header>
+       
         <div class="order-bg">
-            <div class="order-userpic">
+            <!-- <div class="order-userpic">
                 <img src="../../../assets/img/order-userpic.png">
-            </div>
-            <div class="order-userinfor">
+            </div> -->
+            <!-- <div class="order-userinfor">
                 <p>尤奇勤</p>
                 <p>2016010226</p>
-            </div>
+            </div> -->
         </div>
         <p class="my-order"><span>我的</span>订单</p>
         <div class="new-infor"> 
@@ -19,35 +21,40 @@
                 <p>最新订单</p>
                 <p>信息</p>
             </div>
-            <div class="new-orderinfor" v-if="list.length!=0" v-on:click="eject_applytype(list[0])">
-                <div><img src="../../../assets/img/order-userpic.png"></div>
-                <div>
-                    <p>{{list[0].states}}状态</p>
-                    <p>{{list[0].content}}</p>
-                </div>
+            <div class="order-infor" style="display:flex;width:70%;" v-on:click="eject_applytype(list[0])" v-if="list.length!=0">
+                <p style="flex:1;font-size:10px;line-height:60px;padding:0;margin:0;">{{list[0].content}}</p>
+                <!-- <p>{{n.status}}</p> -->
             </div>
+
+            <!-- <div class="new-orderinfor" v-if="list.length!=0" v-on:click="eject_applytype(list[0])">
+                <div>
+                    <p style="">{{list[0].content}}</p>
+                </div>
+            </div> -->
         </div>
         <div class="old-infor">
             <p>历史记录</p>
-            <div style="height:320px;overflow:scroll">
+            <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
                 <mt-loadmore :top-method="loadTop" 
                 :bottom-method="loadBottom" :autoFill = "false"
                 :bottom-all-loaded="allLoaded" ref="loadmore">
+                    <mt-spinner type="triple-bounce" v-if="topLoading"  color="#26a2ff" class="loading"></mt-spinner>
                   <div class="old" v-for="(n,index) in list"  style="display:flex; border-bottom: 1px solid rgba(187,187,187, 0.5); padding: 10px 0;" :key="index">
                         <div class="order-infortime">
-                            <p>{{n.create_time}}</p>
+                            <p>{{n.create_time | timeago}}</p>
                             <!-- <p>{{n.hour}}</p> -->
                         </div>
-                        <div class="order-infor" style="display:flex;" v-on:click="eject_applytype(n)">
-                            <p>{{n.content}}</p>
-                            <p>{{n.status}}</p>
+                        <div class="order-infor" style="display:flex;width:70%;" v-on:click="eject_applytype(n)">
+                            <p style="flex:1;">{{n.content}}</p>
+                            <!-- <p>{{n.status}}</p> -->
                         </div>
                   </div>
+                    <mt-spinner type="triple-bounce" v-if="bottomLoading"  color="#26a2ff" class="loading"></mt-spinner>
                 </mt-loadmore>
             </div>
         </div>
         <mt-popup v-model="popupVisible" popup-transition="popup-fade" class="mint-popup-2">
-            <div>[时间]：{{popup.create_time}}</div>
+            <div>[时间]：{{popup.create_time | timeago}}</div>
             <div>[内容]：{{popup.content}}</div>
             <div>[状态]：{{popup.status}}</div>
             <div class="details">[原因]：{{popup.resaon}}</div>
@@ -69,101 +76,75 @@ export default {
             content:'',
             state:'',
             allLoaded:false,
-            loading:false,
             page: 1,
             flag: true,
+            wrapperHeight:'',
+            topLoading:false,
+            bottomLoading:false
         }
     },   
     methods:{
         eject_applytype: function (val){
-          // console.log(123);
           this.popupVisible = true;
           this.popup = val;
         },
         loadTop: function() {
+            this.infor(1);
             this.$refs.loadmore.onTopLoaded();
         },
-        // infor: function(){
-        //     var that = this;
-        //     axios.get('/order')
-        //     .then(function (response) {
-        //         // console.log(that.loading,that.allLoaded)
-        //         var new_infor = response.data.list;
-        //         // console.log(response.data.list);
-        //         for (var i = 0; i < new_infor.length; i++) {
-        //           // console.log(123);
-        //           var L =[];
-        //           // L.year = list[i].year;
-        //           // L.hour = list[i].hour;
-        //           L.contents = new_infor[i].content;
-        //           L.states = new_infor[i].state.msg;
-        //           // console.log(L.contents);
-        //           that.new_infor.push(L);
-        //         };
-        //         // this.data = response;
-        //         that.loading = false;
-        //         // that.allLoaded = false;
-        //         that.$refs.loadmore.onBottomLoaded();
-        //     })
-        //     .catch(function (error) {
-        //         // console.log(error);
-        //     });
-        // },
-        infor:function(){
+        infor:function(type){//0上啦加载  1下拉刷新
             var that = this;
-            this.loading = true;
-            // this.allLoaded = true;
-            axios.get('/user/personalCenter/getOrderList',{params:{page:this.page}})//,{params:{page:this.page}}
+            if(type==0){
+                that.bottomLoading = true;
+            }else if(type==1){
+                that.topLoading = true;
+                that.page=1;
+                that.list=[];
+            }
+             axios.get('/user/personalCenter/getOrderList',{params:{page:this.page}})//,{params:{page:this.page}}
             .then(function (response) {
                 that.page++;
                 that.flag = true;
                 // console.log(that.loading,that.allLoaded)
                 var list = response.data.result;
-                console.log(response.data.result);
                 for (var i = 0; i < list.length; i++) {
-                  console.log(123);
                   var L={};
                   L.create_time = list[i].create_time;
                   L.content = list[i].content;
-                  L.status = list[i].status;
+                  L.status = list[i].status==1?"true":"false";
                   L.resaon = list[i].resaon;
                   // console.log(L.hour);
                   that.list.push(L);
                 };
-                console.log(that.list,456)
-                // this.data = response;
-                that.loading = false;
-                // that.allLoaded = false;
+                that.topLoading = false;
+                that.bottomLoading = false;
                 that.$refs.loadmore.onBottomLoaded();
             })
             .catch(function (error) {
-                // console.log(error);
             });
-            // this.loading = true;
-            //     setTimeout(()=>{
-            //         let last = this.list[this.list.length - 1];
-            //         //     for (let i = 1; i <= 2; i++) {
-            //         //         this.list.push(last + i);
-            //         // }
-            //         this.loading = false;
-            //     },2000);
 
         },
         loadBottom:function() {  
-            // console.log(123546)
             if(this.flag){
                 this.flag = false;
-                this.infor();
+                this.infor(0);
                 this.$refs.loadmore.onBottomLoaded();
             }
         }
     }, 
     mounted(){
-        // this.test();
-        this.infor();
+        this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top-10;
+        this.infor(1);
     },
 }
 </script>
+<style>
+.loading div{
+        /* margin: 0 auto!important; */
+        text-align: center;
+    }
+</style>
+
 <style scoped>
 
     .pull {
@@ -228,6 +209,7 @@ export default {
     }
     .new-text {
         margin: 5px 0 0 10px;
+        width: 70px;
     }
     .new-text p {
         font-size: 10px;
@@ -288,7 +270,7 @@ export default {
     }
     .order-infor {
         border-left: 1px solid rgba(187,187,187, 0.5);
-        margin: 0 0 0 15px;
+        margin: 0 0 0 8px;
         padding: 0 0 0 10px;
     }
     .order-infor p:nth-child(1) {
@@ -318,11 +300,19 @@ export default {
     }
     .mint-popup-2 {
         width: 80%;
-        height: 70%;
+        max-height: 70%;
         top: 50%;
         backface-visibility: hidden;
         line-height: 35px;
         padding: 5%;
+        border-radius: 5px;
     }
+    .page-loadmore-wrapper {
+        overflow: scroll
+    }
+    ::-webkit-scrollbar {
+        display:none;
+    }
+    
 </style>
 

@@ -51,16 +51,16 @@ Mock.mock('https://localhost:8080/user/personalCenter/getTalk',{
 		// "msg": "success",
 		"data": [
 			{
-				'content': '@cparagraph(20)',
-				'create_time': '@integer(1525273647, 1526273647)'
+				'content': '@cparagraph(10)',
+				'create_time': '@integer(0, 0)'
 			},
 			{
-				'content': '@cparagraph(20)',
-				'create_time': '@integer(1525273647, 1526273647)'
+				'content': '@cparagraph(200)',
+				'create_time': '@integer(0, 0)'
 			},
 			{
-				'content': '@cparagraph(20)',
-				'create_time': '@integer(1525273647, 1526273647)'
+				'content': '@cparagraph(10)',
+				'create_time': '@integer(0, 0)'
 			},
 			{
 				'content': '@cparagraph(20)',

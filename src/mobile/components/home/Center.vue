@@ -32,12 +32,12 @@
                     </div>
                 </router-link>
 
-                <router-link to="/center/accept">
+                <!-- <router-link to="/center/accept">
                     <div class="my accept">
                         <div class="small-icons"><img src="../../assets/img/user_four.png"></div>
                         <div class="per-text"><p>接受订单任务</p></div>
                     </div>
-                </router-link>
+                </router-link> -->
 
                 <router-link to="/center/feedback">
                     <div class="my feedback">

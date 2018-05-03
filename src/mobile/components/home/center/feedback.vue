@@ -15,7 +15,7 @@
             <mt-spinner type="triple-bounce" v-if="topLoading"  color="#26a2ff" class="loading"></mt-spinner>
             <div class="talkList" v-for="(i,index) in data" :key="index">
                     <div class="avatar">
-                        <img src="/static/feedback.png" alt="头像加载失败">
+                        <img :src="picture[Math.floor((Math.random()*3))]" alt="头像加载失败">
                     </div>
                     <p class="talk-content" @click="eject_applytype(i.content)">{{i.content}}</p>
                     <p class="timeage">{{i.create_time | timeago}}</p>
@@ -27,7 +27,7 @@
             </div> -->
             <mt-spinner type="triple-bounce" v-if="bottomLoading"  color="#26a2ff" class="loading"></mt-spinner>
         </mt-loadmore>
-        <mt-popup v-model="popupVisible" popup-transition="popup-fade" style="width:80%;max-height:80%;overflow:scroll;border-radius:10px;padding:16px;">
+        <mt-popup v-model="popupVisible" popup-transition="popup-fade" style="width:80%;max-height:66%;overflow:scroll;border-radius:5px;padding:16px;">
                 <p class="detailss">
                   {{talkContent}}
                 </p>
@@ -49,7 +49,7 @@ export default {
       content:'',
       page:1,
       picture: [
-        "./static/feedback.png",
+        "./static/feedback1.png",
         "./static/feedback2.png",
         "./static/feedback3.png"
       ],
@@ -70,10 +70,9 @@ export default {
         var that = this;
         if(type == 0){//0:上啦加载  1：下拉刷新
             that.bottomLoading = true;
-            that.page++;
         }else if(type == 1){
             that.topLoading = true;
-            that.page=0;
+            that.page=1;
             that.data=[];
         }
         
@@ -81,6 +80,7 @@ export default {
         axios.get('/user/personalCenter/getTalk',{
           page:that.page,
         }).then(function (response) {
+                that.page++;
                 var list = response.data.data;
                 that.data.push.apply(that.data,list);
                 that.bottomLoading = false;
@@ -201,19 +201,21 @@ export default {
       display: flex;
       position: fixed;
       bottom: 10px;
+      width:100%;
     }
     .button {
-      margin: 15px 0 0 10px;
+      margin: 10px 6px 0 15px;
       font-size: 12px;
-      width: 48px;
+      width: 70px;
       /*height: 30px;*/
     }
     .pass {
-      margin: 10px 0 0 15px;
+      margin: 10px 0 0 10px;
       /*color: black;*/
       /*height: 20px;*/
       width: 240px;
       background: #f5f5f5;
+      flex:1;
     }
 
     .detailss {
@@ -265,5 +267,8 @@ export default {
     }
     .page-loadmore-wrapper {
         overflow: scroll
+    }
+    ::-webkit-scrollbar {
+        display: none;
     }
 </style>

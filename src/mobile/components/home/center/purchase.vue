@@ -5,10 +5,10 @@
           <div class="back"><img src="../../../assets/img/back.png"></div>
       </router-link>
       <div class="purchase">
-        <mt-field label="工号" placeholder="请输入" v-model="name"></mt-field>
+        <mt-field label="工号" placeholder="请输入工号" v-model="name"></mt-field>
         <!-- <mt-field label="张数" id="txtAmount" value=0 onkeyup="checkInt(this);" onpaste="checkInt(this);" oncut="checkInt(this);" ondrop="checkInt(this);" onchange="checkInt(this);" placeholder="请输入" type="email"></mt-field> -->
         <!-- <input  class=""> -->
-        <mt-field v-model="mout" label="张数" placeholder="请输入"></mt-field>
+        <mt-field v-model="mout" label="个数" placeholder="请输入个数"></mt-field>
         <!-- <div></div> -->
         <!-- <input v-model="key*2"> -->
         <!-- <input id=txtTotal  style="border-right-width:0px;margin-right:0px;" readonly> 
@@ -37,10 +37,10 @@ export default {
     payment: function(){
       var that = this;
       if (this.name=='') {
-        Toast("请输入姓名");
+        Toast("请输入工号");
         return;
       } else if (this.key=='') {
-        Toast("请输入张数");
+        Toast("请输入个数");
         return;
       }else{
         axios.get('/alipay/wappay',{
@@ -85,8 +85,8 @@ export default {
     .button {
       margin: 10px 0 0 0;
       font-size: 16px;
-      width: 300px;
-      margin: 20px auto;
+      /* width: 300px; */
+      /* margin: 20px auto; */
     }
     .money {
       text-align: right;
