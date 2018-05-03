@@ -30,7 +30,7 @@ let all_router = {
     {
       path: '/home/mine',
       name: '我的赞',
-      meta:{select:3},
+      meta:{keepAlive:true,select:3},
       component: resolve =>void(require(['../components/home/Mine'], resolve))
     },
     {

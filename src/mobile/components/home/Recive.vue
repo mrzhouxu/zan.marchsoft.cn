@@ -296,11 +296,11 @@ export default {
             var zanwu = this.Id('reciveShort');
             var zanwu2 = this.Id('reciveShort2');
             var that = this;
-            axios.get('/user/seeCon',{
+            axios.get('/user/consume/seeCon',{params:{
                 type: 0
-            })
+            }})
             .then(function (response) {
-                var list = response.data.list;
+                var list = response.data.result;
                 for (var i = 0; i < list.length; i++) {
                     var arr = [];
                     arr.type = list[i].coin_id;
@@ -330,11 +330,11 @@ export default {
             var zanwu11 = this.Id('reciveShort11');
             var zanwu12 = this.Id('reciveShort12');
             var that = this;
-            axios.get('/user/seeCon',{
+            axios.get('/user/consume/seeCon',{params:{
                 type: 1
-            })
+            }})
             .then(function (response) {
-                var list = response.data.list;
+                var list = response.data.result;
                 for (var i = 0; i < list.length; i++) {
                     var arr = [];
                     arr.type = list[i].coin_id;
@@ -361,11 +361,11 @@ export default {
         getDataOld: function(resolve, reject) {
             var zanwu31 = this.Id('reciveShort31');
             var that = this;
-            axios.get('/user/seeCon',{
+            axios.get('/user/consume/seeCon',{params:{
                 type: 2
-            })
+            }})
             .then(function (response) {
-                var list = response.data.list;
+                var list = response.data.result;
                 for (var i = 0; i < list.length; i++) {
                     var arr = [];
                     arr.type = list[i].coin_id;

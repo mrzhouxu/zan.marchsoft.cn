@@ -282,7 +282,7 @@ export default {
             var that = this;
             axios.get('/user/thumbsUp/getCoinList')
             .then(function (response) {
-                var list = response.data.result.data;
+                var list = response.data.result;
                 for (var i = 0; i < list.length; i++) {
                     var arr = [];
                     arr.type = list[i].coin_id;
@@ -314,7 +314,7 @@ export default {
             var that = this;
             axios.get('/user/thumbsUp/getUsedCoinList')
             .then(function (response) {
-                var list = response.data.result.data;
+                var list = response.data.result;
                 for (var i = 0; i < list.length; i++) {
                     var arr = [];
                     arr.type = list[i].coin_id;
@@ -343,7 +343,7 @@ export default {
             var that = this;
             axios.get('/user/thumbsUp/getOverdueCoinList')
             .then(function (response) {
-                var list = response.data.result.data;
+                var list = response.data.result;
                 for (var i = 0; i < list.length; i++) {
                     var arr = [];
                     arr.type = list[i].coin_id;
