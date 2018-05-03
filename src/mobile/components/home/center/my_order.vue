@@ -113,7 +113,7 @@ export default {
             var that = this;
             this.loading = true;
             // this.allLoaded = true;
-            axios.get('/user/personalCenter/getOrderList')//,{params:{page:this.page}}
+            axios.get('/user/personalCenter/getOrderList',{params:{page:this.page}})//,{params:{page:this.page}}
             .then(function (response) {
                 that.page++;
                 that.flag = true;

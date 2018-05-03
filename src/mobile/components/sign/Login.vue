@@ -75,44 +75,32 @@ export default {
         }
     },
     methods:{
-        handleClick: function() {
-            Toast('提示信息');
-        },
         trimStr: function(str) {
             return str.replace(/\s+/g, "");
         },
         doSubmit: function(){
             var that = this;
-            var user = that.trimStr(that.student.userName);
-            var userNameLength = user.
-                length;
-            var passW = that.trimStr(that.student.passWord);
-            var passWLength = passW.
-                length;
-
-            // if (user == '') {
-            //     Toast('请填写您的账号');
-            //     return;
-            // }else if (userNameLength != 11) {
-            //     Toast('账号长度为11');
-            //     return;
-            // }else if (passWLength == '') {
-            //     Toast('请输入密码！');
-            //     return;
-            // };
-
+            let user = that.trimStr(that.student.userName);
+            let passW = that.trimStr(that.student.passWord);
+            console.log(passW,user)
+            if (user == '') {
+                Toast('请填写您的账号');
+                return;
+            }else if (passW== '') {
+                Toast('请输入密码！');
+                return;
+            };
             axios.post('/user/login', {
-                username: that.student.userName,
-                password: that.student.passWord
-            })
-            .then(function (response) {
-                var date = response.data.object;
-                if (!date.code) {
+                username: user,
+                password: passW
+            }).then(function (response) {
+                let date = response.data;
+                if (date.code==0) {
                     Toast('登录成功！');
                     that.$router.push({ path: '/home/record' });
                 }else {
                     Toast(date.msg);
-                };
+                }
             })
             .catch(function (error) {
                 console.log(error);

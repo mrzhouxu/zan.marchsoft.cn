@@ -8,15 +8,34 @@ import 'normalize.css'
 
 import axios from 'axios'
 window.axios = axios
-axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'https://localhost:8080';
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+window.axios.defaults.withCredentials = true
+window.axios.defaults.xsrfCookieName = null
+window.axios.defaults.xsrfHeaderName = null
+axios.defaults.baseURL = 'http://localhost:3030';
+// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+
+const Qs = require('qs');
+axios.interceptors.request.use(function (config) {
+  config.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+  if(config.method === 'post') {
+      config.data = Qs.stringify( {
+          ...config.data
+      })
+      console.log(config.data)
+  } 
+  return config;
+}, function (error) {
+  loadinginstace.close()
+  return Promise.reject(error);
+})
+
 axios.interceptors.response.use(function (response) {
   return response;
 }, function (error) {
   let res = error.response;
-  if (res.status == 401) {
-      location.href = "http://localhost:8080/mobile.html#/sign/login";
+  // console.log(res)
+  if (res&&res.status == 401) {
+      location.href = "http://localhost:8081/mobile.html#/sign/login";
       return false;
   }
   // Do something with response error
@@ -24,11 +43,11 @@ axios.interceptors.response.use(function (response) {
 });
 
 
-import Mock from 'mockjs'
-window.Mock = Mock
-require('../../util/mock/mobile_mock')
-require('../../util/mock/xuhong_mock.js')
-require('../../util/mock/youqiqin_mock')
+// import Mock from 'mockjs'
+// window.Mock = Mock
+// require('../../util/mock/mobile_mock')
+// require('../../util/mock/xuhong_mock.js')
+// require('../../util/mock/youqiqin_mock')
 
 // 引入全部组件
 import 'mint-ui/lib/style.css'

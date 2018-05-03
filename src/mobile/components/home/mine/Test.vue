@@ -62,18 +62,17 @@ export default {
           [  
           {  
             flex: 1,  
-            values: ['大一', '大二', '大三'],  
-            className: 'slot1',  
-            textAlign: 'left'  
+            // values: ['大一', '大二', '大三'],  
+            values: [{id:0,name:''}],
+            className: 'slot1', 
           }, {
             divider: true,
             content: '-',
             className: 'slot2'
           }, {  
             flex: 1,  
-            values: [{name:''}],  
-            className: 'slot3',  
-            textAlign: 'right'  
+            values: [{id:0,name:''}],  
+            className: 'slot3', 
           }  
         ], 
       ids: "",
@@ -92,7 +91,7 @@ export default {
     },
     handleClick: function() {
       this.popupVisible = true;
-      this.slots[2].values = this.men[0];
+      // this.slots[2].values = this.men[0];
     },
     // getName: function(arr) {
     //   var j = [];
@@ -102,49 +101,64 @@ export default {
     //   return j;
     // },
     onValuesChange(picker, values) {
-      if (values[0]=='大一') {
-        // var array = this.men[0];
-        picker.setSlotValues(1, this.men[0]);
-      }else if (values[0]=='大二') {
-        picker.setSlotValues(1, this.men[1]);
-      }else if (values[0]=='大三') {
-        picker.setSlotValues(1, this.men[2]);
-      };
+      // if (values[0]=='大一') {
+      //   // var array = this.men[0];
+      //   picker.setSlotValues(1, this.men[0]);
+      // }else if (values[0]=='大二') {
+      //   picker.setSlotValues(1, this.men[1]);
+      // }else if (values[0]=='大三') {
+      //   picker.setSlotValues(1, this.men[2]);
+      // };
+      for(let i in this.men){
+        if(i==values[0].id){
+          picker.setSlotValues(1, this.men[i]);
+          break;
+        }
+      }
       this.tt = values[1].name;
       this.id = values[1].id;
-      // console.log(values[1].id);
+      console.log(values[0].id);
     },
     getPeople: function() {
       var that = this;
-      axios.post('/getPeople')
+      axios.get('/user/thumbsUp/getUserListExceptSelf')
       .then(function (response) {
-          var date = response.data.list;
-          console.log(date);
-          var j = [];
-          for (var i = 0; i < date.kk.length; i++) {
-            var j0 = {};
-            j0.id = date.kk[i].id;
-            j0.name = date.kk[i].name;
-            j.push(j0);
-          };
-          that.men.push(j);
-          var l = [];
-          for (var i = 0; i < date.ll.length; i++) {
-            var j0 = {};
-            j0.id = date.ll[i].id;
-            j0.name = date.ll[i].name;
-            l.push(j0);
-          };
-          that.men.push(l);
-          var p = [];
-          for (var i = 0; i < date.pp.length; i++) {
-            var j0 = {};
-            j0.id = date.pp[i].id;
-            j0.name = date.pp[i].name;
-            p.push(j0);
-          };
-          that.men.push(p);
-          console.log(that.men)
+          that.men = response.data.result;
+          // console.log(date);
+          that.slots[0].values = []
+          for(let i in that.men){
+            console.log(i);
+            if(i==0) {
+              that.slots[0].values.push({id:i,name:"老师"});
+              continue;
+            }
+            that.slots[0].values.push({id:i,name:i + "级"});
+          }
+          // var j = [];
+          // for (var i = 0; i < date.kk.length; i++) {
+          //   var j0 = {};
+          //   j0.id = date.kk[i].id;
+          //   j0.name = date.kk[i].name;
+          //   j.push(j0);
+          // };
+          // that.men.push(j);
+          // var l = [];
+          // for (var i = 0; i < date.ll.length; i++) {
+          //   var j0 = {};
+          //   j0.id = date.ll[i].id;
+          //   j0.name = date.ll[i].name;
+          //   l.push(j0);
+          // };
+          // that.men.push(l);
+          // var p = [];
+          // for (var i = 0; i < date.pp.length; i++) {
+          //   var j0 = {};
+          //   j0.id = date.pp[i].id;
+          //   j0.name = date.pp[i].name;
+          //   p.push(j0);
+          // };
+          // that.men.push(p);
+          // console.log(that.men)
       })
       .catch(function (error) {
           console.log(error);
