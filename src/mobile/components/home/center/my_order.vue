@@ -1,9 +1,11 @@
 <template>
     <div>
-        <mt-header fixed title="我的订单"></mt-header>
-        <router-link to="../home/center">
-            <div class="back"><img src="../../../assets/img/back.png"></div>
-        </router-link>
+        <mt-header fixed title="我的订单">
+             <router-link to="../home/center" slot="left">
+                <div class="back"><img src="../../../assets/img/back.png"></div>
+            </router-link>
+        </mt-header>
+       
         <div class="order-bg">
             <div class="order-userpic">
                 <img src="../../../assets/img/order-userpic.png">
@@ -29,7 +31,7 @@
         </div>
         <div class="old-infor">
             <p>历史记录</p>
-            <div style="height:320px;overflow:scroll">
+            <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
                 <mt-loadmore :top-method="loadTop" 
                 :bottom-method="loadBottom" :autoFill = "false"
                 :bottom-all-loaded="allLoaded" ref="loadmore">
@@ -72,6 +74,7 @@ export default {
             loading:false,
             page: 1,
             flag: true,
+            wrapperHeight:'',
         }
     },   
     methods:{
@@ -159,6 +162,7 @@ export default {
         }
     }, 
     mounted(){
+        this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top-10;
         // this.test();
         this.infor();
     },
@@ -318,11 +322,18 @@ export default {
     }
     .mint-popup-2 {
         width: 80%;
-        height: 70%;
+        max-height: 70%;
         top: 50%;
         backface-visibility: hidden;
         line-height: 35px;
         padding: 5%;
+        border-radius: 5px;
+    }
+    .page-loadmore-wrapper {
+        overflow: scroll
+    }
+    ::-webkit-scrollbar {
+        display:none;
     }
 </style>
 

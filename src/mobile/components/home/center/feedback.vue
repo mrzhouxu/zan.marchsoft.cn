@@ -15,7 +15,7 @@
             <mt-spinner type="triple-bounce" v-if="topLoading"  color="#26a2ff" class="loading"></mt-spinner>
             <div class="talkList" v-for="(i,index) in data" :key="index">
                     <div class="avatar">
-                        <img src="/static/feedback.png" alt="头像加载失败">
+                        <img :src="picture[Math.floor((Math.random()*3))]" alt="头像加载失败">
                     </div>
                     <p class="talk-content" @click="eject_applytype(i.content)">{{i.content}}</p>
                     <p class="timeage">{{i.create_time | timeago}}</p>
@@ -27,7 +27,7 @@
             </div> -->
             <mt-spinner type="triple-bounce" v-if="bottomLoading"  color="#26a2ff" class="loading"></mt-spinner>
         </mt-loadmore>
-        <mt-popup v-model="popupVisible" popup-transition="popup-fade" style="width:80%;max-height:80%;overflow:scroll;border-radius:10px;padding:16px;">
+        <mt-popup v-model="popupVisible" popup-transition="popup-fade" style="width:80%;max-height:66%;overflow:scroll;border-radius:5px;padding:16px;">
                 <p class="detailss">
                   {{talkContent}}
                 </p>
@@ -49,7 +49,7 @@ export default {
       content:'',
       page:1,
       picture: [
-        "./static/feedback.png",
+        "./static/feedback1.png",
         "./static/feedback2.png",
         "./static/feedback3.png"
       ],
@@ -201,6 +201,7 @@ export default {
       display: flex;
       position: fixed;
       bottom: 10px;
+      width:100%;
     }
     .button {
       margin: 15px 0 0 10px;
@@ -214,6 +215,7 @@ export default {
       /*height: 20px;*/
       width: 240px;
       background: #f5f5f5;
+      flex:1;
     }
 
     .detailss {
@@ -265,5 +267,8 @@ export default {
     }
     .page-loadmore-wrapper {
         overflow: scroll
+    }
+    ::-webkit-scrollbar {
+        display: none;
     }
 </style>
