@@ -70,10 +70,9 @@ export default {
         var that = this;
         if(type == 0){//0:上啦加载  1：下拉刷新
             that.bottomLoading = true;
-            that.page++;
         }else if(type == 1){
             that.topLoading = true;
-            that.page=0;
+            that.page=1;
             that.data=[];
         }
         
@@ -81,6 +80,7 @@ export default {
         axios.get('/user/personalCenter/getTalk',{
           page:that.page,
         }).then(function (response) {
+                that.page++;
                 var list = response.data.data;
                 that.data.push.apply(that.data,list);
                 that.bottomLoading = false;
@@ -204,13 +204,13 @@ export default {
       width:100%;
     }
     .button {
-      margin: 15px 0 0 10px;
+      margin: 10px 6px 0 15px;
       font-size: 12px;
-      width: 48px;
+      width: 70px;
       /*height: 30px;*/
     }
     .pass {
-      margin: 10px 0 0 15px;
+      margin: 10px 0 0 10px;
       /*color: black;*/
       /*height: 20px;*/
       width: 240px;

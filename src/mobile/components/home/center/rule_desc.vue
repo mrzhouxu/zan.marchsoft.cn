@@ -63,6 +63,10 @@ export default {
       font-size: 15px;
       color: red;
     }
+    .rule-desc{
+        padding: 0 10px;
+        text-align: justify;
+    }
     .rule-desc p{
       font-size: 12px;
       line-height: 20px;

@@ -19,7 +19,7 @@
                     <p id="reciveShort11"  class="reciveShort">
                         <span>暂没有使用该点赞币</span>
                     </p>
-                    <div v-for="d in dataUsed" v-if="d.type==1"  class="recive-card-operay">
+                    <div v-for="(d,index) in dataUsed" :key="index" v-if="d.type==1"  class="recive-card-operay">
 
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
@@ -43,8 +43,7 @@
                     <p id="reciveShort12"  class="reciveShort">
                         <span>暂没有使用vip点赞币</span>
                     </p>
-                    <div class="reciveCardVip recive-card-operay2" v-for="d in dataUsed" 
-            v-if="d.type==2">
+                    <div class="reciveCardVip recive-card-operay2" v-for="(d,index) in dataUsed" :key="index"  v-if="d.type==2">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
                                 <img src="../../assets/img/head.jpg" alt="头像">
@@ -66,8 +65,7 @@
                     <p id="reciveShort"  class="reciveShort">
                         <span>暂无该点赞币</span>
                     </p>
-                    <div v-for="d,index in data" 
-            v-if="d.type==1" v-on:click="greet2(d.isActive,index)" v-bind:class="{ reciveCardSelect: d.isActive }">
+                    <div v-for="(d,index) in data" :key="index" v-if="d.type==1" v-on:click="greet2(d.isActive,index)" v-bind:class="{ reciveCardSelect: d.isActive }">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
                                 <img src="../../assets/img/head.jpg" alt="头像">
@@ -90,8 +88,7 @@
                     <p id="reciveShort2" class="reciveShort">
                         <span>暂无该点赞币</span>
                     </p>
-                    <div class="reciveCardVip" v-for="d,index in data" 
-            v-if="d.type==2" v-on:click="greet2(d.isActive,index)" v-bind:class="{ reciveCardSelect: d.isActive }">
+                    <div class="reciveCardVip" v-for="(d,index) in data" :key="index" v-if="d.type==2" v-on:click="greet2(d.isActive,index)" v-bind:class="{ reciveCardSelect: d.isActive }">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
                                 <img src="../../assets/img/head.jpg" alt="头像">
@@ -118,7 +115,7 @@
                     <p id="reciveShort31" class="reciveShort">
                         <span>暂无该点赞币</span>
                     </p>
-                    <div v-for="d in dataOld" v-if="d.type==1" class="recive-card-old">
+                    <div v-for="(d,index) in dataOld" :key="index" v-if="d.type==1" class="recive-card-old">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
                                 <img src="../../assets/img/head.jpg" alt="头像">
