@@ -16,12 +16,12 @@
             </div> -->
         </div>
         <p class="my-order"><span>我的</span>订单</p>
-        <div class="new-infor"> 
+        <div class="new-infor" v-if="list.length!=0"> 
             <div class="new-text">
                 <p>最新订单</p>
                 <p>信息</p>
             </div>
-            <div class="order-infor" style="display:flex;width:70%;" v-on:click="eject_applytype(list[0])" v-if="list.length!=0">
+            <div class="order-infor" style="display:flex;width:70%;" v-on:click="eject_applytype(list[0])">
                 <p style="flex:1;font-size:10px;line-height:60px;padding:0;margin:0;">{{list[0].content}}</p>
                 <!-- <p>{{n.status}}</p> -->
             </div>
@@ -32,7 +32,8 @@
                 </div>
             </div> -->
         </div>
-        <div class="old-infor">
+        <div style="line-height:35px;font-size:14px;text-align:center" v-if="list.length==0">暂无订单~要不去买点？</div>
+        <div class="old-infor" v-if="list.length!=0">
             <p>历史记录</p>
             <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
                 <mt-loadmore :top-method="loadTop" 
@@ -101,9 +102,7 @@ export default {
                 that.page=1;
                 that.list=[];
             }
-            axios.get('/user/personalCenter/getOrderList',{
-                page:that.page,
-            })
+             axios.get('/user/personalCenter/getOrderList',{params:{page:this.page}})//,{params:{page:this.page}}
             .then(function (response) {
                 that.page++;
                 that.flag = true;
