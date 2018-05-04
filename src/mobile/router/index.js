@@ -115,6 +115,17 @@ let all_router = {
       name: '退出登录',
       component: resolve =>void(require(['../components/home/center/sign_out'], resolve))
     },
+    //李雪冰路由添加
+    {
+      path: '/home/record/top',
+      name: '排行榜',
+      component: resolve =>void(require(['../components/home/record/Top'], resolve))
+    },
+    {
+      path: '/home/rank/week',
+      name: '本周排名',
+      component: resolve =>void(require(['../components/home/record/RankWeek'], resolve))
+    },
   ]
 }
 

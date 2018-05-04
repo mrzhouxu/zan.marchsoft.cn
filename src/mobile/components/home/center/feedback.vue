@@ -88,7 +88,7 @@ export default {
         })
         .catch(function (error) {
         });
-      },
+    },
     addtalk: function (){
         
         var that = this;
