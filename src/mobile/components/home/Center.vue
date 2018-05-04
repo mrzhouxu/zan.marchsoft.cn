@@ -100,6 +100,7 @@ export default {
         login_out(){
             MessageBox.confirm('确定执行此操作?').then(action => {
                 axios.get("/user/login_out").then(res=>{
+                    // console.log(res.data)
                     if(res.data.code == 0){
                         Toast({
                             message: '操作成功',

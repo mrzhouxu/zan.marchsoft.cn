@@ -35,7 +35,9 @@ axios.interceptors.response.use(function (response) {
   let res = error.response;
   // console.log(res)
   if (res&&res.status == 401) {
-      location.href = "http://localhost:8081/mobile.html#/sign/login";
+      // location.replace("http://localhost:8080/mobile.html#/sign/login") 
+      location.href = "http://localhost:8080/mobile.html#/sign/login";
+      // location.reload();
       return false;
   }
   // Do something with response error
@@ -48,6 +50,7 @@ axios.interceptors.response.use(function (response) {
 // require('../../util/mock/mobile_mock')
 // require('../../util/mock/xuhong_mock.js')
 // require('../../util/mock/youqiqin_mock')
+// require('../../util/mock/lixuebing')
 
 // 引入全部组件
 import 'mint-ui/lib/style.css'

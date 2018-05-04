@@ -1,5 +1,5 @@
 
-Mock.mock("https://localhost:8080/user/personalCenter/getApplyType",{
+Mock.mock("http://localhost:3030/user/personalCenter/getApplyType",{
 	"code": "0",
 	"msg": "success",
 	"data": [
@@ -22,13 +22,13 @@ Mock.mock("https://localhost:8080/user/personalCenter/getApplyType",{
       ]
 })
 //退出登录
-Mock.mock("https://localhost:8080/user/login_out","get",{
+Mock.mock("http://localhost:3030/user/login_out","get",{
 	"code":"0",
 	"msg":"成功"
 })
 
 // 添加匿名留言
-Mock.mock('https://localhost:8080/user/personalCenter/addTalk',{
+Mock.mock('http://localhost:3030/user/personalCenter/addTalk',{
     // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
         // 'list|1-10': [{
             // 属性 id 是一个自增数，起始值为 1，每次增 1
@@ -46,7 +46,7 @@ Mock.mock('https://localhost:8080/user/personalCenter/addTalk',{
 })
 
 // 获取匿名留言
-Mock.mock('https://localhost:8080/user/personalCenter/getTalk',{
+Mock.mock('http://localhost:3030/user/personalCenter/getTalk',{
         // "code": "0",
 		// "msg": "success",
 		"data": [
@@ -112,7 +112,7 @@ Mock.mock('https://localhost:8080/user/personalCenter/getTalk',{
 			},
 		]
 })
-// Mock.mock('https://localhost:8080/new_infor',{
+// Mock.mock('http://localhost:3030/new_infor',{
 //     // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
 //         'list|5': [{
 //             // 属性 id 是一个自增数，起始值为 1，每次增 1
@@ -132,7 +132,7 @@ Mock.mock('https://localhost:8080/user/personalCenter/getTalk',{
 
 
 // 修改密码
-Mock.mock('https://localhost:8080/user/personalCenter/updatePassword',{
+Mock.mock('http://localhost:3030/user/personalCenter/updatePassword',{
 // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
     // 'list|1': [
         // {
@@ -154,21 +154,21 @@ Mock.mock('https://localhost:8080/user/personalCenter/updatePassword',{
 
 
 // 申请点赞币
-Mock.mock('https://localhost:8080/user/personalCenter/addApply',{
+Mock.mock('http://localhost:3030/user/personalCenter/addApply',{
 	"code":"0",
 	"msg":"成功"
 })
 
 
 // 购买点赞币
-Mock.mock('https://localhost:8080/alipay/wappay',{
+Mock.mock('http://localhost:3030/alipay/wappay',{
 	"code": "0",
 	"msg": "success",
 })
 
 
 
-Mock.mock('https://localhost:8080/order',{
+Mock.mock('http://localhost:3030/order',{
     // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
         'list|5': [{
             // 属性 id 是一个自增数，起始值为 1，每次增 1
@@ -187,7 +187,7 @@ Mock.mock('https://localhost:8080/order',{
 })
 
 // 我的订单
-Mock.mock('https://localhost:8080/user/personalCenter/getOrderList',{
+Mock.mock('http://localhost:3030/user/personalCenter/getOrderList',{
 	"code": "0",
 	"msg": "success",
 	"result": [
@@ -232,7 +232,7 @@ Mock.mock('https://localhost:8080/user/personalCenter/getOrderList',{
 
 
 
-Mock.mock('https://localhost:8080/order',{
+Mock.mock('http://localhost:3030/order',{
     // 属性 list 的值是一个数组，其中含有 1 到 10 个元素
         'list|5': [{
             // 属性 id 是一个自增数，起始值为 1，每次增 1
@@ -253,7 +253,7 @@ Mock.mock('https://localhost:8080/order',{
 
 
 // 接受订单任务>历史记录
-Mock.mock('https://localhost:8080/user/personalCenter/getProcessOrderr',{
+Mock.mock('http://localhost:3030/user/personalCenter/getProcessOrderr',{
 	"data":[
 		{
 			'content':'@cword(10, 20)',

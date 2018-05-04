@@ -1,5 +1,5 @@
 //登录
-Mock.mock('https://localhost:8080/user/login',{
+Mock.mock('http://localhost:3030/user/login',{
 	"object|1": [{
 			"code": 0,
 			"msg": "success"
@@ -19,7 +19,7 @@ Mock.mock('https://localhost:8080/user/login',{
 	]
 })
 	
-Mock.mock('https://localhost:8080/user/seeCon', {
+Mock.mock('http://localhost:3030/user/seeCon', {
     'list|1-10': [{
         'coin_id|1-2': 2,
         'name': '@cname()',
@@ -30,14 +30,14 @@ Mock.mock('https://localhost:8080/user/seeCon', {
     }]
 })
 //无限加载
-Mock.mock('https://localhost:8080/rr', {
+Mock.mock('http://localhost:3030/rr', {
     'list|10': [{
         'name|1-500': 1
     }]
 })
 
 // 已过期
-Mock.mock('https://localhost:8080/user/thumbsUp/getOverdueCoinList', {
+Mock.mock('http://localhost:3030/user/thumbsUp/getOverdueCoinList', {
     'list|1': [
     {
         "code": 0,
@@ -63,7 +63,7 @@ Mock.mock('https://localhost:8080/user/thumbsUp/getOverdueCoinList', {
 })
 
 // 已使用
-Mock.mock('https://localhost:8080/user/thumbsUp/getUsedCoinList', {
+Mock.mock('http://localhost:3030/user/thumbsUp/getUsedCoinList', {
     'list|1': [
     {
         "code": 0,
@@ -93,7 +93,7 @@ Mock.mock('https://localhost:8080/user/thumbsUp/getUsedCoinList', {
 })
 
 // 未使用
-Mock.mock('https://localhost:8080/user/thumbsUp/getCoinList', {
+Mock.mock('http://localhost:3030/user/thumbsUp/getCoinList', {
     'list|1': [
     {
         "code": 0,
@@ -118,7 +118,7 @@ Mock.mock('https://localhost:8080/user/thumbsUp/getCoinList', {
     ]
 })
 
-Mock.mock('https://localhost:8080/buy', {
+Mock.mock('http://localhost:3030/buy', {
     'list|1': [
     {
         "code": 1,
@@ -132,7 +132,7 @@ Mock.mock('https://localhost:8080/buy', {
 })
 
 //点赞表单
-Mock.mock('https://localhost:8080/user/thumbsUp', {
+Mock.mock('http://localhost:3030/user/thumbsUp', {
     'list|1': [
     {
         "code": 0,
@@ -145,7 +145,7 @@ Mock.mock('https://localhost:8080/user/thumbsUp', {
     ]
 })
 
-Mock.mock('https://localhost:8080/getPeople', {
+Mock.mock('http://localhost:3030/getPeople', {
     'list': {
     'kk|10-15': [{'id|+1': 1,"name": '@cname'}],
     'll|10-15': [{'id|+1': 1,"name": '@cname'}],
@@ -153,7 +153,7 @@ Mock.mock('https://localhost:8080/getPeople', {
     }
 })
 
-Mock.mock('https://localhost:8080/group', {
+Mock.mock('http://localhost:3030/group', {
     'list|1': [
     {
         "code": 1,
@@ -166,7 +166,7 @@ Mock.mock('https://localhost:8080/group', {
     ]
 })
 
-Mock.mock('https://localhost:8080/getOrder', {
+Mock.mock('http://localhost:3030/getOrder', {
     'list|1-5': [{
         "name": '@cname',
 		"number|1-10": 1,
@@ -181,7 +181,7 @@ Mock.mock('https://localhost:8080/getOrder', {
     }]
 })
 
-Mock.mock('https://localhost:8080/grant', {
+Mock.mock('http://localhost:3030/grant', {
     'list|1': [
     {
         "code": 1,

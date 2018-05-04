@@ -98,7 +98,7 @@ export default {
         margin: 10px 0 0 0;
     }
     .submission {
-      width: 300px;
+      /* width: 300px; */
       margin: 0 auto;
     }
 </style>

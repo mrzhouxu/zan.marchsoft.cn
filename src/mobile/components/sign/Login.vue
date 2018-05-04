@@ -60,7 +60,7 @@
     }
 </style>
 <script>
-import { Toast } from 'mint-ui';
+import { Toast,Indicator } from 'mint-ui';
 export default {
     components:{
         
@@ -82,7 +82,7 @@ export default {
             var that = this;
             let user = that.trimStr(that.student.userName);
             let passW = that.trimStr(that.student.passWord);
-            console.log(passW,user)
+            // console.log(passW,user)
             if (user == '') {
                 Toast('请填写您的账号');
                 return;
@@ -108,7 +108,7 @@ export default {
         }
     },
     mounted() {
-
+        Indicator.close();
     }
 }
 </script>

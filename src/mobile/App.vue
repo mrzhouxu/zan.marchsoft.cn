@@ -11,11 +11,19 @@
 </template>
 
 <script>
+// import { Indicator } from 'mint-ui';
 export default {
   name: 'App',
   data(){
     return {
     }
+  },
+  watch: {
+      // $route:{
+      //     handler(val,old){
+      //       Indicator.close();
+      //     }
+      // }
   },
   mounted(){
     

@@ -88,7 +88,48 @@ const filters = {
     },
     ytox:function(value){
         return atob(atob(atob(value)));
+    },
+    //本周  上周 参数 0本周 1 上一周 2上两周
+    //输出  2018-4-29 
+    getDateWeek:function(time){
+        var todayDate = new Date(parseInt(time));
+        var date = todayDate.getDate();
+        var month= todayDate.getMonth() +1;
+        var year= todayDate.getYear();
+        var dateweek = "";
+        if(navigator.appName == "Netscape")
+        {
+          dateweek = dateweek + (1900+year) + "-" + month + "-" + date ;
+        }
+        if(navigator.appVersion.indexOf("MSIE") != -1)
+        {
+          dateweek = dateweek + year + "-" + month + "-" + date ;
+        }
+        return dateweek;
+    },
+    weekNum:function(week){
+        var now = new Date(); 
+        var nowTime = now.getTime() ; 
+        var day = now.getDay();
+        var oneDayLong = 24*60*60*1000 ; 
+
+
+        var MondayTime = nowTime - (day-1)*oneDayLong-7*24*60*60*1000*week; 
+        var SundayTime =  nowTime + (7-day)*oneDayLong-7*24*60*60*1000*week; 
+
+
+        // var monday = new Date(MondayTime);
+        // var sunday = new Date(SundayTime);
+        console.log(MondayTime,SundayTime)
+        console.log(this.getDateWeek(MondayTime)) ; 
+        console.log(this.getDateWeek(SundayTime)) ;
+        return {
+            start_date:this.getDateWeek(MondayTime),
+            over_date:this.getDateWeek(SundayTime)
+        }
+
     }
+    
 }
 
 

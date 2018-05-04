@@ -6,15 +6,15 @@
         <div id="content">
             <div class="content-top">
                 <div class="content-left">
-                    <p>{{zan_count}}</p>
+                    <p>{{totalWeek}}</p>
                     <p>本周获赞</p>
                 </div>
                 <div class="content-center">
-                    <p>{{zan_count}}</p>
+                    <p>{{countTotal}}</p>
                     <p>获赞总数</p>
                 </div>
                 <div class="content-right">
-                    <p>{{zan_count}}</p>
+                    <p>{{rankWeek}}</p>
                     <!-- <router-link to="/home/rank/week"> -->
                         <p class="rank-week">本周排名</p>
                     <!-- </router-link> -->
@@ -23,7 +23,7 @@
             <div class="content-buttom">
                 <!-- <a to="/home/record/top">获取点赞排行></a> -->
                 <router-link to="/home/record/top"><i class="fa fa-bar-chart"></i> 获赞排行榜 > </router-link>
-                <p class="time-range">(统计时间为：{{date}} 22:00--{{date}} 22:00)</p>
+                <p class="time-range">(统计时间为：{{date.start_date}} 至 {{date.over_date}} 22:00)</p>
             </div>
         </div>
 
@@ -37,59 +37,89 @@
                         <mt-tab-container-item id="1">
                             <mt-loadmore :top-method="loadTop" 
                             :bottom-method="loadBottom" :autoFill = "false"
-                            :bottom-all-loaded="allLoaded" ref="loadmore">
+                            :bottom-all-loaded="allLoaded" ref="loadmore1">
                                 <mt-spinner type="triple-bounce" v-if="topLoading"  color="#26a2ff" class="loading"></mt-spinner>
-                                    <mt-cell v-for="n in 10" :title="'内容 ' + n" :key="n"/>
+
+                                    <!-- <mt-cell v-for="n in 10" :title="'内容 ' + n" :key="n"/> -->
+                                    <div class="task-list" v-for="(item,index) in list1" :key="index" @click="getInfo(item)">
+                                        <div class="task-item">
+                                            <div class="item-img">
+                                                <img :src="item.img_url" alt="err">
+                                            </div>
+                                            <div class="item-message">
+                                                <p style="font-size:14px;">{{item.name}} 赞了你一次</p>
+                                                <p class="bContentList" style="font-size:12px;">{{item.reason}}</p>
+                                            </div>
+                                            <div class="item-time">
+                                                <p style="font-size: 12px;">{{item.use_time | timeago}}</p>
+                                                <p style="font-size: 12px;">{{item.over_time | timeago}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 <mt-spinner type="triple-bounce" v-if="bottomLoading"  color="#26a2ff" class="loading"></mt-spinner>
                             </mt-loadmore>
                         </mt-tab-container-item>
                         <mt-tab-container-item id="2">
-                            <mt-cell v-for="n in 4" :title="'测试 ' + n" :key="n"/>
+
+                            <mt-loadmore :top-method="loadTop" 
+                            :bottom-method="loadBottom" :autoFill = "false"
+                            :bottom-all-loaded="allLoaded" ref="loadmore2">
+                                <mt-spinner type="triple-bounce" v-if="topLoading"  color="#26a2ff" class="loading"></mt-spinner>
+
+                                    <!-- <mt-cell v-for="n in 10" :title="'内容 ' + n" :key="n"/> -->
+                                    <div class="task-list" v-for="(item,index) in list2" :key="index" @click="getInfo(item)">
+                                        <div class="task-item">
+                                            <div class="item-img">
+                                                <img :src="item.img_url" alt="err">
+                                            </div>
+                                            <div class="item-message">
+                                                <p style="font-size:14px;">{{item.name}} 赞了你一次</p>
+                                                <p class="bContentList" style="font-size:12px;">{{item.reason}}</p>
+                                            </div>
+                                            <div class="item-time">
+                                                <p style="font-size: 12px;">{{item.use_time | timeago}}</p>
+                                                <p style="font-size: 12px;">{{item.over_time | timeago}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <mt-spinner type="triple-bounce" v-if="bottomLoading"  color="#26a2ff" class="loading"></mt-spinner>
+                            </mt-loadmore>
+
                         </mt-tab-container-item>
                     </mt-tab-container>
             </div>
             
         </div>  
 
-        
-        <!-- <div id="task-list">
-            <div class="task-item">
-                <div class="item-img">
-                    <img src="../../assets/img/head.jpg" alt="">
+        <mt-popup
+        v-model="popupVisible"
+        popup-transition="popup-fade"
+        style="width:80%;background:none;">
+            <div class="bInfo">
+                <div class="bHeader">
+                    <div class="bAvatar">
+                        <img :src="bInfo.img_url" alt="err">
+                    </div>
+                    <p class="fromTo">{{bInfo.name}} 给我点赞!</p>
                 </div>
-                <div class="item-message">
-                    <p>桑金超赞了你一次</p>
-                    <p>努力学习，帮助他人</p>
+                <div class="bContent">
+                    <p>{{bInfo.reason}}</p>
                 </div>
-                <div class="item-time">
-                    <p>7:50</p>
-                    <p>5月1号到期</p>
-                </div>
-            </div>
-
-            <div class="task-item">
-                <div class="item-img">
-                    <img src="../../assets/img/head.jpg" alt="">
-                </div>
-                <div class="item-message">
-                    <p>桑金超赞了你一次</p>
-                    <p>努力学习，帮助他人</p>
-                </div>
-                <div class="item-time">
-                    <p>星期一</p>
-                    <p>已使用</p>
+                <div class="bFooter">
+                    <p>{{bInfo.start_time | getDateWeek }} --- {{bInfo.over_time | getDateWeek}} 20:00</p>
                 </div>
             </div>
-
-        </div> -->
-
+        </mt-popup>
         <NavBottom selected="1"></NavBottom>
     </div>
 </template>
 
 <script>
 import NavBottom from '../NavBottom.vue'
-
+// import {filters} from '../../filter'
+import {filters} from '../../filter';
 export default {
     components:{
         NavBottom
@@ -97,33 +127,159 @@ export default {
     data () {
         return {
             selected:'1',
-            zan_count:'',
+            countTotal:0,
+            totalWeek: 0,
+            rankWeek: 0,
             wrapperHeight: 0,
             allLoaded: false,
             sel:'1',
-            date:'',
-            topLoading:true,
-            bottomLoading:true,
+            date:{
+                start_date:'1900-1-1',
+                over_date:'1900-1-1',
+            },
+            
+            topLoading:false,
+            bottomLoading:false,
+            topLoading2:false,
+            bottomLoading2:false,
+            popupVisible:false,
+            flag:true,
+            page1:1,
+            page2:1,
+            bInfo:{
+                name:'桑金超',
+                reason:'努力学习,乐于助人',
+                start_time:'1525412837',
+                over_time:'1525412837',
+                img_url:"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+            },
+            list1:[
+                {
+                   "name":"桑金超",
+                   "reason":"努力学习,帮助他人",
+                   "start_time":"1525412837",
+                   "over_time":"1525412837",
+                   "use_time":"1525412837",
+                   "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+                },
+                {
+                   "name":"桑金超",
+                   "reason":"努力学习,帮助他人",
+                   "start_time":"1525412837",
+                   "over_time":"1525412837",
+                   "use_time":"1525412837",
+                   "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+                },
+                {
+                   "name":"桑金超",
+                   "reason":"努力学习,帮助他人",
+                   "start_time":"1525412837",
+                   "over_time":"1525412837",
+                   "use_time":"1525412837",
+                   "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+                }
+            ],
+            list2:[
+                {
+                   "name":"桑金超",
+                   "reason":"努力学习,帮助他人",
+                   "start_time":"1525412837",
+                   "over_time":"1525412837",
+                   "use_time":"1525412837",
+                   "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+                },
+                {
+                   "name":"桑金超",
+                   "reason":"努力学习,帮助他人",
+                   "start_time":"1525412837",
+                   "over_time":"1525412837",
+                   "use_time":"1525412837",
+                   "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+                },
+                {
+                   "name":"桑金超",
+                   "reason":"努力学习,帮助他人",
+                   "start_time":"1525412837",
+                   "over_time":"1525412837",
+                   "use_time":"1525412837",
+                   "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+                }
+            ],
         }
     },
     methods:{
         info(){
-            axios.get('lixuebing.com').then(res =>{
-                 // console.log(res);
-                this.zan_count = res.data.number;
-                this.date = res.data.array;
+            axios.get('/user/record/countnum').then(res =>{
+                this.countTotal = res.data.result.countTotal;
+                this.totalWeek = res.data.result.totalWeek;
+                this.rankWeek = res.data.result.rankWeek;
             })
         },
-        loadTop: function() {
-            this.$refs.loadmore.onTopLoaded();
+        getList(){
+            this.flag = false;
+            var page = 1;
+            if(this.sel == 1){
+                page = this.page1;
+            }else if(this.sel == 2){
+                page = this.page2;
+            }
+            axios.get('user/record/thumbup',{
+                params: { 
+                    'page': page,
+                    'isthumbup':this.sel
+                }
+            }).then(res=>{
+                if(this.sel == 1){
+                    this.page1++;
+                    this.list1.push.apply(this.list1,res.data.result);
+                }else if(this.sel == 2){
+                    this.page2++;
+                    this.list2.push.apply(this.list2,res.data.result);
+                }
+                this.topLoading = false;
+                this.bottomLoading = false;
+                this.flag = true;
+            })
         },
-        loadBottom:function() {  
-            this.$refs.loadmore.onBottomLoaded();
+        getInfo(item){
+            // console.log(item)
+            this.bInfo = item;
+            this.popupVisible = true;
+        },
+        loadTop: function() {
+            this.topLoading = true;
+            if(this.sel == 1){
+                this.page1 = 1;
+                this.list1 = [];
+                this.getList(this.sel);
+                this.$refs.loadmore1.onTopLoaded();
+            }else if(this.sel == 2){
+                this.page2 = 1;
+                this.list2 = [];
+                this.getList(this.sel);
+                this.$refs.loadmore2.onTopLoaded();
+            }
+            
+        },
+        loadBottom:function() {
+            this.bottomLoading = true;
+            if(this.flag){
+                this.getList(this.sel);
+            }
+            if(this.sel == 1){
+                this.$refs.loadmore1.onBottomLoaded();
+            }else if(this.sel == 2){
+                this.$refs.loadmore2.onBottomLoaded();
+            }
+            
         }
     },
     mounted(){
         this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top-55;
         this.info();
+        this.getList();
+        // console.log(filters)
+        this.date = filters.weekNum(0);
     }
 }
 </script>
@@ -175,6 +331,7 @@ export default {
     .task-list{
         display: flex;
         flex-direction: column;
+        padding: 0 12px 0 0;
     }
     .task-item{
         display: flex;
@@ -208,6 +365,48 @@ export default {
     }
     .loading{
         text-align: center;
+    }
+    .bAvatar{
+        width: 30px;
+        height: 30px;
+        background: red;
+        vertical-align: middle;
+        display: inline-block;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+    .bAvatar>img{
+        width: 100%;
+        height: 100%;
+    }
+    .fromTo{
+        display: inline-block;
+        vertical-align: middle;
+        font-size: 12px;
+    }
+    .bInfo{
+        color: #fff;
+        min-height: 132px;
+        border-radius: 6px;
+        background-image:url(../../assets/img/VIP.jpg);
+        background-size: cover;
+        padding: 0 10px;
+    }
+    .bContent{
+        text-align: center;
+        font-size: 14px;
+        min-height:40px;
+    }
+    .bFooter{
+        font-size: 12px;
+        text-align: center;
+        opacity: 0.68;
+        margin: 10px 0;
+    }
+    .bContentList{
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 </style>
 

@@ -1,4 +1,4 @@
-Mock.mock('https://localhost:8080/lixuebing.com',{
+Mock.mock('http://localhost:3030/lixuebing',{
   "number|1-100": 100,
 
   "array|1": [
