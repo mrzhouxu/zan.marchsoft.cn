@@ -17,6 +17,11 @@ let all_router = {
       component: resolve =>void(require(['../components/home/Record'], resolve))
     },
     {
+      path: '/home/rank',
+      name: '排行榜',
+      component: resolve =>void(require(['../components/home/record/Rank'], resolve))
+    },
+    {
       path: '/home/recive',
       name: '收到的赞',
       meta:{keepAlive:true,select:2},
