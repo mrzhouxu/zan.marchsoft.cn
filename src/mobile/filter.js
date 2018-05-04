@@ -120,9 +120,9 @@ const filters = {
 
         // var monday = new Date(MondayTime);
         // var sunday = new Date(SundayTime);
-        console.log(MondayTime,SundayTime)
-        console.log(this.getDateWeek(MondayTime)) ; 
-        console.log(this.getDateWeek(SundayTime)) ;
+        // console.log(MondayTime,SundayTime)
+        // console.log(this.getDateWeek(MondayTime)) ; 
+        // console.log(this.getDateWeek(SundayTime)) ;
         return {
             start_date:this.getDateWeek(MondayTime),
             over_date:this.getDateWeek(SundayTime)

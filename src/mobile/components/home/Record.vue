@@ -22,7 +22,7 @@
             </div>
             <div class="content-buttom">
                 <!-- <a to="/home/record/top">获取点赞排行></a> -->
-                <router-link to="/home/record/rank"><i class="fa fa-bar-chart"></i> 获赞排行榜 > </router-link>
+                <router-link to="/home/rank"><i class="fa fa-bar-chart"></i> 获赞排行榜 > </router-link>
                 <p class="time-range">(统计时间为：{{date.start_date}} 至 {{date.over_date}} 22:00)</p>
             </div>
         </div>
@@ -51,8 +51,8 @@
                                                 <p class="bContentList" style="font-size:12px;">{{item.reason}}</p>
                                             </div>
                                             <div class="item-time">
-                                                <p style="font-size: 12px;">{{item.use_time | timeago}}</p>
-                                                <p style="font-size: 12px;">{{item.over_time | timeago}}</p>
+                                                <p style="font-size: 12px;">{{item.use_time*1000 | timeago}}</p>
+                                                <p style="font-size: 12px;">{{item.over_time*1000 | timeago}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -74,12 +74,12 @@
                                                 <img :src="item.img_url" alt="err">
                                             </div>
                                             <div class="item-message">
-                                                <p style="font-size:14px;">{{item.name}} 赞了你一次</p>
+                                                <p style="font-size:14px;">赞了 {{item.name}}</p>
                                                 <p class="bContentList" style="font-size:12px;">{{item.reason}}</p>
                                             </div>
                                             <div class="item-time">
-                                                <p style="font-size: 12px;">{{item.use_time | timeago}}</p>
-                                                <p style="font-size: 12px;">{{item.over_time | timeago}}</p>
+                                                <p style="font-size: 12px;">{{item.use_time*1000 | timeago}}</p>
+                                                <!-- <p style="font-size: 12px;">{{item.over_time*1000 | timeago}}</p> -->
                                             </div>
                                         </div>
                                     </div>
@@ -108,7 +108,7 @@
                     <p>{{bInfo.reason}}</p>
                 </div>
                 <div class="bFooter">
-                    <p>{{bInfo.start_time | getDateWeek }} --- {{bInfo.over_time | getDateWeek}} 20:00</p>
+                    <p>{{bInfo.start_time*1000 | getDateWeek }} --- {{bInfo.over_time*1000 | getDateWeek}} 20:00</p>
                 </div>
             </div>
         </mt-popup>
@@ -154,56 +154,56 @@ export default {
                 img_url:"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
             },
             list1:[
-                {
-                   "name":"桑金超",
-                   "reason":"努力学习,帮助他人",
-                   "start_time":"1525412837",
-                   "over_time":"1525412837",
-                   "use_time":"1525412837",
-                   "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
-                },
-                {
-                   "name":"桑金超",
-                   "reason":"努力学习,帮助他人",
-                   "start_time":"1525412837",
-                   "over_time":"1525412837",
-                   "use_time":"1525412837",
-                   "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
-                },
-                {
-                   "name":"桑金超",
-                   "reason":"努力学习,帮助他人",
-                   "start_time":"1525412837",
-                   "over_time":"1525412837",
-                   "use_time":"1525412837",
-                   "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
-                }
+                // {
+                //    "name":"桑金超",
+                //    "reason":"努力学习,帮助他人",
+                //    "start_time":"1525412837",
+                //    "over_time":"1525412837",
+                //    "use_time":"1525412837",
+                //    "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+                // },
+                // {
+                //    "name":"桑金超",
+                //    "reason":"努力学习,帮助他人",
+                //    "start_time":"1525412837",
+                //    "over_time":"1525412837",
+                //    "use_time":"1525412837",
+                //    "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+                // },
+                // {
+                //    "name":"桑金超",
+                //    "reason":"努力学习,帮助他人",
+                //    "start_time":"1525412837",
+                //    "over_time":"1525412837",
+                //    "use_time":"1525412837",
+                //    "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+                // }
             ],
             list2:[
-                {
-                   "name":"桑金超",
-                   "reason":"努力学习,帮助他人",
-                   "start_time":"1525412837",
-                   "over_time":"1525412837",
-                   "use_time":"1525412837",
-                   "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
-                },
-                {
-                   "name":"桑金超",
-                   "reason":"努力学习,帮助他人",
-                   "start_time":"1525412837",
-                   "over_time":"1525412837",
-                   "use_time":"1525412837",
-                   "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
-                },
-                {
-                   "name":"桑金超",
-                   "reason":"努力学习,帮助他人",
-                   "start_time":"1525412837",
-                   "over_time":"1525412837",
-                   "use_time":"1525412837",
-                   "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
-                }
+                // {
+                //    "name":"桑金超",
+                //    "reason":"努力学习,帮助他人",
+                //    "start_time":"1525412837",
+                //    "over_time":"1525412837",
+                //    "use_time":"1525412837",
+                //    "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+                // },
+                // {
+                //    "name":"桑金超",
+                //    "reason":"努力学习,帮助他人",
+                //    "start_time":"1525412837",
+                //    "over_time":"1525412837",
+                //    "use_time":"1525412837",
+                //    "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+                // },
+                // {
+                //    "name":"桑金超",
+                //    "reason":"努力学习,帮助他人",
+                //    "start_time":"1525412837",
+                //    "over_time":"1525412837",
+                //    "use_time":"1525412837",
+                //    "img_url":"http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" 
+                // }
             ],
         }
     },
@@ -215,24 +215,24 @@ export default {
                 this.rankWeek = res.data.result.rankWeek;
             })
         },
-        getList(){
+        getList(val){
             this.flag = false;
             var page = 1;
-            if(this.sel == 1){
+            if(val == 1){
                 page = this.page1;
-            }else if(this.sel == 2){
+            }else if(val == 2){
                 page = this.page2;
             }
             axios.get('user/record/thumbup',{
                 params: { 
                     'page': page,
-                    'isthumbup':this.sel
+                    'isthumbup':val
                 }
             }).then(res=>{
-                if(this.sel == 1){
+                if(val == 1){
                     this.page1++;
                     this.list1.push.apply(this.list1,res.data.result);
-                }else if(this.sel == 2){
+                }else if(val == 2){
                     this.page2++;
                     this.list2.push.apply(this.list2,res.data.result);
                 }
@@ -275,10 +275,14 @@ export default {
         }
     },
     mounted(){
-        this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top-55;
+        this.topLoading = true;
         this.info();
-        this.getList();
-        // console.log(filters)
+        setTimeout(()=>{
+            this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top-55;
+            // console.log(this.wrapperHeight,document.documentElement.clientHeight,this.$refs.wrapper.getBoundingClientRect().top);
+        },0);
+        this.getList(1);
+        this.getList(2);
         this.date = filters.weekNum(0);
     }
 }
@@ -396,6 +400,9 @@ export default {
         text-align: center;
         font-size: 14px;
         min-height:40px;
+        word-break:break-all;
+        max-height: 350px;
+        overflow: scroll;
     }
     .bFooter{
         font-size: 12px;

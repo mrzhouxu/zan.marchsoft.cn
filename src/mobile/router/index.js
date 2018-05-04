@@ -116,11 +116,11 @@ let all_router = {
       component: resolve =>void(require(['../components/home/center/sign_out'], resolve))
     },
     //李雪冰路由添加
-    {
-      path: '/home/record/rank',
-      name: '排行榜',
-      component: resolve =>void(require(['../components/home/record/Rank'], resolve))
-    },
+    // {
+    //   path: '/home/record/rank',
+    //   name: '排行榜',
+    //   component: resolve =>void(require(['../components/home/record/Rank'], resolve))
+    // },
     {
       path: '/home/rank/week',
       name: '本周排名',
