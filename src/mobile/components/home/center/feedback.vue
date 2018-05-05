@@ -18,7 +18,7 @@
                         <img :src="picture[Math.floor((Math.random()*3))]" alt="头像加载失败">
                     </div>
                     <p class="talk-content" @click="eject_applytype(i.content)">{{i.content}}</p>
-                    <p class="timeage">{{i.create_time | timeago}}</p>
+                    <p class="timeage">{{i.create_time*1000 | timeago}}</p>
             </div>
             <!-- <div v-for="i,index in 100" class="details" style="display:flex; border-bottom: 1px solid rgba(187,187,187, 0.2);position: relative;"  :key="index">
                 <div class="feedback-user"><img :src="i"></div>
@@ -78,10 +78,10 @@ export default {
         
 
         axios.get('/user/personalCenter/getTalk',{
-          page:that.page,
+          params:{page:that.page}
         }).then(function (response) {
                 that.page++;
-                var list = response.data.data;
+                var list = response.data.result;
                 that.data.push.apply(that.data,list);
                 that.bottomLoading = false;
                 that.topLoading = false;
@@ -106,7 +106,7 @@ export default {
                     iconClass: 'fa fa-check fa-5x'
                 });
                 that.content = "";
-                that.gettalk(0);
+                that.gettalk(1);
              } else {
               Toast({
                     message: feedback.msg,

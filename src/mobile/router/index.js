@@ -66,7 +66,7 @@ let all_router = {
     {
       path: '/home/center',
       name: '个人中心',
-      meta:{select:4},
+      meta:{keepAlive:false,select:4},
       component: resolve =>void(require(['../components/home/Center'], resolve))
     },
     {

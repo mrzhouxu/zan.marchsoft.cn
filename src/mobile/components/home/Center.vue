@@ -4,9 +4,9 @@
         <div id="test">
             <div class="bg-user">
                 <!-- <div class="user-picture"><img src="../../assets/img/user_picture.png"></div> -->
-                <div class="user-picture"><img :src="'http://q1.qlogo.cn/g?b=qq&nk='+userInfo.qq+'&s=100'"></div>
+                <div class="user-picture"><img :src="'http://q1.qlogo.cn/g?b=qq&nk='+userInfo.qq_account+'&s=100'"></div>
                 <div class="per-infor">
-                    <p>{{userInfo.name}}</p>
+                    <p style="min-height:30px;">{{userInfo.name}}</p>
                     <!-- <p>{{userInfo.stuNumber}}</p> -->
                 </div>
             </div>
@@ -89,10 +89,10 @@ export default {
     data() {
         return {
             userInfo:{
-                id:1,
-                name:'桑金超',
-                stuNumber:'20151515138',
-                qq:"794135759"
+                id:" ",
+                name:" ",
+                stuNumber:' ',
+                qq:" "
             }
         }
     },
@@ -114,9 +114,17 @@ export default {
             }).catch(err=>{
                 // console.log(112)
             });
+        },
+        getInfo(){
+            axios.get("/user/getInfo").then(res=>{
+                this.userInfo = res.data.result;
+            }).catch(err=>{
+
+            })
         }
     },
     mounted() {
+        this.getInfo();
     }
 }
 </script>

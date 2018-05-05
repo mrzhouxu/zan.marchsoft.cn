@@ -145,7 +145,10 @@ export default {
     getTyge(){
         axios.get("/user/personalCenter/getApplyType").then((res)=>{
             // console.log(res.data.data)
-            this.options = res.data.data;
+            // this.options = res.data.result;
+            for(let i=0,len=res.data.result.length;i<len;i++){
+                this.options.push({'label':res.data.result[i].type_name,'value':res.data.result[i].id+''});
+            }
         })
     },
     submission: function() {
@@ -164,10 +167,11 @@ export default {
             return;
         };
         axios.post('user/personalCenter/addApply',{
-            applyContent:that.data,
+            applyContent:JSON.stringify(that.data),
             applyType:that.bType,
         })
             .then(function (response) {
+              // console.log(response.data)
                 var judge = response.data;
                 if (judge.code==0) {
                     Toast(judge.msg);
