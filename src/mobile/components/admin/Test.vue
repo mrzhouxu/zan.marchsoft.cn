@@ -364,7 +364,7 @@ export default {
                 coin_id:1
             };
             MessageBox.prompt('请输入个数').then(({ value, action }) => {
-                params.count = value;
+                params.num = value;
                 axios.post("/admin/coin/give",params).then((res)=>{
                     if(res.data.code == 0){
                         alert(res.data.msg);

@@ -44,10 +44,10 @@
                                     <div class="task-list" v-for="(item,index) in list1" :key="index" @click="getInfo(item)">
                                         <div class="task-item">
                                             <div class="item-img">
-                                                <img :src="item.img_url" alt="err">
+                                                <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+item.img_url+'&s=100'" alt="err">
                                             </div>
                                             <div class="item-message">
-                                                <p style="font-size:14px;">{{item.name}} 赞了你一次</p>
+                                                <p style="font-size:14px;">{{item.from_user_name}} 赞了你一次</p>
                                                 <p class="bContentList" style="font-size:12px;">{{item.reason}}</p>
                                             </div>
                                             <div class="item-time">
@@ -71,10 +71,10 @@
                                     <div class="task-list" v-for="(item,index) in list2" :key="index" @click="getInfo(item)">
                                         <div class="task-item">
                                             <div class="item-img">
-                                                <img :src="item.img_url" alt="err">
+                                                <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+item.img_url+'&s=100'" alt="err">
                                             </div>
                                             <div class="item-message">
-                                                <p style="font-size:14px;">赞了 {{item.name}}</p>
+                                                <p style="font-size:14px;">赞了 {{item.to_user_name}}</p>
                                                 <p class="bContentList" style="font-size:12px;">{{item.reason}}</p>
                                             </div>
                                             <div class="item-time">
@@ -100,7 +100,7 @@
             <div class="bInfo">
                 <div class="bHeader">
                     <div class="bAvatar">
-                        <img :src="bInfo.img_url" alt="err">
+                        <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+bInfo.img_url+'&s=100'" alt="err">
                     </div>
                     <p class="fromTo">{{bInfo.name}} 给我点赞!</p>
                 </div>
