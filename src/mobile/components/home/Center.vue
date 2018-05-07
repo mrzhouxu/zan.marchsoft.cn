@@ -115,16 +115,18 @@ export default {
                 // console.log(112)
             });
         },
-        getInfo(){
-            axios.get("/user/getInfo").then(res=>{
-                this.userInfo = res.data.result;
-            }).catch(err=>{
+        // getInfo(){
+        //     axios.get("/user/getInfo").then(res=>{
+        //         this.userInfo = res.data.result;
+        //     }).catch(err=>{
 
-            })
-        }
+        //     })
+        // }
     },
     mounted() {
-        this.getInfo();
+        // this.getInfo();
+        this.userInfo = this.$parent.$data.userInfo;
+        // console.log(this.$parent.$data.userInfo)
     }
 }
 </script>

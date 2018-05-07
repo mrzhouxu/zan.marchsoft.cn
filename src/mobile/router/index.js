@@ -8,7 +8,7 @@ let all_router = {
   routes:[
     {
       path: '/',
-      component: resolve =>void(require(['../components/home/Record'], resolve))
+      component: resolve =>void(require(['../components/sign/Login'], resolve))
     },
     {
       path: '/home/record',

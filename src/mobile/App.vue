@@ -16,6 +16,7 @@ export default {
   name: 'App',
   data(){
     return {
+      userInfo:{},
     }
   },
   watch: {
@@ -25,8 +26,20 @@ export default {
       //     }
       // }
   },
+  methods:{
+    getInfo(){
+      if(this.userInfo.name==null){
+          axios.get("/user/getInfo").then(res=>{
+              this.userInfo = res.data.result;
+          }).catch(err=>{
+
+          })
+      }
+          
+      }
+  },
   mounted(){
-    
+    this.getInfo();
   }
 }
 </script>
