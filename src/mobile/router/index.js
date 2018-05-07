@@ -126,6 +126,14 @@ let all_router = {
       name: '本周排名',
       component: resolve =>void(require(['../components/home/record/RankWeek'], resolve))
     },
+
+    //管理员
+    {
+      path: '/admin/test',
+      name: '管理员',
+      component: resolve =>void(require(['../components/admin/Test'], resolve))
+    }
+
   ]
 }
 

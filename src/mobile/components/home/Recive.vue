@@ -20,6 +20,7 @@
                         <span>暂没有使用该点赞币</span>
                     </p>
                     <div v-for="(d,index) in dataUsed" :key="index" v-if="d.type==1"  class="recive-card-operay">
+                    <!-- <div v-for="(d,index) in dataUsed" :key="index" v-if="d.type==1"  class="recive-card-operay"> -->
 
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
