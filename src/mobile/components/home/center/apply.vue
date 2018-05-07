@@ -145,10 +145,10 @@ export default {
     getTyge(){
         axios.get("/user/personalCenter/getApplyType").then((res)=>{
             // console.log(res.data.data)
-            // this.options = res.data.result;
-            for(let i=0,len=res.data.result.length;i<len;i++){
-                this.options.push({'label':res.data.result[i].type_name,'value':res.data.result[i].id+''});
-            }
+            this.options = res.data.result;
+            // for(let i=0,len=res.data.result.length;i<len;i++){
+            //     this.options.push({'label':res.data.result[i].type_name,'value':res.data.result[i].id+''});
+            // }
         })
     },
     submission: function() {
@@ -169,6 +169,7 @@ export default {
         axios.post('user/personalCenter/addApply',{
             applyContent:JSON.stringify(that.data),
             applyType:that.bType,
+            resaon:that.reason
         })
             .then(function (response) {
               // console.log(response.data)
@@ -176,6 +177,7 @@ export default {
                 if (judge.code==0) {
                     Toast(judge.msg);
                     that.data = [{code:"",num:""}];
+                    that.reason = "";
                 // that.$router.push({ path: '/home/record' });
                 } else {
                     Toast(judge.msg);
