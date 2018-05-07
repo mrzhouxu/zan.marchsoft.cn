@@ -21,7 +21,7 @@
                     <div v-for="(d,index) in dataUsed" v-if="d.type==1"  class="recive-card-operay" :key="index">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
-                                <img src="../../assets/img/head.jpg" alt="头像">
+                                <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+d.qq_account+'&s=100'" alt="头像">
                                 <span>我给{{d.name}}点赞！</span>
                             </div>
                             <span class="recive-card-time">已使用</span> 
@@ -45,7 +45,7 @@
             v-if="d.type==2" :key="index">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
-                                <img src="../../assets/img/head.jpg" alt="头像">
+                                <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+d.qq_account+'&s=100'" alt="头像">
                                 <span>我给{{d.name}}点赞！！</span>
                             </div>
                             <span class="recive-card-time">已使用</span> 
@@ -292,6 +292,7 @@ export default {
                     arr.startTime = list[i].start_time;
                     arr.endTime = list[i].over_time;
                     arr.id = list[i].id;
+                    arr.qq_account = list[i].qq_account;
                     that.data.push(arr);
                     if(arr.type == 1) {
                         zanwu.style.display = "none";
@@ -322,6 +323,7 @@ export default {
                     arr.reason = list[i].reason;
                     arr.startTime = list[i].start_time;
                     arr.endTime = list[i].over_time;
+                    arr.qq_account = list[i].qq_account;
                     that.dataUsed.push(arr);
                     if(arr.type == 1) {
                         zanwu11.style.display = "none";
@@ -351,6 +353,7 @@ export default {
                     // arr.reason = list[i].reason;
                     arr.startTime = list[i].start_time;
                     arr.endTime = list[i].over_time;
+                    arr.qq_account = list[i].qq_account;
                     that.dataOld.push(arr);
                     if(arr.type == 1) {
                         zanwu31.style.display = "none";
