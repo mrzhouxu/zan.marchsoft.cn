@@ -70,6 +70,7 @@
 <script>
 import NavBottom from '../../NavBottom.vue';
 import { Indicator } from 'mint-ui';
+import { filters } from '../../../filter.js';
 export default {
     components:{
         NavBottom,
@@ -88,8 +89,8 @@ export default {
             timeSelect: '全部',
             gradeSelect: '全部',
             timeCode: {
-                startDate: 0,
-                endDate: 0,
+                start_date: 0,
+                over_date: 0,
             },
             gradeCode: 0,
             user: {
@@ -113,7 +114,7 @@ export default {
                 text: '等人家一下呗~',
                 spinnerType: 'fading-circle'
             });
-            axios.get('user/record/countList?countGrade='+this.gradeCode+'&startDate='+'0'+'&endDate='+'0').then((res)=>{
+            axios.get('user/record/countList?countGrade='+this.gradeCode+'&startDate='+this.timeCode.start_date+'&endDate='+this.timeCode.over_date).then((res)=>{
                 if(res.data.result!=null){
                     this.user = res.data.result[0]
                     this.list = res.data.result[1]
@@ -127,6 +128,11 @@ export default {
         },
         timeChange (t,index) {
             this.timeSelect=t;
+            if(index==0) {
+                this.timeCode = filters.weekNum(0);
+                this.timeCode.start_date = "2000-1-1";
+            }else this.timeCode = filters.weekNum(index-1);
+            console.log(this.timeCode)
         }
     },
     mounted(){
