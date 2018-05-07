@@ -89,10 +89,10 @@ export default {
     data() {
         return {
             userInfo:{
-                id:" ",
+                id:0,
                 name:" ",
                 stuNumber:' ',
-                qq:" "
+                qq_account:"123456"
             }
         }
     },

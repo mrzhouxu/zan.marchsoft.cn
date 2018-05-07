@@ -97,7 +97,7 @@
             </mt-tab-container-item>
             <mt-tab-container-item id="3">
                 <mt-cell :title="'普通点赞币'" @click.native="fade31" is-link>
-                    <span>{{Us.Pu}}张</span>
+                    <span>{{dataOld.length}}张</span>
                     <img slot="icon" src="../../assets/img/copper.png" width="24" height="24">
                 </mt-cell>
                 <div class="Mine-card" id="Mine-card-normal31">

@@ -4,9 +4,9 @@
     <router-view></router-view>
     </keep-alive> -->
     <keep-alive>
-        <router-view v-if="$route.meta.keepAlive"></router-view>
+        <router-view v-if="$route.meta.keepAlive&&userInfo.id"></router-view>
     </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive"></router-view>
+    <router-view v-if="!$route.meta.keepAlive&&userInfo.id"></router-view>
   </div>
 </template>
 

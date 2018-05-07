@@ -34,7 +34,8 @@
         </mt-popup>
       </div>
         <div class="feedback-text">
-          <mt-field v-model="content" class="pass"  placeholder="我要匿名反馈" type="textarea" rows="1"></mt-field>
+        <!-- <textarea onpropertychange="this.style.height=this.scrollHeight + 'px'" oninput="this.style.height=this.scrollHeight + 'px'"></textarea> -->
+          <mt-field id="textarea" v-model="content" class="pass bianji-textarea-l"  placeholder="我要匿名反馈" type="textarea" rows="1"></mt-field>
           <mt-button class="button" type="default" @click.native="addtalk">发送</mt-button>
         </div>
     </div>
@@ -106,6 +107,7 @@ export default {
                     iconClass: 'fa fa-check fa-5x'
                 });
                 that.content = "";
+                document.getElementById('textarea').getElementsByTagName('textarea')[0].style.height = '29px';
                 that.gettalk(1);
              } else {
               Toast({
@@ -124,12 +126,64 @@ export default {
     loadBottom:function() {  
         this.gettalk(0);
         this.$refs.loadmore.onBottomLoaded();
-    }
+    },
+    autoHeight(){
+        // var el = document.getElementsByClassName('bianji-textarea-l')[0];
+        // el.height = el.scrollHeight;
+        // // $(".bianji-textarea-l").height($(".bianji-textarea-l")[0].scrollHeight);
+        // // $(".bianji-textarea-l").on("keyup keydown", function(){
+        // //     $(this).height(this.scrollHeight);
+        // // })
+        // el.addEventListener("keyup",function(){
+        //     el.height = el.scrollHeight;
+        // });
+        // el.addEventListener("keydown",function(){
+        //     el.height = el.scrollHeight;
+        // });
+    },
+    makeExpandingArea(el) {  
+        var setStyle = function(el) {  
+            el.style.height = 'auto';
+            if(el.scrollHeight < 200)el.style.height = el.scrollHeight + 'px';  
+            else el.style.height = '200px'
+            // console.log(el.scrollHeight);  
+        }  
+        var delayedResize = function(el) {  
+            window.setTimeout(function() {  
+                    setStyle(el)  
+                },  
+                0);  
+        }  
+        if (el.addEventListener) {  
+            el.addEventListener('input', function() {  
+                setStyle(el)  
+            }, false);  
+            setStyle(el)  
+        } else if (el.attachEvent) {  
+            el.attachEvent('onpropertychange', function() {  
+                setStyle(el)  
+            });  
+            setStyle(el)  
+        }  
+        if (window.VBArray && window.addEventListener) { //IE9  
+            el.attachEvent("onkeydown", function() {  
+                var key = window.event.keyCode;  
+                if (key == 8 || key == 46) delayedResize(el);  
+
+            });  
+            el.attachEvent("oncut", function() {  
+                delayedResize(el);  
+            }); //处理粘贴  
+        }  
+    }  
   },
   //页面加载后加载的方法
   mounted(){
-      this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top-66;
+        this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top-66;
         this.gettalk(1);
+        // this.autoHeight();
+        var el = document.getElementById('textarea').getElementsByTagName('textarea')[0];
+        this.makeExpandingArea(el);
     // this.test();
   }
 }
@@ -208,6 +262,9 @@ export default {
       font-size: 12px;
       width: 70px;
       /*height: 30px;*/
+        position: absolute;
+        right: 0;
+        bottom: 0;
     }
     .pass {
       margin: 10px 0 0 10px;
@@ -216,6 +273,7 @@ export default {
       width: 240px;
       background: #f5f5f5;
       flex:1;
+      margin-right:80px;
     }
 
     .detailss {
