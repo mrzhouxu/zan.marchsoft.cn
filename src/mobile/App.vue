@@ -28,7 +28,7 @@ export default {
   },
   methods:{
     getInfo(){
-      if(this.userInfo.name==null){
+      if(this.userInfo.name==null&&this.$route.path!="/sign/login"){
           axios.get("/user/getInfo").then(res=>{
               this.userInfo = res.data.result;
           }).catch(err=>{

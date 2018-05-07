@@ -52,7 +52,7 @@
                                             </div>
                                             <div class="item-time">
                                                 <p style="font-size: 12px;">{{item.use_time*1000 | timeago}}</p>
-                                                <p style="font-size: 12px;">{{item.over_time*1000 | timeago}}</p>
+                                                <!-- <p style="font-size: 12px;">{{item.over_time*1000 | timeago}}</p> -->
                                             </div>
                                         </div>
                                     </div>

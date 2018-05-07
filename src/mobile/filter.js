@@ -51,7 +51,23 @@ const filters = {
             var diffValue = now - dateTimeStamp;//时间差
          
             if(diffValue < 0){
-                return;
+                diffValue = Math.floor(Math.abs(diffValue)/1000);
+                console.log(diffValue);
+                var tempDay = Math.floor(diffValue/24/60/60);
+                var tempHour = Math.floor((diffValue%(24*60*60))/60/60);
+                var tempMin = Math.floor((((diffValue%(24*60*60))%(60*60))/60));
+                var tempStr = "";
+                if(tempDay>0){
+                    tempStr += tempDay + " 天 ";
+                }
+                if(tempHour>0){
+                    tempStr += tempHour + " 小时 ";
+                }
+                if(tempMin>0){
+                    tempStr += tempMin +" 分钟后";
+                }
+                console.log(tempDay,tempHour,tempMin)
+                return tempStr;
             }
             var minC = diffValue/minute;  //计算时间差的分，时，天，周，月
             var hourC = diffValue/hour;

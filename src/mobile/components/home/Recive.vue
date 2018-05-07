@@ -309,7 +309,7 @@ export default {
                     arr.name = list[i].name;
                     arr.reason = list[i].reason;
                     // arr.startTime = list[i].startTime;
-                    arr.endTime = list[i].endTime;
+                    arr.endTime = list[i].over_time;
                     arr.id = list[i].id;
                     that.data.push(arr);
                     if(arr.type == 1) {
@@ -342,7 +342,7 @@ export default {
                     arr.name = list[i].name;
                     arr.reason = list[i].reason;
                     // arr.startTime = list[i].startTime;
-                    arr.endTime = list[i].endTime;
+                    arr.endTime = list[i].over_time;
                     that.dataUsed.push(arr);
                     if(arr.type == 1) {
                         zanwu11.style.display = "none";
@@ -373,7 +373,7 @@ export default {
                     arr.name = list[i].name;
                     arr.reason = list[i].reason;
                     // arr.startTime = list[i].startTime;
-                    arr.endTime = list[i].endTime;
+                    arr.endTime = list[i].over_time;
                     that.dataOld.push(arr);
                     if(arr.type == 1) {
                         zanwu31.style.display = "none";
