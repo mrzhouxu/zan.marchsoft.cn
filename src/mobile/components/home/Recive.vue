@@ -310,15 +310,19 @@ export default {
                     // arr.startTime = list[i].startTime;
                     arr.endTime = list[i].endTime;
                     arr.id = list[i].id;
-                    that.data.push(arr);
                     if(arr.type == 1) {
                         zanwu.style.display = "none";
                         that.Us.Pu++;
-                    };
-                    if(arr.type == 2) {
+                    }else{
+                        arr.type = 2
                         zanwu2.style.display = "none";
                         that.Us.Vip++;
-                    };
+                    }
+                    that.data.push(arr);
+                    // if(arr.type == 2) {
+                    //     zanwu2.style.display = "none";
+                    //     that.Us.Vip++;
+                    // };
                 };
                 resolve();
             })
