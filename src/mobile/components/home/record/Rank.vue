@@ -2,7 +2,7 @@
     <div>
         <div class="nav">
             <mt-header title="获赞排行榜">
-                <router-link to="/" slot="left">
+                <router-link to="/home/record" slot="left">
                     <mt-button icon="back">返回</mt-button>
                 </router-link>
                 <mt-button icon="more" slot="right"></mt-button>
