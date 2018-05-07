@@ -13,7 +13,7 @@ let all_router = {
     {
       path: '/home/record',
       name: '点赞记录',
-      meta:{select:1},
+      meta:{keepAlive:true,select:1},
       component: resolve =>void(require(['../components/home/Record'], resolve))
     },
     {
