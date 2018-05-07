@@ -129,19 +129,19 @@ export default {
       var that = this;
       var buy = that.trimStr(that.buy);
       var photo = that.trimStr(that.photo);
+      var params = {
+        ids:JSON.stringify(this.ids),
+        content:''
+      };
       if (this.value == 'A') {
         if (buy == '') {
           Toast('请填写您购买的物品');
           return;
         };
-        axios.post('/user/insertCoinOrder', {
-            coin_useful: that.value,
-            coin_id_arr: that.ids,
-            moneyNumber: that.ids.length,
-            content: buy,
-        })
+        params.content = buy;
+        axios.post('/user/consume/insertCoinOrder', params)
         .then(function (response) {
-            var date = response.data.list;
+            var date = response.data;
             if (date.code) {
                 Toast('购买成功！');
                 // that.$router.push({ path: '/home/recive' });
@@ -153,12 +153,14 @@ export default {
             console.log(error);
         });
       }else if (this.value == 'B'||this.value == 'C') {
-        axios.post('/user/insertCoinOrder', {
-            coin_useful: that.value,
-            coin_id_arr: that.ids,
-        })
+        if(this.value == 'B'){
+          params.content = "请假";
+        }else if(this.value == 'C'){
+          params.content = "销假";
+        }
+        axios.post('/user/consume/insertCoinOrder', params)
         .then(function (response) {
-            var date = response.data.list;
+            var date = response.data;
             if (date.code) {
                 Toast('使用成功！');
                 // that.$router.push({ path: '/home/recive' });
@@ -174,14 +176,10 @@ export default {
           Toast('请填写您的支付宝账号！');
           return;
         };
-        axios.post('/user/insertCoinOrder', {
-            coin_useful: that.value,
-            coin_id_arr: that.ids,
-            moneyNumber: that.ids.length*2,
-            content: photo,
-        })
+        params.content = photo;
+        axios.post('/user/consume/insertCoinOrder', params)
         .then(function (response) {
-            var date = response.data.list;
+            var date = response.data;
             if (date.code) {
                 Toast('兑换成功！');
                 // that.$router.push({ path: '/home/recive' });
@@ -198,7 +196,6 @@ export default {
   mounted(){
     this.ids = JSON.parse(filters.ytox(this.$route.params.ids))
     this.count = this.ids.length;
-    console.log(this.ids)
   }
 }
 </script>

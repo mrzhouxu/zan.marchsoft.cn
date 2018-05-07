@@ -2,7 +2,7 @@
     <div>
         <div class="nav">
             <mt-header title="获赞排行榜">
-                <router-link to="/" slot="left">
+                <router-link to="/home/record" slot="left">
                     <mt-button icon="back">返回</mt-button>
                 </router-link>
                 <mt-button icon="more" slot="right"></mt-button>
@@ -14,31 +14,34 @@
             </div>
         </div>
         <div style="height:80px"></div>
-        <div style="border-bottom: 3px solid #EBEBEB;height: 40px;overflow: hidden;padding: 10px 20px;">
-            <span style="display: inline-block;line-height: 40px;vertical-align: text-bottom;">{{user.countTotal}}</span>
-             <img style="height:40px" src="../../../assets/img/order-userpic.png">
-             <div style="display: inline-block;">
-                 <p style="margin:0;padding:0;font-size: 16px;line-height: 20px;">桑金超</p>
-                 <p style="margin:0;padding:0;font-size: 12px;line-height: 20px;">共10点人气</p>
+        <div style="border-bottom: 3px solid #EBEBEB;height: 40px;overflow: hidden;padding: 10px 20px;" v-if="user.curRank!=0">
+            <span style="display: inline-block;line-height: 40px;vertical-align: text-bottom;width:40px;height:40px;text-align:center;">{{user.curRank}}</span>
+             <img style="height:40px;border-radius: 50%;margin: 0 10px 0 0;" :src="'http://q1.qlogo.cn/g?b=qq&nk='+user.qq_account+'&s=100'">
+             <div style="display: inline-block;vertical-align: top;">
+                 <p style="margin:0;padding:0;font-size: 16px;line-height: 20px;">{{user.name}}</p>
+                 <p style="margin:0;padding:0;font-size: 12px;line-height: 20px;">共 {{user.renqi}} 点人气</p>
              </div>
             <span style="display: inline-block;line-height: 40px;vertical-align: text-bottom;float: right;font-size:14px">
-                <span style="color:#FF9800;">+</span><span style="color:#FF9800;font-size:20px">2</span>个赞
+                <span style="color:#FF9800;">+</span><span style="color:#FF9800;font-size:20px">{{user.zan}} </span>个赞
             </span>
         </div>
-        <div style="border-bottom: 1px solid #EBEBEB;height: 40px;overflow: hidden;padding: 10px 20px;" v-for="l in list">
-            <img style="height:40px" src="../../../assets/img/one.png" v-if="l.rank==1">
-            <img style="height:40px" src="../../../assets/img/two.png" v-else-if="l.rank==2">
-            <img style="height:40px" src="../../../assets/img/three.png" v-else-if="l.rank==3">
-            <span style="display: inline-block;line-height: 40px;vertical-align: text-bottom;" v-else>{{l.rank}}</span>
-             <img style="height:40px" :src="l.img_url">
-             <div style="display: inline-block;">
-                 <p style="margin:0;padding:0;font-size: 16px;line-height: 20px;">{{l.name}}</p>
-                 <p style="margin:0;padding:0;font-size: 12px;line-height: 20px;">共{{l.total}}点人气</p>
-             </div>
-            <span style="display: inline-block;line-height: 40px;vertical-align: text-bottom;float: right;font-size:14px">
-                <span style="color:#FF9800;">+</span><span style="color:#FF9800;font-size:20px">{{l.week}}</span>个赞
-            </span>
-        </div>
+        <div style="margin-bottom:55px;">
+            <div style="border-bottom: 1px solid #EBEBEB;height: 40px;overflow: hidden;padding: 10px 20px;" v-for="(l,index) in list" :key="index">
+                <img style="height:40px" src="../../../assets/img/one.png" v-if="index=='0'">
+                <img style="height:40px;transform: scale(0.9);" src="../../../assets/img/two.png" v-else-if="index=='1'">
+                <img style="height:40px;transform: scale(0.8);" src="../../../assets/img/three.png" v-else-if="index=='2'">
+                <span style="display: inline-block;line-height: 40px;vertical-align: text-bottom;width:40px;height:40px;text-align:center;" v-else>{{index}}</span>
+                <img style="height:40px;border-radius: 50%;margin: 0 10px 0 0;" :src="'http://q1.qlogo.cn/g?b=qq&nk='+l.qq_account+'&s=100'">
+                <div style="display: inline-block;vertical-align: top;">
+                    <p style="margin:0;padding:0;font-size: 16px;line-height: 20px;">{{l.name}}</p>
+                    <p style="margin:0;padding:0;font-size: 12px;line-height: 20px;">共{{l.renqi}}点人气</p>
+                </div>
+                <span style="display: inline-block;line-height: 40px;vertical-align: text-bottom;float: right;font-size:14px">
+                    <span style="color:#FF9800;">+</span><span style="color:#FF9800;font-size:20px">{{l.zan}} </span>个赞
+                </span>
+            </div>
+        </div> 
+        
         <mt-popup
         v-model="popupVisible"
         position="top" class="popup-div">
@@ -46,14 +49,14 @@
                     <mt-cell :title="grade.label">
                         <i class="fa fa-angle-down"></i>
                     </mt-cell>
-                    <span class="option-span" v-for="g,index in grade.option"
+                    <span class="option-span" v-for="(g,index) in grade.option" 
                     :class="{'select-span':gradeSelect==g}" @click="gradeChange(g,index)">
                     {{g}}
                     </span>
                     <mt-cell :title="time.label">
                         <i class="fa fa-angle-down"></i>
                     </mt-cell>
-                    <span class="option-span" v-for="t,index in time.option"
+                    <span class="option-span" v-for="(t,index) in time.option" 
                     :class="{'select-span':timeSelect==t}" @click="timeChange(t,index)">
                     {{t}}
                     </span>
@@ -94,11 +97,14 @@ export default {
             },
             gradeCode: 0,
             user: {
-                countTotal: 28,
-                totalWeek: 2,
-                rankWeek: 20
+                name:'',
+                qq_account:'',
+                curRank: 0,
+                zan: 0,
+                renqi: 0
             },
-            list: []
+            list: [
+            ],
         }
     },
     methods:{
@@ -116,8 +122,26 @@ export default {
             });
             axios.get('user/record/countList?countGrade='+this.gradeCode+'&startDate='+this.timeCode.start_date+'&endDate='+this.timeCode.over_date).then((res)=>{
                 if(res.data.result!=null){
-                    this.user = res.data.result[0]
-                    this.list = res.data.result[1]
+                    // this.user = res.data.result[0]
+                    var arr = [];
+                    for(let i in res.data.result){
+                        arr.push(res.data.result[i])
+                    }
+                   
+                    arr.sort(function(a,b){
+                        return  b.renqi - a.renqi;
+                    });
+
+                    this.list = arr;
+                    for(var i in this.list){
+                        if(this.list[i].id == this.$parent.$data.userInfo.id){
+                            this.user.curRank = parseInt(i)+1;
+                            this.user.zan =  this.list[i].zan;
+                            this.user.renqi = this.list[i].renqi;
+                            this.user.name = this.list[i].name;
+                            this.user.qq_account = this.list[i].qq_account;
+                        }
+                    }
                 }
                 Indicator.close()
             })
@@ -136,6 +160,8 @@ export default {
         }
     },
     mounted(){
+        this.timeCode = filters.weekNum(0);
+        this.timeCode.start_date = "2000-1-1";
         this.getAllRank()
     }
 }

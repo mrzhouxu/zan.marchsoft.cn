@@ -21,14 +21,14 @@
                     <div v-for="(d,index) in dataUsed" v-if="d.type==1"  class="recive-card-operay" :key="index">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
-                                <img src="../../assets/img/head.jpg" alt="头像">
+                                <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+d.qq_account+'&s=100'" alt="头像">
                                 <span>我给{{d.name}}点赞！</span>
                             </div>
                             <span class="recive-card-time">已使用</span> 
                         </div>
                         <p>原因：{{d.reason}}</p>
                         <div class="recive-card-message-down">
-                            <span>{{d.startTime}}-{{d.endTime}}</span>
+                            <span>{{d.startTime*1000 | getDateWeek}} --- {{d.endTime*1000 | getDateWeek}}</span>
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
             v-if="d.type==2" :key="index">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
-                                <img src="../../assets/img/head.jpg" alt="头像">
+                                <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+d.qq_account+'&s=100'" alt="头像">
                                 <span>我给{{d.name}}点赞！！</span>
                             </div>
                             <span class="recive-card-time">已使用</span> 
@@ -69,10 +69,10 @@
                             <div class="Mine-card-message">
                                 <span>普通点赞币</span>
                             </div>
-                            <span class="Mine-card-time">{{d.endTime}}过期</span> 
+                            <span class="Mine-card-time">{{d.endTime*1000|timeago}}过期</span> 
                         </div>
                         <div class="Mine-card-message-down">
-                            <span>{{d.startTime}}-{{d.endTime}}</span>
+                            <span>{{d.startTime*1000 | getDateWeek}} --- {{d.endTime*1000 | getDateWeek}}</span>
                         </div>
                     </div>
                 </div>
@@ -97,7 +97,7 @@
             </mt-tab-container-item>
             <mt-tab-container-item id="3">
                 <mt-cell :title="'普通点赞币'" @click.native="fade31" is-link>
-                    <span>{{Us.Pu}}张</span>
+                    <span>{{dataOld.length}}张</span>
                     <img slot="icon" src="../../assets/img/copper.png" width="24" height="24">
                 </mt-cell>
                 <div class="Mine-card" id="Mine-card-normal31">
@@ -112,7 +112,7 @@
                             <img src="../../assets/img/old.png" class="Mine-card-time-old" alt="过期标志"> 
                         </div>
                         <div class="Mine-card-message-down">
-                            <span>{{d.startTime}}-{{d.endTime}}</span>
+                            <span>{{d.startTime*1000 | getDateWeek}} --- {{d.endTime*1000 | getDateWeek}}</span>
                         </div>
                     </div>
                     
@@ -292,6 +292,7 @@ export default {
                     arr.startTime = list[i].start_time;
                     arr.endTime = list[i].over_time;
                     arr.id = list[i].id;
+                    arr.qq_account = list[i].qq_account;
                     that.data.push(arr);
                     if(arr.type == 1) {
                         zanwu.style.display = "none";
@@ -320,8 +321,9 @@ export default {
                     arr.type = list[i].coin_id;
                     arr.name = list[i].to_user_name;
                     arr.reason = list[i].reason;
-                    arr.startTime = list[i].startTime;
-                    arr.endTime = list[i].endTime;
+                    arr.startTime = list[i].start_time;
+                    arr.endTime = list[i].over_time;
+                    arr.qq_account = list[i].qq_account;
                     that.dataUsed.push(arr);
                     if(arr.type == 1) {
                         zanwu11.style.display = "none";
@@ -349,8 +351,9 @@ export default {
                     arr.type = list[i].coin_id;
                     // arr.name = list[i].name;
                     // arr.reason = list[i].reason;
-                    arr.startTime = list[i].startTime;
-                    arr.endTime = list[i].endTime;
+                    arr.startTime = list[i].start_time;
+                    arr.endTime = list[i].over_time;
+                    arr.qq_account = list[i].qq_account;
                     that.dataOld.push(arr);
                     if(arr.type == 1) {
                         zanwu31.style.display = "none";

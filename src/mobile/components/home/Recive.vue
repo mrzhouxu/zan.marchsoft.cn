@@ -20,10 +20,11 @@
                         <span>暂没有使用该点赞币</span>
                     </p>
                     <div v-for="(d,index) in dataUsed" :key="index" v-if="d.type==1"  class="recive-card-operay">
+                    <!-- <div v-for="(d,index) in dataUsed" :key="index" v-if="d.type==1"  class="recive-card-operay"> -->
 
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
-                                <img src="../../assets/img/head.jpg" alt="头像">
+                                <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+d.qq_account+'&s=100'" alt="头像">
                                 <span>{{d.name}} 给我点赞！</span>
                             </div>
                             <span class="recive-card-time">已使用</span> 
@@ -46,7 +47,7 @@
                     <div class="reciveCardVip recive-card-operay2" v-for="(d,index) in dataUsed" :key="index"  v-if="d.type==2">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
-                                <img src="../../assets/img/head.jpg" alt="头像">
+                                <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+d.qq_account+'&s=100'" alt="头像">
                                 <span>{{d.name}} 给我点赞！</span>
                             </div>
                             <span class="recive-card-time">已使用</span> 
@@ -68,10 +69,10 @@
                     <div v-for="(d,index) in data" :key="index" v-if="d.type==1" v-on:click="greet2(d.isActive,index)" v-bind:class="{ reciveCardSelect: d.isActive }">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
-                                <img src="../../assets/img/head.jpg" alt="头像">
+                                <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+d.qq_account+'&s=100'" alt="头像">
                                 <span>{{d.name}} 给我点赞！</span>
                             </div>
-                            <span class="recive-card-time">{{d.endTime}}过期</span> 
+                            <span class="recive-card-time">{{d.endTime*1000 | timeago}}过期</span> 
                         </div>
                         <p>原因：{{d.reason}}</p>
                         <!-- <div class="recive-card-message-down">
@@ -91,7 +92,7 @@
                     <div class="reciveCardVip" v-for="(d,index) in data" :key="index" v-if="d.type==2" v-on:click="greet2(d.isActive,index)" v-bind:class="{ reciveCardSelect: d.isActive }">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
-                                <img src="../../assets/img/head.jpg" alt="头像">
+                                <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+d.qq_account+'&s=100'" alt="头像">
                                 <span>{{d.name}} 给我点赞！</span>
                             </div>
                             <span class="recive-card-time">永久有效</span> 
@@ -118,7 +119,7 @@
                     <div v-for="(d,index) in dataOld" :key="index" v-if="d.type==1" class="recive-card-old">
                         <div class="recive-card-message-up">
                             <div class="recive-card-message">
-                                <img src="../../assets/img/head.jpg" alt="头像">
+                                <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+d.qq_account+'&s=100'" alt="头像">
                                 <span>{{d.name}} 给我点赞！</span>
                             </div>
                             <img src="../../assets/img/old.png" class="recive-card-time-old" alt="过期标志"> 
@@ -308,8 +309,9 @@ export default {
                     arr.name = list[i].name;
                     arr.reason = list[i].reason;
                     // arr.startTime = list[i].startTime;
-                    arr.endTime = list[i].endTime;
+                    arr.endTime = list[i].over_time;
                     arr.id = list[i].id;
+                    arr.qq_account = list[i].qq_account;
                     if(arr.type == 1) {
                         zanwu.style.display = "none";
                         that.Us.Pu++;
@@ -345,7 +347,8 @@ export default {
                     arr.name = list[i].name;
                     arr.reason = list[i].reason;
                     // arr.startTime = list[i].startTime;
-                    arr.endTime = list[i].endTime;
+                    arr.endTime = list[i].over_time;
+                    arr.qq_account = list[i].qq_account;
                     that.dataUsed.push(arr);
                     if(arr.type == 1) {
                         zanwu11.style.display = "none";
@@ -376,7 +379,8 @@ export default {
                     arr.name = list[i].name;
                     arr.reason = list[i].reason;
                     // arr.startTime = list[i].startTime;
-                    arr.endTime = list[i].endTime;
+                    arr.endTime = list[i].over_time;
+                    arr.qq_account = list[i].qq_account;
                     that.dataOld.push(arr);
                     if(arr.type == 1) {
                         zanwu31.style.display = "none";

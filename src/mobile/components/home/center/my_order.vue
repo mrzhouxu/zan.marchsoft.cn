@@ -32,8 +32,8 @@
                 </div>
             </div> -->
         </div>
-        <div style="line-height:35px;font-size:14px;text-align:center" v-if="list.length==0">暂无订单~要不去买点？</div>
-        <div class="old-infor" v-if="list.length!=0">
+        <div style="line-height:35px;font-size:14px;text-align:center" v-show="list.length==0">暂无订单~要不去买点？</div>
+        <div class="old-infor" v-show="list.length!=0">
             <p>历史记录</p>
             <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
                 <mt-loadmore :top-method="loadTop" 

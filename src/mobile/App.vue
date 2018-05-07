@@ -4,9 +4,9 @@
     <router-view></router-view>
     </keep-alive> -->
     <keep-alive>
-        <router-view v-if="$route.meta.keepAlive"></router-view>
+        <router-view v-if="$route.meta.keepAlive&&userInfo.id"></router-view>
     </keep-alive>
-    <router-view v-if="!$route.meta.keepAlive"></router-view>
+    <router-view v-if="!$route.meta.keepAlive&&userInfo.id"></router-view>
   </div>
 </template>
 
@@ -28,7 +28,7 @@ export default {
   },
   methods:{
     getInfo(){
-      if(this.userInfo.name==null){
+      if(this.userInfo.name==null&&this.$route.path!="/sign/login"){
           axios.get("/user/getInfo").then(res=>{
               this.userInfo = res.data.result;
           }).catch(err=>{

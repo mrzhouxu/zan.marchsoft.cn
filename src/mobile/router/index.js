@@ -13,7 +13,7 @@ let all_router = {
     {
       path: '/home/record',
       name: '点赞记录',
-      meta:{select:1},
+      meta:{keepAlive:true,select:1},
       component: resolve =>void(require(['../components/home/Record'], resolve))
     },
     {
@@ -48,21 +48,22 @@ let all_router = {
     //   name: '我的赞-送人',
     //   component: resolve =>void(require(['../components/home/mine/Test'], resolve))
     // },
-    {
-      path: '/manager/approve',
-      name: '管理员-审批',
-      component: resolve =>void(require(['../components/manager/Approve'], resolve))
-    },
-    {
-      path: '/manager/publish',
-      name: '管理员-独家发币',
-      component: resolve =>void(require(['../components/manager/Publish'], resolve))
-    },
-    {
-      path: '/manager/design',
-      name: '管理员-指定组别',
-      component: resolve =>void(require(['../components/manager/Design'], resolve))
-    },
+
+    // {
+    //   path: '/manager/approve',
+    //   name: '管理员-审批',
+    //   component: resolve =>void(require(['../components/manager/Approve'], resolve))
+    // },
+    // {
+    //   path: '/manager/publish',
+    //   name: '管理员-独家发币',
+    //   component: resolve =>void(require(['../components/manager/Publish'], resolve))
+    // },
+    // {
+    //   path: '/manager/design',
+    //   name: '管理员-指定组别',
+    //   component: resolve =>void(require(['../components/manager/Design'], resolve))
+    // },
     {
       path: '/home/center',
       name: '个人中心',
@@ -126,6 +127,19 @@ let all_router = {
       name: '本周排名',
       component: resolve =>void(require(['../components/home/record/RankWeek'], resolve))
     },
+
+    //管理员
+    {
+      path: '/admin/sendB',
+      name: '管理员发币',
+      component: resolve =>void(require(['../components/admin/SendB'], resolve))
+    },
+    {
+      path: '/admin/approvalB',
+      name: '管理员审批点赞币',
+      component: resolve =>void(require(['../components/admin/ApprovalB'], resolve))
+    }
+
   ]
 }
 
