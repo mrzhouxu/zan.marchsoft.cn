@@ -98,7 +98,7 @@ export default {
             gradeCode: 0,
             user: {
                 name:'',
-                qq_account:'',
+                qq_account:'undefined',
                 curRank: 0,
                 zan: 0,
                 renqi: 0
@@ -134,7 +134,7 @@ export default {
 
                     this.list = arr;
                     for(var i in this.list){
-                        if(this.list[i].id == this.$parent.$data.userInfo.id){
+                        if(this.list[i].id == res.data.code){
                             this.user.curRank = parseInt(i)+1;
                             this.user.zan =  this.list[i].zan;
                             this.user.renqi = this.list[i].renqi;

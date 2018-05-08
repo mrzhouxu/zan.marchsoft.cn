@@ -92,9 +92,12 @@ export default {
                 id:0,
                 name:" ",
                 stuNumber:' ',
-                qq_account:"123456"
+                qq_account:"undefined"
             }
         }
+    },
+    watch:{
+        
     },
     methods: {
         login_out(){
@@ -115,18 +118,18 @@ export default {
                 // console.log(112)
             });
         },
-        // getInfo(){
-        //     axios.get("/user/getInfo").then(res=>{
-        //         this.userInfo = res.data.result;
-        //     }).catch(err=>{
 
-        //     })
-        // }
+        getInfo(){
+            axios.get("/user/getInfo").then(res=>{
+                this.userInfo = res.data.result;
+            }).catch(err=>{
+
+            })
+        }
     },
     mounted() {
-        // this.getInfo();
-        this.userInfo = this.$parent.$data.userInfo;
-        // console.log(this.$parent.$data.userInfo)
+        this.getInfo();
+        // this.userInfo = this.$store.userInfo;
     }
 }
 </script>
