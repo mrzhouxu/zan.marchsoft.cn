@@ -97,7 +97,6 @@ export default {
                 let date = response.data;
                 if (date.code==0) {
                     Toast('登录成功！');
-                    that.$store.userInfo = date.result; 
                     that.$router.push({ path: '/home/record' });
                 }else {
                     Toast(date.msg);

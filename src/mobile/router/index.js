@@ -138,6 +138,11 @@ let all_router = {
       path: '/admin/approvalB',
       name: '管理员审批点赞币',
       component: resolve =>void(require(['../components/admin/ApprovalB'], resolve))
+    },
+    {
+      path: '/admin/test',
+      name: '管理员审批点赞币',
+      component: resolve =>void(require(['../components/admin/Test'], resolve))
     }
 
   ]

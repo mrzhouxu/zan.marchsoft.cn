@@ -129,7 +129,6 @@ export default {
     },
     mounted() {
         this.getInfo();
-        // this.userInfo = this.$store.userInfo;
     }
 }
 </script>
