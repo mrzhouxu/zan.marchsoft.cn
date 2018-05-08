@@ -73,7 +73,8 @@
     </div>
 </template>
 <script>
-    import { Popup } from 'mint-ui';
+    import { Popup,Indicator } from 'mint-ui';
+    import {waitData} from '../../../wait';
 export default {
     data () {
         return {
@@ -117,6 +118,10 @@ export default {
             })
         },
         infor:function(type){//0上啦加载  1下拉刷新
+            Indicator.open({
+                text: waitData[Math.floor(Math.random()*(waitData.length))],
+                spinnerType: 'fading-circle'
+            });
             var that = this;
             if(type==0){
                 that.bottomLoading = true;
@@ -147,8 +152,10 @@ export default {
                     }
                 };
                 that.topLoading = false;
+                Indicator.close();
             })
             .catch(function (error) {
+                Indicator.close();
             });
 
         },

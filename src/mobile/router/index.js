@@ -84,6 +84,7 @@ let all_router = {
     {
       path: '/center/my_order',
       name: '我的订单',
+      meta:{keepAlive:true},
       component: resolve =>void(require(['../components/home/center/my_order'], resolve))
     },
     {
@@ -139,11 +140,11 @@ let all_router = {
       name: '管理员审批点赞币',
       component: resolve =>void(require(['../components/admin/ApprovalB'], resolve))
     },
-    {
-      path: '/admin/test',
-      name: '管理员审批点赞币',
-      component: resolve =>void(require(['../components/admin/Test'], resolve))
-    }
+    // {
+    //   path: '/admin/test',
+    //   name: '管理员审批点赞币',
+    //   component: resolve =>void(require(['../components/admin/Test'], resolve))
+    // }
 
   ]
 }
