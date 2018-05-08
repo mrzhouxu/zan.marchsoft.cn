@@ -7,13 +7,13 @@
         </mt-header>
        
         <div class="order-bg">
-            <!-- <div class="order-userpic">
-                <img src="../../../assets/img/order-userpic.png">
-            </div> -->
-            <!-- <div class="order-userinfor">
-                <p>尤奇勤</p>
-                <p>2016010226</p>
-            </div> -->
+            <div class="order-userpic">
+                <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+userInfo.qq_account+'&s=100'">
+            </div>
+            <div class="order-userinfor">
+                <p>{{userInfo.name}}</p>
+                <p>{{userInfo.code}}</p>
+            </div>
         </div>
         <p class="my-order"><span>我的</span>订单</p>
         <div class="new-infor" v-if="list.length!=0"> 
@@ -23,7 +23,9 @@
             </div>
             <div class="order-infor" style="display:flex;width:70%;" v-on:click="eject_applytype(list[0])">
                 <p style="flex:1;font-size:10px;line-height:60px;padding:0;margin:0;">{{list[0].content}}</p>
-                <!-- <p>{{n.status}}</p> -->
+                <p v-if="list[0].status==0">等待处理</p>
+                <p v-else-if="list[0].status==1">已完成</p>
+                <p v-else>已拒绝</p>
             </div>
 
             <!-- <div class="new-orderinfor" v-if="list.length!=0" v-on:click="eject_applytype(list[0])">
@@ -36,7 +38,7 @@
         <div class="old-infor" v-show="list.length!=0">
             <p>历史记录</p>
             <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
-                <mt-loadmore :top-method="loadTop" 
+                <mt-loadmore 
                 :bottom-method="loadBottom" :autoFill = "false"
                 :bottom-all-loaded="allLoaded" ref="loadmore">
                     <mt-spinner type="triple-bounce" v-if="topLoading"  color="#26a2ff" class="loading"></mt-spinner>
@@ -57,7 +59,11 @@
         <mt-popup v-model="popupVisible" popup-transition="popup-fade" class="mint-popup-2">
             <div>[时间]：{{popup.create_time | timeago}}</div>
             <div>[内容]：{{popup.content}}</div>
-            <div>[状态]：{{popup.status}}</div>
+            <div>[状态]：
+                <span v-if="popup.status==0">等待处理</span>
+                <span v-else-if="popup.status==1">已完成</span>
+                <span v-else>已拒绝</span>
+            </div>
             <div class="details">[原因]：{{popup.resaon}}</div>
         </mt-popup>
     </div>
@@ -81,7 +87,13 @@ export default {
             flag: true,
             wrapperHeight:'',
             topLoading:false,
-            bottomLoading:false
+            bottomLoading:false,
+            userInfo:{
+                id:0,
+                name:" ",
+                code:' ',
+                qq_account:"undefined"
+            }
         }
     },   
     methods:{
@@ -92,6 +104,13 @@ export default {
         loadTop: function() {
             this.infor(1);
             this.$refs.loadmore.onTopLoaded();
+        },
+        getInfo(){
+            axios.get("/user/getInfo").then(res=>{
+                this.userInfo = res.data.result;
+            }).catch(err=>{
+
+            })
         },
         infor:function(type){//0上啦加载  1下拉刷新
             var that = this;
@@ -105,21 +124,27 @@ export default {
              axios.get('/user/personalCenter/getOrderList',{params:{page:this.page}})//,{params:{page:this.page}}
             .then(function (response) {
                 that.page++;
-                that.flag = true;
                 // console.log(that.loading,that.allLoaded)
-                var list = response.data.result;
+                var list = response.data.result.data;
                 for (var i = 0; i < list.length; i++) {
-                  var L={};
-                  L.create_time = list[i].create_time;
+                    var L={};
+                  L.create_time = list[i].created_time;
                   L.content = list[i].content;
-                  L.status = list[i].status==1?"true":"false";
+                  L.status = list[i].status;
                   L.resaon = list[i].resaon;
                   // console.log(L.hour);
                   that.list.push(L);
+                    if(response.data.result.data.length==10){
+                        that.flag = true;
+                        that.$refs.loadmore.onBottomLoaded();
+                    }else {
+                        this.allLoaded = true;
+                    }
                 };
+                console.log(that.list)
                 that.topLoading = false;
                 that.bottomLoading = false;
-                that.$refs.loadmore.onBottomLoaded();
+                
             })
             .catch(function (error) {
             });
@@ -135,7 +160,8 @@ export default {
     }, 
     mounted(){
         this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top-10;
-        this.infor(1);
+        this.infor(0);
+        this.getInfo();
     },
 }
 </script>
@@ -171,6 +197,7 @@ export default {
     }
     .order-bg img {
         width: 50px;
+        border-radius: 50%;
     }
     .order-userpic{
         margin: 0 0 0 15px;
