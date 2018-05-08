@@ -16,16 +16,16 @@
             </div>
         </div>
         <p class="my-order"><span>我的</span>订单</p>
-        <div class="new-infor" v-if="list.length!=0"> 
+        <div class="new-infor" v-show="list.length!=0"> 
             <div class="new-text">
                 <p>最新订单</p>
                 <p>信息</p>
             </div>
-            <div class="order-infor" style="display:flex;width:70%;" v-on:click="eject_applytype(list[0])">
+            <div class="order-infor" style="display:flex;width:70%;height:60px;" v-on:click="eject_applytype(list[0])" v-if="list.length!=0">
                 <p style="flex:1;font-size:10px;line-height:60px;padding:0;margin:0;">{{list[0].content}}</p>
                 <p v-if="list[0].status==0">等待处理</p>
                 <p v-else-if="list[0].status==1">已完成</p>
-                <p v-else>已拒绝</p>
+                <p style="color:red;" v-else>已拒绝</p>
             </div>
 
             <!-- <div class="new-orderinfor" v-if="list.length!=0" v-on:click="eject_applytype(list[0])">
@@ -44,12 +44,16 @@
                     <mt-spinner type="triple-bounce" v-if="topLoading"  color="#26a2ff" class="loading"></mt-spinner>
                   <div class="old" v-for="(n,index) in list"  style="display:flex; border-bottom: 1px solid rgba(187,187,187, 0.5); padding: 10px 0;" :key="index">
                         <div class="order-infortime">
-                            <p>{{n.create_time | timeago}}</p>
+                            <p>{{n.create_time*1000 | timeago}}</p>
                             <!-- <p>{{n.hour}}</p> -->
                         </div>
                         <div class="order-infor" style="display:flex;width:70%;" v-on:click="eject_applytype(n)">
                             <p style="flex:1;">{{n.content}}</p>
-                            <!-- <p>{{n.status}}</p> -->
+                            <p>
+                                <p v-if="n.status==0">等待处理</p>
+                                <p v-else-if="n.status==1">已完成</p>
+                                <p style="color:red;" v-else>已拒绝</p>
+                            </p>
                         </div>
                   </div>
                     <mt-spinner type="triple-bounce" v-if="bottomLoading"  color="#26a2ff" class="loading"></mt-spinner>
@@ -57,14 +61,14 @@
             </div>
         </div>
         <mt-popup v-model="popupVisible" popup-transition="popup-fade" class="mint-popup-2">
-            <div>[时间]：{{popup.create_time | timeago}}</div>
+            <div>[时间]：{{popup.create_time*1000 | timeago}}</div>
             <div>[内容]：{{popup.content}}</div>
             <div>[状态]：
-                <span v-if="popup.status==0">等待处理</span>
-                <span v-else-if="popup.status==1">已完成</span>
+                <span style="color:black;" v-if="popup.status==0">等待处理</span>
+                <span style="color:black;" v-else-if="popup.status==1">已完成</span>
                 <span v-else>已拒绝</span>
             </div>
-            <div class="details">[原因]：{{popup.resaon}}</div>
+            <!-- <div class="details">[原因]：{{popup.resaon}}</div> -->
         </mt-popup>
     </div>
 </template>
@@ -123,8 +127,9 @@ export default {
             }
              axios.get('/user/personalCenter/getOrderList',{params:{page:this.page}})//,{params:{page:this.page}}
             .then(function (response) {
+                that.$refs.loadmore.onBottomLoaded();
+                that.bottomLoading = false;
                 that.page++;
-                // console.log(that.loading,that.allLoaded)
                 var list = response.data.result.data;
                 for (var i = 0; i < list.length; i++) {
                     var L={};
@@ -132,34 +137,32 @@ export default {
                   L.content = list[i].content;
                   L.status = list[i].status;
                   L.resaon = list[i].resaon;
-                  // console.log(L.hour);
                   that.list.push(L);
                     if(response.data.result.data.length==10){
                         that.flag = true;
                         that.$refs.loadmore.onBottomLoaded();
                     }else {
-                        this.allLoaded = true;
+                        that.allLoaded = true;
+                        that.$refs.loadmore.onBottomLoaded();
                     }
                 };
-                console.log(that.list)
                 that.topLoading = false;
-                that.bottomLoading = false;
-                
             })
             .catch(function (error) {
             });
 
         },
-        loadBottom:function() {  
-            if(this.flag){
-                this.flag = false;
+        loadBottom:function() { 
+            
+            // if(this.flag){
+                // this.flag = false;
                 this.infor(0);
                 this.$refs.loadmore.onBottomLoaded();
-            }
+            // }
         }
     }, 
     mounted(){
-        this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top-10;
+        this.wrapperHeight = document.documentElement.clientHeight - this.$refs.wrapper.getBoundingClientRect().top-326;
         this.infor(0);
         this.getInfo();
     },
@@ -292,6 +295,7 @@ export default {
     }
     .order-infortime {
         margin: 0 0 0 10px;
+        width: 70px;
     }
     .order-infortime p:nth-child(2) {
         text-align: center;
