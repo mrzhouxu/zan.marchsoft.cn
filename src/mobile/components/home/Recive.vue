@@ -256,6 +256,7 @@
 <script>
 import { Toast,Indicator } from 'mint-ui';
 import {filters} from '../../filter'
+import {waitData} from '../../wait';
 import NavBottom from '../NavBottom.vue';
 export default {
     components:{
@@ -514,7 +515,7 @@ export default {
         // this.getDataUsed();
         // this.getDataOld();
         Indicator.open({
-            text: '等人家一下呗~',
+            text: waitData[Math.floor(Math.random()*(waitData.length))],
             spinnerType: 'fading-circle'
         });
         Promise.all([
