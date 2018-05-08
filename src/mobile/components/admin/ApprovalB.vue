@@ -32,14 +32,27 @@
                         <mt-button disabled type="danger" v-if="item.status==2" style="margin-top:10px;" size="large">已拒绝</mt-button>
                     </div>
                 </div>
-                <!-- <ul
-                v-infinite-scroll="loadMore"
-                infinite-scroll-disabled="loading"
-                infinite-scroll-distance="10">
-                    <li v-for="item in list">{{ item }}</li>
-                </ul> -->
             </mt-tab-container-item>
             <mt-tab-container-item id="2">
+                <div v-infinite-scroll="loadMore"
+                infinite-scroll-disabled="loading"
+                infinite-scroll-distance="10">
+                    <div v-for="(item,index) in listO" :key="index" style="padding: 10px 10px 10px;background:white;">
+                        <div>
+                            <img class="avatar" :src="'http://q1.qlogo.cn/g?b=qq&nk='+item.qq_account+'&s=100'">
+                            <span style="vertical-align: middle;">{{item.name}}</span>
+                            <span style="vertical-align: middle;float:right;">2018-05-08</span>
+                        </div>
+                        <div style="padding:10px 0;">
+                            <p style="padding:0;">原因：</p>
+                            <p style="padding:0;margin:0;text-align:center;">{{item.content}}</p>
+                        </div>
+                        <mt-button type="primary" size="large" @click.native="sumitB(item.id,1)" v-if="item.status==0">完成</mt-button>
+                        <mt-button type="danger" size="large" style="margin-top:10px;"  @click.native="sumitB(item.id,2)" v-if="item.status==0">拒绝</mt-button>
+                        <mt-button disabled type="primary" v-if="item.status==1" style="margin-top:10px;" size="large">已完成</mt-button>
+                        <mt-button disabled type="danger" v-if="item.status==2" style="margin-top:10px;" size="large">已拒绝</mt-button>
+                    </div>
+                </div>
             </mt-tab-container-item>
         </mt-tab-container>
   </div>
@@ -56,12 +69,13 @@
 import { Navbar, TabItem } from 'mint-ui';
 import { MessageBox } from 'mint-ui';
 import { Toast } from 'mint-ui';
+import { Indicator } from 'mint-ui';
 export default {
   data () {
     return {
-        selected:'1',
+        selected:'2',
         bPage:1,
-        // flagB:true,
+        flagB:false,
         listB:[
             // {
             //     id:0,
@@ -86,19 +100,47 @@ export default {
             //     name:"123",
             // }
         ],
+        oPage:1,
+        flagO:false,
+        listO:[
+            // {
+            //     id:0,
+            //     qq_account:'qq',
+            //     content:'',
+            //     name:"",
+            // },
+            // {
+            //     id:0,
+            //     qq_account:'qq',
+            //     content:'',
+            //     name:"",
+            // },
+        ]
     }
   },
   methods:{
     loadMore() {
         this.loading = true;
-        this.getB();
+        if(this.flagB&&this.selected == "1"){
+            this.flagB = false;
+            this.getB();
+        }else if(this.flagO&&this.selected == "2"){
+            this.flagO = false;
+            this.getO();
+        }
     },
     getB(){
+        Indicator.open();
         axios.get("/admin/apply/get",{
             params: { 'page': this.bPage }
         }).then((res)=>{
             if(res.data.code == 0){
+                Indicator.close();
                 this.bPage++;
+                console.log(res.data.result.data,res.data.result.data.length);
+                if(res.data.result.data.length == 0){
+                    return;
+                }
                 for(let i in res.data.result.data){
                     let val = res.data.result.data[i];
                     this.listB.push({
@@ -111,52 +153,119 @@ export default {
                     });
                 }
                 this.loading = false;
+                this.flagB = true;
             }
             
         }).catch((err)=>{
-
+            Indicator.close();
+        })
+    },
+    getO(){
+        Indicator.open();
+        axios.get("admin/order/get",{
+            params: { 'page': this.oPage }
+        }).then((res)=>{
+            Indicator.close();
+            if(res.data.code == 0){
+                this.oPage++;
+                console.log(res.data.result.data,res.data.result.data.length);
+                if(res.data.result.data.length == 0){
+                    return;
+                }
+                for(let i in res.data.result.data){
+                    let val = res.data.result.data[i];
+                    this.listO.push({
+                        id:val.id,
+                        qq_account:val.qq_account,
+                        name:val.apply_user_name,
+                        status:val.status,
+                        content:val.content,
+                        created_time:val.created_time
+                    });
+                }
+                this.loading = false;
+                this.flagO = true;
+            }
+        }).catch((err)=>{
+            Indicator.close();
         })
     },
     sumitB(id,val){
         if(val==1){
             MessageBox.confirm('确定执行此操作?').then(action => {
+                Indicator.open();
                 var params = { 'id':id,'status':val};
-                axios.post("/admin/apply/update",params).then((res)=>{
-                    if(res.data.code == 0){
-                        Toast('success');
-                        this.listB = [];
-                        this.bPage = 1;
-                        this.getB();
-                    }else{
-                        Toast(res.data.msg);
-                    }
+                if(this.selected == "1"){
+                    axios.post("/admin/apply/update",params).then((res)=>{
+                        if(res.data.code == 0){
+                            Toast('success');
+                            this.listB = [];
+                            this.bPage = 1;
+                            this.getB();
+                        }else{
+                            Toast(res.data.msg);
+                        }
 
-                }).catch((err)=>{
+                    }).catch((err)=>{
 
-                })
+                    })
+                }else if(this.selected == "2"){
+                    axios.post("/admin/order/update",params).then((res)=>{
+                        if(res.data.code == 0){
+                            Toast('success');
+                            this.listO = [];
+                            this.oPage = 1;
+                            this.getO();
+                        }else{
+                            Toast(res.data.msg);
+                        }
+
+                    }).catch((err)=>{
+
+                    })
+                }
+                
             });
         }else if(val==2){
             MessageBox.confirm('你确定要拒绝这一群小鲜肉?').then(action => {
+                Indicator.open();
                 var params = { 'id':id,'status':val};
-                axios.post("/admin/apply/update",params).then((res)=>{
-                    if(res.data.code == 0){
-                        Toast('success');
-                        this.listB = [];
-                        this.bPage = 1;
-                        this.getB();
-                    }else{
-                        Toast(res.data.msg);
-                    }
-                }).catch((err)=>{
+                if(this.selected == "1"){
+                    axios.post("/admin/apply/update",params).then((res)=>{
+                        if(res.data.code == 0){
+                            Toast('success');
+                            this.listB = [];
+                            this.bPage = 1;
+                            this.getB();
+                        }else{
+                            Toast(res.data.msg);
+                        }
+                    }).catch((err)=>{
 
-                })
+                    })
+                }else if(this.selected == "2"){
+                    axios.post("/admin/order/update",params).then((res)=>{
+                        if(res.data.code == 0){
+                            Toast('success');
+                            this.listO = [];
+                            this.oPage = 1;
+                            this.getO();
+                        }else{
+                            Toast(res.data.msg);
+                        }
+                    }).catch((err)=>{
+
+                    })
+                }
+                
             });
         }
 
     }
   },
   mounted(){
-    // this.getB();
+    this.getB();
+    this.getO();
   }
 }
 </script>
