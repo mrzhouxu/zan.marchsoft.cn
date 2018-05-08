@@ -142,7 +142,7 @@ export default {
         axios.post('/user/consume/insertCoinOrder', params)
         .then(function (response) {
             var date = response.data;
-            if (date.code) {
+            if (date.code==0) {
                 Toast('购买成功！');
                 // that.$router.push({ path: '/home/recive' });
             }else {
@@ -161,7 +161,7 @@ export default {
         axios.post('/user/consume/insertCoinOrder', params)
         .then(function (response) {
             var date = response.data;
-            if (date.code) {
+            if (date.code==0) {
                 Toast('使用成功！');
                 // that.$router.push({ path: '/home/recive' });
             }else {
@@ -180,7 +180,7 @@ export default {
         axios.post('/user/consume/insertCoinOrder', params)
         .then(function (response) {
             var date = response.data;
-            if (date.code) {
+            if (date.code==0) {
                 Toast('兑换成功！');
                 // that.$router.push({ path: '/home/recive' });
             }else {
