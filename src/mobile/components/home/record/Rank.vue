@@ -74,6 +74,7 @@
 import NavBottom from '../../NavBottom.vue';
 import { Indicator } from 'mint-ui';
 import { filters } from '../../../filter.js';
+import {waitData} from '../../../wait';
 export default {
     components:{
         NavBottom,
@@ -116,8 +117,12 @@ export default {
         // },
         getAllRank () {
             this.popupVisible=false;
+            // Indicator.open({
+            //     text: '等人家一下呗~',
+            //     spinnerType: 'fading-circle'
+            // });
             Indicator.open({
-                text: '等人家一下呗~',
+                text: waitData[Math.floor(Math.random()*(waitData.length))],
                 spinnerType: 'fading-circle'
             });
             axios.get('user/record/countList?countGrade='+this.gradeCode+'&startDate='+this.timeCode.start_date+'&endDate='+this.timeCode.over_date).then((res)=>{

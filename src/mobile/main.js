@@ -36,7 +36,8 @@ axios.interceptors.response.use(function (response) {
   let res = error.response;
   // console.log(res)
   if (res&&res.status == 401) {
-      location.replace("http://localhost:8081/mobile.html#/sign/login") 
+      location.replace("http://localhost:8080/mobile.html#/sign/login") 
+      // location.replace("http://localhost:8081/mobile.html#/sign/login") 
       // location.href = "http://172.16.0.152:90/mobile.html#/sign/login";
       // location.reload();
       return false;

@@ -13,7 +13,7 @@ let all_router = {
     {
       path: '/home/record',
       name: '点赞记录',
-      meta:{keepAlive:true,select:1},
+      meta:{keepAlive:false,select:1},
       component: resolve =>void(require(['../components/home/Record'], resolve))
     },
     {
@@ -24,7 +24,7 @@ let all_router = {
     {
       path: '/home/recive',
       name: '收到的赞',
-      meta:{keepAlive:true,select:2},
+      meta:{keepAlive:false,select:2},
       component: resolve =>void(require(['../components/home/Recive'], resolve)),
     },
     {
@@ -35,7 +35,7 @@ let all_router = {
     {
       path: '/home/mine',
       name: '我的赞',
-      meta:{keepAlive:true,select:3},
+      meta:{keepAlive:false,select:3},
       component: resolve =>void(require(['../components/home/Mine'], resolve))
     },
     {
@@ -84,7 +84,7 @@ let all_router = {
     {
       path: '/center/my_order',
       name: '我的订单',
-      meta:{keepAlive:true},
+      meta:{keepAlive:false},
       component: resolve =>void(require(['../components/home/center/my_order'], resolve))
     },
     {

@@ -81,7 +81,8 @@
 <script>
 import NavBottom from '../NavBottom.vue'
 import { MessageBox } from 'mint-ui';
-import { Toast } from 'mint-ui';
+import { Toast,Indicator } from 'mint-ui';
+import {waitData} from '../../wait';
 export default {
     components: {
         NavBottom
@@ -120,8 +121,13 @@ export default {
         },
 
         getInfo(){
+            Indicator.open({
+                text: waitData[Math.floor(Math.random()*(waitData.length))],
+                spinnerType: 'fading-circle'
+            });
             axios.get("/user/getInfo").then(res=>{
                 this.userInfo = res.data.result;
+                Indicator.close();
             }).catch(err=>{
 
             })

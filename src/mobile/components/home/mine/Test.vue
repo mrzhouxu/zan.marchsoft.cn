@@ -178,11 +178,11 @@ export default {
           reason: this.reason
         })
         .then(function (response) {
-            var date = response.data.list;
+            var date = response.data;
             console.log(date);
-            if (date.code) {
+            if (date.code==0) {
                 Toast('点赞成功！');
-                that.$router.push({ path: '/home/mine' });
+                that.$router.push('/home/mine');
             }else {
                 Toast(date.msg);
             };
