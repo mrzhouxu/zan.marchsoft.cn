@@ -30,7 +30,7 @@
                 <img style="height:40px" src="../../../assets/img/one.png" v-if="index=='0'">
                 <img style="height:40px;transform: scale(0.9);" src="../../../assets/img/two.png" v-else-if="index=='1'">
                 <img style="height:40px;transform: scale(0.8);" src="../../../assets/img/three.png" v-else-if="index=='2'">
-                <span style="display: inline-block;line-height: 40px;vertical-align: text-bottom;width:40px;height:40px;text-align:center;" v-else>{{index}}</span>
+                <span style="display: inline-block;line-height: 40px;vertical-align: text-bottom;width:40px;height:40px;text-align:center;" v-else>{{index+1}}</span>
                 <img style="height:40px;border-radius: 50%;margin: 0 10px 0 0;" :src="'http://q1.qlogo.cn/g?b=qq&nk='+l.qq_account+'&s=100'">
                 <div style="display: inline-block;vertical-align: top;">
                     <p style="margin:0;padding:0;font-size: 16px;line-height: 20px;">{{l.name}}</p>

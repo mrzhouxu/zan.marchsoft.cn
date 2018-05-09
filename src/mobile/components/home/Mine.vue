@@ -229,12 +229,13 @@
         /*height: 300px;*/
         /*background-color: #e6e6e6;*/
         padding: 10px;
+        background-color: #f5f5f5;
     }
+    
 </style>
 <script>
 import { Toast,Indicator } from 'mint-ui';
 import {filters} from '../../filter';
-import {waitData} from '../../wait';
 import NavBottom from '../NavBottom.vue';
 export default {
     components:{
@@ -459,7 +460,7 @@ export default {
         // this.getDataUsed();
         // this.getDataOld();
         Indicator.open({
-            text: waitData[Math.floor(Math.random()*(waitData.length))],
+            text: '等人家一下呗~',
             spinnerType: 'fading-circle'
         });
         Promise.all([

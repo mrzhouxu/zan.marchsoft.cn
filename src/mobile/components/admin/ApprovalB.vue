@@ -15,7 +15,7 @@
                         <div>
                             <img class="avatar" :src="'http://q1.qlogo.cn/g?b=qq&nk='+item.qq_account+'&s=100'">
                             <span style="vertical-align: middle;">{{item.name}}</span>
-                            <span style="vertical-align: middle;float:right;">2018-05-08</span>
+                            <span style="vertical-align: middle;float:right;">{{item.created_time*1000 | timeago}}</span>
                         </div>
                         <div style="padding:10px 0;">
                             <p style="padding:0;">原因：</p>
@@ -41,7 +41,7 @@
                         <div>
                             <img class="avatar" :src="'http://q1.qlogo.cn/g?b=qq&nk='+item.qq_account+'&s=100'">
                             <span style="vertical-align: middle;">{{item.name}}</span>
-                            <span style="vertical-align: middle;float:right;">2018-05-08</span>
+                            <span style="vertical-align: middle;float:right;">{{item.created_time*1000 | timeago}}</span>
                         </div>
                         <div style="padding:10px 0;">
                             <p style="padding:0;">原因：</p>
@@ -149,7 +149,8 @@ export default {
                         member:JSON.parse(val.data),
                         name:val.apply_user_name,
                         status:val.status,
-                        content:val.content
+                        content:val.content,
+                        created_time:val.created_time
                     });
                 }
                 this.loading = false;
@@ -177,7 +178,7 @@ export default {
                     this.listO.push({
                         id:val.id,
                         qq_account:val.qq_account,
-                        name:val.apply_user_name,
+                        name:val.name,
                         status:val.status,
                         content:val.content,
                         created_time:val.created_time

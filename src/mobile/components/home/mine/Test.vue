@@ -20,6 +20,13 @@
     </form>
   </div>
 </template>
+<style>
+.MinePeople .mint-field-core{
+    text-align: center;
+    background: rgba(100,100,100,.03);
+}
+</style>
+
 <style scoped>
   #recive-min-body {
     background-color: #f5f5f5;
@@ -47,6 +54,7 @@
         border-radius: 7px;
         margin-top: 20px;
     }
+    
 </style>
 <script>
 import { Toast } from 'mint-ui';

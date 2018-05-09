@@ -299,6 +299,9 @@ export default {
       margin: 15px 0 5px 0;
       border-bottom: 10px solid #f5f5f5;
     }
+    .reason{
+      margin-bottom: 10px;
+    }
     .reason p {
       margin: 15px 0 0 0;
       z-index: 1;

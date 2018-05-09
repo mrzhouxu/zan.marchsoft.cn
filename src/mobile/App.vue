@@ -10,6 +10,7 @@
   </div>
 </template>
 
+
 <script>
 // import { Indicator } from 'mint-ui';
 export default {
