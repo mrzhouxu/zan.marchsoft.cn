@@ -179,6 +179,7 @@ export default {
         return;
       }else if (this.reason == '') {
         Toast('请填写您要点赞的理由');
+        return;
       }else{
         axios.post('/user/thumbsUp',{
           ids: this.ids,
@@ -190,7 +191,7 @@ export default {
             console.log(date);
             if (date.code==0) {
                 Toast('点赞成功！');
-                that.$router.push('/home/mine');
+                that.$router.push({path: '/home/mine'});
             }else {
                 Toast(date.msg);
             };

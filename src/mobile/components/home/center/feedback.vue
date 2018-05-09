@@ -193,6 +193,9 @@ export default {
         /* margin: 0 auto!important; */
         text-align: center;
     }
+    #textarea textarea{
+        resize:none!important;
+    }
 </style>
 
 <style scoped>
@@ -329,4 +332,5 @@ export default {
     ::-webkit-scrollbar {
         display: none;
     }
+    
 </style>
