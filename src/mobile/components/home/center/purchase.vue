@@ -43,7 +43,7 @@ export default {
         Toast("请输入个数");
         return;
       }else{
-        location.href = 'http://localhost:3030/alipay/wappay?count='+(that.mout*2)+'&code='+that.name
+        location.href = 'http://123.206.63.63:8080/alipay/wappay?count='+(that.mout*2)+'&code='+that.name
         // axios.get('/alipay/wappay',{params:{
         //   count:that.mout*2,
         //   code:that.name,
