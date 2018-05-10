@@ -27,10 +27,10 @@
         </div>
         <div style="margin-bottom:55px;">
             <div style="border-bottom: 1px solid #EBEBEB;height: 40px;overflow: hidden;padding: 10px 20px;" v-for="(l,index) in list" :key="index">
-                <img style="height:40px" src="../../../assets/img/one.png" v-if="index=='0'">
-                <img style="height:40px;transform: scale(0.9);" src="../../../assets/img/two.png" v-else-if="index=='1'">
-                <img style="height:40px;transform: scale(0.8);" src="../../../assets/img/three.png" v-else-if="index=='2'">
-                <span style="display: inline-block;line-height: 40px;vertical-align: text-bottom;width:40px;height:40px;text-align:center;" v-else>{{index+1}}</span>
+                <img style="height:40px" src="../../../assets/img/one.png" v-if="rank[index]==1">
+                <img style="height:40px;transform: scale(0.9);" src="../../../assets/img/two.png" v-else-if="rank[index]==2">
+                <img style="height:40px;transform: scale(0.8);" src="../../../assets/img/three.png" v-else-if="rank[index]==3">
+                <span style="display: inline-block;line-height: 40px;vertical-align: text-bottom;width:40px;height:40px;text-align:center;" v-else>{{rank[index]}}</span>
                 <img style="height:40px;border-radius: 50%;margin: 0 10px 0 0;" :src="'http://q1.qlogo.cn/g?b=qq&nk='+l.qq_account+'&s=100'">
                 <div style="display: inline-block;vertical-align: top;">
                     <p style="margin:0;padding:0;font-size: 16px;line-height: 20px;">{{l.name}}</p>
@@ -86,6 +86,7 @@ export default {
                     label:'年级',
                     option: ['全部','大一','大二','大三']
             },
+            rank: [],
             time: {
                 label: '时间区域',
                 option: ['全部','本周','上周']
@@ -138,6 +139,7 @@ export default {
                     });
 
                     this.list = arr;
+                    let f = 1;
                     for(var i in this.list){
                         if(this.list[i].id == res.data.code){
                             this.user.curRank = parseInt(i)+1;
@@ -146,7 +148,16 @@ export default {
                             this.user.name = this.list[i].name;
                             this.user.qq_account = this.list[i].qq_account;
                         }
+                        if(i==0)
+                            this.rank.push(1)
+                        else{
+                            if(arr[i].renqi!=arr[i-1].renqi){
+                                f++;
+                                this.rank.push(f)
+                            } else this.rank.push(f)
+                        }
                     }
+                    console.log(this.rank);
                 }
                 Indicator.close()
             })
