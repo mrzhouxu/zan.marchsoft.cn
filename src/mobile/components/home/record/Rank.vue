@@ -141,13 +141,6 @@ export default {
                     this.list = arr;
                     let f = 1;
                     for(var i in this.list){
-                        if(this.list[i].id == res.data.code){
-                            this.user.curRank = parseInt(i)+1;
-                            this.user.zan =  this.list[i].zan;
-                            this.user.renqi = this.list[i].renqi;
-                            this.user.name = this.list[i].name;
-                            this.user.qq_account = this.list[i].qq_account;
-                        }
                         if(i==0)
                             this.rank.push(1)
                         else{
@@ -155,6 +148,13 @@ export default {
                                 f++;
                                 this.rank.push(f)
                             } else this.rank.push(f)
+                        }
+                        if(this.list[i].id == res.data.code){
+                            this.user.curRank = f;
+                            this.user.zan =  this.list[i].zan;
+                            this.user.renqi = this.list[i].renqi;
+                            this.user.name = this.list[i].name;
+                            this.user.qq_account = this.list[i].qq_account;
                         }
                     }
                     console.log(this.rank);
