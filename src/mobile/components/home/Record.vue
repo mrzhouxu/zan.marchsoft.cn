@@ -23,7 +23,7 @@
             <div class="content-buttom">
                 <!-- <a to="/home/record/top">获取点赞排行></a> -->
                 <router-link to="/home/rank"><i class="fa fa-bar-chart"></i> 获赞排行榜 > </router-link>
-                <p class="time-range">(统计时间为：{{date.start_date}} 至 {{date.over_date}} 22:00)</p>
+                <p class="time-range">(统计时间为：{{date.start_date}} 至 {{date.over_date}})</p>
             </div>
         </div>
 
