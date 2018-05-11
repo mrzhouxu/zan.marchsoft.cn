@@ -147,7 +147,7 @@
         position: relative;
     }
     .Mine-card>div{
-        height: 120px;
+        height: 100px;
     }
     .recive-card>div{
         height: 75px;
@@ -182,17 +182,17 @@
         margin: 0;
         margin-left: 35px;
         color: #fee;
-        font-size: 10px;
+        font-size: 14px;
     }
     .Mine-card-message-down {
         width: 100%;
         position: absolute;
-        bottom: 10px;
+        bottom: 14px;
         text-align: center;
     }
     .Mine-card-message-down>span {
         color: #fee;
-        font-size: 10px;
+        font-size: 14px;
         opacity: 0.6;
     }
     .recive-card-message-down {
@@ -200,9 +200,9 @@
         justify-content: center;
     }
     .recive-card-message-down>span {
-        margin-top: 10px;
+        margin-top: 14px;
         color: #fee;
-        font-size: 10px;
+        font-size: 14px;
         opacity: 0.6;
     }
     .Mine-card img, .recive-card img{
@@ -216,19 +216,19 @@
         margin: 7px 0 3px 7px;
     }
     .Mine-card-message>span,.recive-card-message>span{
-        font-size: 10px;
+        font-size: 14px;
         color: #fee;
     }
     .Mine-card-time, .recive-card-time{
         margin: 7px;
-        font-size: 10px;
+        font-size: 14px;
         color: #fff;
         opacity: 0.7;
     }
     .Mine-card, .recive-card {
         /*height: 300px;*/
         /*background-color: #e6e6e6;*/
-        padding: 10px;
+        padding: 14px;
         background-color: #f5f5f5;
     }
     

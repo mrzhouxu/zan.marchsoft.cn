@@ -138,7 +138,7 @@ export default {
           Toast('请填写您购买的物品');
           return;
         };
-        params.content = buy;
+        params.content = "[购物]:"+buy;
         axios.post('/user/consume/insertCoinOrder', params)
         .then(function (response) {
             var date = response.data;
@@ -154,9 +154,9 @@ export default {
         });
       }else if (this.value == 'B'||this.value == 'C') {
         if(this.value == 'B'){
-          params.content = "请假";
+          params.content = "[请假]";
         }else if(this.value == 'C'){
-          params.content = "销假";
+          params.content = "[销假]";
         }
         axios.post('/user/consume/insertCoinOrder', params)
         .then(function (response) {
@@ -176,7 +176,7 @@ export default {
           Toast('请填写您的支付宝账号！');
           return;
         };
-        params.content = photo;
+        params.content = "[兑换现金]:"+photo;
         axios.post('/user/consume/insertCoinOrder', params)
         .then(function (response) {
             var date = response.data;

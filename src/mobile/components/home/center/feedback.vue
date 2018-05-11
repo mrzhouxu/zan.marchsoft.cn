@@ -1,16 +1,17 @@
 <template>
   <div>
-    <mt-header fixed  title="匿名反馈">
+    <mt-header fixed  title="匿名聊天">
       <router-link to="../home/center"  slot="left"> 
           <div class="back"><img src="../../../assets/img/back.png"></div>
       </router-link>
     </mt-header>
     <div class="apply-bg"></div>
     <div class="all">
-      <p class="feedback"><span>匿名</span>反馈</p>
+      <p class="feedback"><span>匿名</span>聊天</p>
       <div class="page-loadmore-wrapper" ref="wrapper" :style="{ height: wrapperHeight + 'px' }">
         <mt-loadmore :top-method="loadTop" 
         :bottom-method="loadBottom" :autoFill = "false"
+        bottomPullText="上拉加载" topPullText="下拉刷新"
         :bottom-all-loaded="allLoaded" ref="loadmore">
             <mt-spinner type="triple-bounce" v-if="topLoading"  color="#26a2ff" class="loading"></mt-spinner>
             <div class="talkList" v-for="(i,index) in data" :key="index">
@@ -264,7 +265,7 @@ export default {
       margin: 10px 6px 0 15px;
       font-size: 12px;
       width: 70px;
-      /*height: 30px;*/
+      height: 49px;
         position: absolute;
         right: 0;
         bottom: 0;
@@ -313,7 +314,7 @@ export default {
         white-space: nowrap;
         text-overflow: ellipsis;
         margin:0 50px 0 50px;
-        font-size:14px;
+        font-size:16px;
         line-height:40px;
         margin-right:70px;
     }

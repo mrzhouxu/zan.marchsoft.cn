@@ -42,7 +42,7 @@
                 <router-link to="/center/feedback">
                     <div class="my feedback">
                         <div class="small-icons"><img src="../../assets/img/user_five.png"></div>
-                        <div class="per-text"><p>匿名反馈</p></div>
+                        <div class="per-text"><p>匿名聊天</p></div>
                     </div>
                 </router-link>
 
@@ -59,12 +59,27 @@
                         <div class="per-text"><p>规则说明</p></div>
                     </div>
                 </router-link>
+
+                <router-link to="/admin/sendB" v-if="userInfo.type==2">
+                    <div class="my rule-desc" >
+                        <div class="small-icons"><img src="../../assets/img/user_seven.png"></div>
+                        <div class="per-text"><p>管理员发币</p></div>
+                    </div>
+                </router-link>
+
+                <router-link to="/admin/approvalB" v-if="userInfo.type==2">
+                    <div class="my rule-desc">
+                        <div class="small-icons"><img src="../../assets/img/user_seven.png"></div>
+                        <div class="per-text"><p>管理员审批</p></div>
+                    </div>
+                </router-link>
                 
                 <!-- <router-link to="/center/sign_out"> -->
                     <div class="my sign-out" @click="login_out">
                         <div class="small-icons"><img src="../../assets/img/user_eight.png"></div>
                         <div class="per-text"><p>退出登录</p></div>
                     </div>
+
                 <!-- </router-link> -->
                 <!-- <div style="height:100px"></div>  -->
             </div>
@@ -173,7 +188,7 @@ export default {
         margin: 22px 0 0 0;
     }
     p:nth-child(2) {
-        font-size: 12px;
+        font-size: 14px;
         line-height: 15px;
     }
     .per-infor>p {
@@ -197,7 +212,7 @@ export default {
     }
     .per-center p {
         color: #101010;
-        font-size: 15px;
+        font-size: 16px;
         margin: 28px 0 0 0;
     }
     a {

@@ -23,7 +23,7 @@
           </mt-popup>
         </div>
         <p class="about">关于申请</p>
-        <div v-for="(n,index) in data" class="apply-userinfor" :key="index">
+        <div v-for="(n,index) in data" class="apply-userinfor" :key="index" style="position:relative;">
           <div class="name">
             <p>*</p>
             <mt-field label="工号" v-model="n.code" placeholder="请输入工号"></mt-field>
@@ -32,6 +32,7 @@
             <p>*</p>
             <mt-field label="张数" v-model="n.num" placeholder="请输入个数"></mt-field>
           </div>
+          <i class="fa fa-minus-square-o fa-lg" v-on:click="remove_applypeople(index)" style="opacity: 0.2;position:absolute;width:27px;height:27px;right:0;top:40%;"></i>
         </div>
         <div class="apply-increpeo"><img src="../../../assets/img/incre-peo.png" v-on:click="add_applypeople"></div>
         <div class="apply-reason">
@@ -131,6 +132,13 @@ export default {
               code:"",
               num:""
           });
+    },
+    remove_applypeople:function(index){
+      if(this.data.length==1){
+        Toast("你是来闹着玩的~");
+        return;
+      }
+      this.data.splice(index,1) 
     },
     eject_applytype: function (){
       this.popupVisible = true;

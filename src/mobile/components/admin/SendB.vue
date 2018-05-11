@@ -1,6 +1,10 @@
 <template>
   <div class="fB">
-        <mt-header fixed title="独家发币"></mt-header>
+        <mt-header fixed title="独家发币">
+            <router-link to="../home/center" slot="left">
+            <div class="back"><img src="../../assets/img/back.png"></div>
+            </router-link>
+        </mt-header>
         <div class="top">
             <!-- <mt-search  style="margin-top:40px;height:100%;">
                 <div class="mint-cell" v-for="(i,index) in selectResult" :key="index">
@@ -129,6 +133,17 @@
 }
 .open{
     height:auto;
+}
+</style>
+<style scoped>
+.back {
+    z-index: 1;
+    position: absolute;
+    top: 8px;
+    left: 10px;
+}
+.back>img {
+    width: 25px;
 }
 </style>
 

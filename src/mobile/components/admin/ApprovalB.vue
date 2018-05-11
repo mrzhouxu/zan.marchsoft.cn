@@ -1,6 +1,10 @@
 <template>
   <div>
-        <mt-header fixed title="审批"></mt-header>
+        <mt-header fixed title="审批">
+            <router-link to="../home/center" slot="left">
+            <div class="back"><img src="../../assets/img/back.png"></div>
+            </router-link>
+        </mt-header>
         <mt-navbar fixed v-model="selected" style="margin-top:40px;">
             <mt-tab-item id="1">点赞币审批</mt-tab-item>
             <mt-tab-item id="2">订单审批</mt-tab-item>
@@ -63,6 +67,15 @@
     height: 30px;
     vertical-align: middle;
 }
+.back {
+    z-index: 1;
+    position: absolute;
+    top: 8px;
+    left: 10px;
+}
+.back>img {
+    width: 25px;
+}
 </style>
 
 <script>
@@ -73,7 +86,7 @@ import { Indicator } from 'mint-ui';
 export default {
   data () {
     return {
-        selected:'2',
+        selected:'1',
         bPage:1,
         flagB:false,
         listB:[

@@ -184,7 +184,7 @@
     }
     .recive-card>div{
         width: 100%;
-        height: 75px;
+        min-height: 60px;
         background-image: url(../../assets/img/normal.jpg);
         border-radius: 7px;
         margin-bottom: 10px;
@@ -215,16 +215,16 @@
         margin: 0;
         margin-left: 35px;
         color: #fee;
-        font-size: 10px;
+        font-size: 14px;
     }
     .recive-card-message-down {
         display: flex;
         justify-content: center;
     }
     .recive-card-message-down>span {
-        margin-top: 10px;
+        margin-top: 14px;
         color: #fee;
-        font-size: 10px;
+        font-size: 14px;
         opacity: 0.6;
     }
     .recive-card img {
@@ -238,19 +238,19 @@
         margin: 7px 0 3px 7px;
     }
     .recive-card-message>span {
-        font-size: 10px;
+        font-size: 14px;
         color: #fee;
     }
     .recive-card-time {
         margin: 7px;
-        font-size: 10px;
+        font-size: 14px;
         color: #fff;
         opacity: 0.7;
     }
     .recive-card {
         /*height: 300px;*/
         background-color: #f5f5f5;
-        padding: 10px;
+        padding: 14px;
     }
 </style>
 <script>
