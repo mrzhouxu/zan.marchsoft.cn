@@ -1,19 +1,19 @@
 <template>
     <mt-tabbar v-model="select">
         <mt-tab-item @click.native="jump('/home/record')" :id="1">
-            <i slot="icon"  class="fa fa-user fa-lg"></i>
+            <i slot="icon"  class="fa fa-pencil-square-o fa-lg"></i>
             点赞记录
         </mt-tab-item>
         <mt-tab-item @click.native="jump('/home/recive')" :id="2">
-            <i slot="icon"  class="fa fa-user fa-lg"></i>
+            <i slot="icon"  class="fa fa-thumbs-o-up fa-lg"></i>
             收到的赞
         </mt-tab-item>
         <mt-tab-item @click.native="jump('/home/mine')" :id="3">
-            <i slot="icon"  class="fa fa-user fa-lg"></i>
+            <i slot="icon"  class="fa fa-diamond fa-lg"></i>
             我的赞
         </mt-tab-item>
         <mt-tab-item @click.native="jump('/home/center')" :id="4">
-            <i slot="icon"  class="fa fa-user fa-lg"></i>
+            <i slot="icon"  class="fa fa-user-o fa-lg"></i>
                 个人中心
         </mt-tab-item>
     </mt-tabbar>
