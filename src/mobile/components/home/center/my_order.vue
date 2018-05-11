@@ -22,7 +22,7 @@
                 <p>信息</p>
             </div>
             <div class="order-infor" style="display:flex;width:70%;height:60px;" v-on:click="eject_applytype(list[0])" v-if="list.length!=0">
-                <p style="flex:1;font-size:10px;line-height:60px;padding:0;margin:0;">{{list[0].content}}</p>
+                <p style="flex:1;font-size:14px;line-height:60px;padding:0;margin:0;">{{list[0].content}}</p>
                 <p v-if="list[0].status==0">等待处理</p>
                 <p v-else-if="list[0].status==1">已完成</p>
                 <p style="color:red;" v-else>已拒绝</p>
@@ -223,7 +223,7 @@ export default {
         /*margin: 10px 0 0 0;*/
     }
     p:nth-child(2) {
-        font-size: 12px;
+        font-size: 14px;
         /*line-height: 0;*/
     }
     span {
@@ -250,7 +250,7 @@ export default {
         width: 70px;
     }
     .new-text p {
-        font-size: 10px;
+        font-size: 14px;
         text-align: center;
         color: #101010;
         opacity: 0.6;
@@ -297,7 +297,7 @@ export default {
         padding: 10px 0;
     }
     .old p {
-        font-size: 10px;
+        font-size: 14px;
         color: #BBBBBB;
     }
     .order-infortime {

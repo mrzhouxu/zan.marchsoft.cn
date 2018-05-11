@@ -140,7 +140,7 @@
 </template>
 <style scoped>
     .reciveShort {
-        font-size: 14px;
+        font-size: 10px;
         margin: 0;
         padding: 0;
         display: flex;
@@ -215,16 +215,16 @@
         margin: 0;
         margin-left: 35px;
         color: #fee;
-        font-size: 14px;
+        font-size: 10px;
     }
     .recive-card-message-down {
         display: flex;
         justify-content: center;
     }
     .recive-card-message-down>span {
-        margin-top: 14px;
+        margin-top: 10px;
         color: #fee;
-        font-size: 14px;
+        font-size: 10px;
         opacity: 0.6;
     }
     .recive-card img {
@@ -238,12 +238,12 @@
         margin: 7px 0 3px 7px;
     }
     .recive-card-message>span {
-        font-size: 14px;
+        font-size: 10px;
         color: #fee;
     }
     .recive-card-time {
         margin: 7px;
-        font-size: 14px;
+        font-size: 10px;
         color: #fff;
         opacity: 0.7;
     }
