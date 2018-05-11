@@ -102,7 +102,8 @@
                     <div class="bAvatar">
                         <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+bInfo.img_url+'&s=100'" alt="err">
                     </div>
-                    <p class="fromTo">{{bInfo.name}} 给我点赞!</p>
+                    <p class="fromTo" v-if="sel==1">{{bInfo.from_user_name}} 给我点赞!</p>
+                    <p class="fromTo" v-else-if="sel==2">我给 {{bInfo.to_user_name}} 点赞!</p>
                 </div>
                 <div class="bContent">
                     <p>{{bInfo.reason}}</p>

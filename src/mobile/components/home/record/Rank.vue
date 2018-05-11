@@ -45,7 +45,7 @@
         <mt-popup
         v-model="popupVisible"
         position="top" class="popup-div">
-            <div style="padding-top:80px;width:100%">
+            <div style="padding-top:75px;width:100%">
                     <mt-cell :title="grade.label">
                         <i class="fa fa-angle-down"></i>
                     </mt-cell>
@@ -60,7 +60,7 @@
                     :class="{'select-span':timeSelect==t}" @click="timeChange(t,index)">
                     {{t}}
                     </span>
-                    <div style="padding:5px">
+                    <div>
                         <mt-button type="default" size="large" @click.native="getAllRank">查询</mt-button>
                     </div>
             </div>
@@ -204,7 +204,7 @@ export default {
     .option-span {
         display: inline-block;
         font-size: 14px;
-        padding: 5px 25px;
+        padding: 10px 25px;
         margin-left: 35px;
         margin-bottom: 15px;
         background-color: #EBEBEB;
