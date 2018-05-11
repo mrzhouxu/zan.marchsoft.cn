@@ -3,7 +3,7 @@
     <mt-header title="我的赞">
       <mt-button icon="back" slot="left" @click.native="goBack">返回</mt-button>
     </mt-header>
-    <form>
+    <!-- <form> -->
       <h3 class="recive-min-input">请填写以下信息：</h3> 
       <mt-field label="你要点赞给" placeholder="姓名" @click.native="handleClick" v-model="tt" disabled class="MinePeople"></mt-field>
       <!-- <mt-field label="使用数量" placeholder="1张"></mt-field> -->
@@ -17,7 +17,7 @@
       <div class="recive-buttonBox">
             <mt-button type="primary" class="recive-button"  @click.native="reciveTestSubmit">确定</mt-button>
       </div>
-    </form>
+    <!-- </form> -->
   </div>
 </template>
 <style>

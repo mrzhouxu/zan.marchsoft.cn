@@ -11,7 +11,7 @@ window.axios = axios
 window.axios.defaults.withCredentials = true
 window.axios.defaults.xsrfCookieName = null
 window.axios.defaults.xsrfHeaderName = null
-axios.defaults.baseURL = 'http://localhost:3030';
+axios.defaults.baseURL = 'http://123.206.63.63:8080';
 // axios.defaults.baseURL = 'http://172.16.0.152:3030';
 // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
@@ -36,7 +36,7 @@ axios.interceptors.response.use(function (response) {
   let res = error.response;
   // console.log(res)
   if (res&&res.status == 401) {
-      location.replace("http://localhost:8080/mobile.html#/sign/login") 
+      location.replace("http://123.206.63.63/mobile.html#/sign/login") 
       // location.replace("http://localhost:8081/mobile.html#/sign/login") 
       // location.href = "http://172.16.0.152:90/mobile.html#/sign/login";
       // location.reload();

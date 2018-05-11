@@ -17,13 +17,13 @@
         background-color: rgba(0,0,0,0);
         color: #fff;
     }
-    .login-input .mint-field-core::-webkit-input-placeholder { /*WebKit browsers*/
+    .login-input .mint-field-core::-webkit-input-placeholder { 
         color: #fff;
     }
-    .login-input .mint-field-core::-moz-input-placeholder { /*Mozilla Firefox*/
+    .login-input .mint-field-core::-moz-input-placeholder { 
         color: #fff;
     }
-    .login-input .mint-field-core::-ms-input-placeholder { /*Internet Explorer*/ 
+    .login-input .mint-field-core::-ms-input-placeholder { 
         color: #fff;
     }
 </style>
@@ -50,14 +50,16 @@
     }
     .login-input {
         background-color: rgba(0,0,0,0);
-        border-bottom:1px solid #fff;
-        margin: 0 20px 10px;
-        padding-left: 10px;
+        /* border-bottom:1px solid #fff; */
+        /* margin: 0 20px 10px; */
+        /* padding-left: 10px; */
+        /* font-size: 20px;
+        line-height: 35px; */
     }
     .login-Bg-Img {
         background-image: url(../../assets/img/bg.jpg);
         background-size: cover;
-    }
+    } 
 </style>
 <script>
 import { Toast,Indicator } from 'mint-ui';

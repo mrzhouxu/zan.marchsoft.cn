@@ -43,24 +43,26 @@ export default {
         Toast("请输入个数");
         return;
       }else{
-        axios.get('/alipay/wappay',{
-          total_amount:that.mout,
-          total_name:that.name,
-        })
-          .then(function (response) {
-            var judge = response.data;
-            console.log(judge);
-            if (judge.code==0) {
-              console.log(judge.code);
-              Toast(judge.msg);
-              // that.$router.push({ path: '/home/record' });
-            } else {
-              Toast(judge.msg);
-            }; 
-          })
-          .catch(function (error) {
-              // console.log(error);
-          }); 
+        location.href = 'http://123.206.63.63:8080/alipay/wappay?count='+(that.mout*2)+'&code='+that.name
+        // axios.get('/alipay/wappay',{params:{
+        //   count:that.mout*2,
+        //   code:that.name,
+        // }}).then(function (response) {
+        //     // var judge = response.data;
+        //     // console.log(judge);
+        //     // if (judge.code==0) {
+        //     //   console.log(judge.code);
+        //     //   Toast(judge.msg);
+        //     //   // that.$router.push({ path: '/home/record' });
+        //     // } else {
+        //     //   Toast(judge.msg);
+        //     // }; 
+        //     console.log(response.data)
+        //     document.body.appendChild(response.data)
+        //   })
+        //   .catch(function (error) {
+        //       // console.log(error);
+        //   }); 
       }
     }
   },
