@@ -3,7 +3,6 @@
     <mt-header title="消费点赞币">
       <mt-button icon="back" slot="left" @click.native="goBack">返回</mt-button>
     </mt-header>
-    <form>
       <h3>请填写以下信息：</h3>
       <mt-radio  
         title="选择消费方式"  
@@ -19,7 +18,6 @@
       <div class="recive-buttonBox">
             <mt-button type="primary" class="recive-button"  @click.native="reciveTestSubmit">确定</mt-button>
       </div>
-    </form>
   </div>
 </template>
 <style scoped>
