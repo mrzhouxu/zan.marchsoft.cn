@@ -8,7 +8,7 @@
                 <mt-button icon="more" slot="right"></mt-button>
             </mt-header>
             <div class="select-div" @click="popupVisible=!popupVisible">
-                全部
+                {{gradeSelect}}
                 <i v-if="!popupVisible" class="fa fa-caret-down"></i>
                 <i v-else class="fa fa-caret-up"></i>
             </div>
