@@ -140,6 +140,11 @@ let all_router = {
       name: '管理员审批点赞币',
       component: resolve =>void(require(['../components/admin/ApprovalB'], resolve))
     },
+    {
+      path: '/admin/statistics',
+      name: '管理员统计页面',
+      component: resolve =>void(require(['../components/admin/Statistics'], resolve))
+    },
     // {
     //   path: '/admin/test',
     //   name: '管理员审批点赞币',

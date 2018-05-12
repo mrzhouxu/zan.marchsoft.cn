@@ -73,6 +73,13 @@
                         <div class="per-text"><p>管理员审批</p></div>
                     </div>
                 </router-link>
+
+                <router-link to="/admin/approvalB" v-if="userInfo.type==2">
+                    <div class="my rule-desc">
+                        <div class="small-icons"><img src="../../assets/img/user_seven.png"></div>
+                        <div class="per-text"><p>管理员统计</p></div>
+                    </div>
+                </router-link>
                 
                 <!-- <router-link to="/center/sign_out"> -->
                     <div class="my sign-out" @click="login_out">
