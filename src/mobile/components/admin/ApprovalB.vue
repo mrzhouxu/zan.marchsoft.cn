@@ -48,6 +48,7 @@
                             <span style="vertical-align: middle;float:right;">{{item.created_time*1000 | timeago}}</span>
                         </div>
                         <div style="padding:10px 0;">
+                            <p style="padding:0;margin:0;">点赞币使用数量 : {{item.coin_sum}} 个币</p>
                             <p style="padding:0;">原因：</p>
                             <p style="padding:0;margin:0;text-align:center;">{{item.content}}</p>
                         </div>
@@ -131,6 +132,19 @@ export default {
         ]
     }
   },
+  watch:{
+      selected(val){
+          this.bPage = 1;
+          this.oPage = 1;
+          this.listB = [];
+          this.listO = [];
+          if(val==1){
+              this.getB()
+          }else if(val==2){
+              this.getO();
+          }
+      }
+  },
   methods:{
     loadMore() {
         this.loading = true;
@@ -194,7 +208,8 @@ export default {
                         name:val.name,
                         status:val.status,
                         content:val.content,
-                        created_time:val.created_time
+                        created_time:val.created_time,
+                        coin_sum:val.star_coin_id.split(",").length
                     });
                 }
                 this.loading = false;
@@ -279,7 +294,7 @@ export default {
   },
   mounted(){
     this.getB();
-    this.getO();
+    // this.getO();
   }
 }
 </script>

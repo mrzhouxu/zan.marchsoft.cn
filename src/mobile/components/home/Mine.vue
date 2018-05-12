@@ -216,7 +216,7 @@
         margin: 7px 0 3px 7px;
     }
     .Mine-card-message>span,.recive-card-message>span{
-        font-size: 10px;
+        font-size: 14px;
         color: #fee;
     }
     .Mine-card-time, .recive-card-time{

@@ -9,6 +9,11 @@
     <router-view v-if="(!$route.meta.keepAlive)"></router-view>
   </div>
 </template>
+<style>
+.mint-header{
+  font-size:17px;
+}
+</style>
 
 
 <script>

@@ -213,9 +213,10 @@
     }
     .recive-card>div>p {
         margin: 0;
-        margin-left: 35px;
+        /* margin-left: 35px; */
+        padding: 4px 8px 10px 35px;
         color: #fee;
-        font-size: 10px;
+        font-size: 13px;
     }
     .recive-card-message-down {
         display: flex;
@@ -238,7 +239,7 @@
         margin: 7px 0 3px 7px;
     }
     .recive-card-message>span {
-        font-size: 10px;
+        font-size: 13px;
         color: #fee;
     }
     .recive-card-time {
