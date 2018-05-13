@@ -10,7 +10,7 @@
   </div>
 </template>
 <style>
-.mint-header{
+.mint-header>h1{
   font-size:17px;
 }
 </style>

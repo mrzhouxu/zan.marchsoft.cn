@@ -74,7 +74,7 @@
                     </div>
                 </router-link>
 
-                <router-link to="/admin/approvalB" v-if="userInfo.type==2">
+                <router-link to="/admin/statistics" v-if="userInfo.type==2">
                     <div class="my rule-desc">
                         <div class="small-icons"><img src="../../assets/img/user_seven.png"></div>
                         <div class="per-text"><p>管理员统计</p></div>

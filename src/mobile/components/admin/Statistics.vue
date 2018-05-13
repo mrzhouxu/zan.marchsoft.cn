@@ -44,25 +44,25 @@
 
         <div>
             <div style="padding: 6px 0 6px 30px;border-bottom: 3px solid rgba(235, 235, 235,.3);">
-                <img src="http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" alt="" style=" border-radius: 50%;height: 40px;width: 40px;vertical-align: middle;">
+                <img src="http://q1.qlogo.cn/g?b=qq&nk=qq&s=100" alt="" style=" border-radius: 50%;height: 40px;width: 40px;vertical-align: middle;">
                 <span style="vertical-align: middle;">累计发放 <strong style="color:red;font-weight:100;">{{list[0]}}</strong> 个点赞币</span>
             </div>
             <div style="padding: 6px 0 6px 30px;border-bottom: 3px solid rgba(235, 235, 235,.3);">
-                <img src="http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" alt="" style=" border-radius: 50%;height: 40px;width: 40px;vertical-align: middle;">
+                <img src="http://q1.qlogo.cn/g?b=qq&nk=qq&s=100" alt="" style=" border-radius: 50%;height: 40px;width: 40px;vertical-align: middle;">
                 <span style="vertical-align: middle;">累计申请 <strong style="color:red;font-weight:100;">{{list[1]}}</strong> 个点赞币</span>
             </div>
             <div style="padding: 6px 0 6px 30px;border-bottom: 3px solid rgba(235, 235, 235,.3);">
-                <img src="http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" alt="" style=" border-radius: 50%;height: 40px;width: 40px;vertical-align: middle;">
+                <img src="http://q1.qlogo.cn/g?b=qq&nk=qq&s=100" alt="" style=" border-radius: 50%;height: 40px;width: 40px;vertical-align: middle;">
                 <span style="vertical-align: middle;">累计卖出 <strong style="color:red;font-weight:100;">{{list[2]}}</strong> 个点赞币 </span>
             </div>
             <div style="padding: 6px 0 6px 30px;border-bottom: 3px solid rgba(235, 235, 235,.3);" @click="flag=!flag">
-                <img src="http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" alt="" style=" border-radius: 50%;height: 40px;width: 40px;vertical-align: middle;">
+                <img src="http://q1.qlogo.cn/g?b=qq&nk=qq&s=100" alt="" style=" border-radius: 50%;height: 40px;width: 40px;vertical-align: middle;">
                 <span style="vertical-align: middle;">累计消费 <strong style="color:red;font-weight:100;">{{list[3]+list[4]+list[5]+list[6]}}</strong> 个点赞币 </span>
                 <i class="fa fa-angle-right fa-lg" style="margin-left: 20px;vertical-align: middle;" v-if="!flag"></i>
                 <i class="fa fa-angle-down fa-lg" style="margin-left: 20px;vertical-align: middle;" v-else></i>
             </div>
             <div style="padding: 6px 0 6px 30px;border-bottom: 3px solid rgba(235, 235, 235,.3);" v-if="flag">
-                <!-- <img src="http://q1.qlogo.cn/g?b=qq&nk=794135759&s=100" alt="" style=" border-radius: 50%;height: 40px;width: 40px;vertical-align: middle;"> -->
+                <!-- <img src="http://q1.qlogo.cn/g?b=qq&nk=qq&s=100" alt="" style=" border-radius: 50%;height: 40px;width: 40px;vertical-align: middle;"> -->
                 <p style="vertical-align: middle;margin-left: 45px;">用于购物 <strong style="color:blue;font-weight:100;">{{list[3]}}</strong> 个点赞币</p>
                 <p style="vertical-align: middle;margin-left: 45px;">用于请假 <strong style="color:blue;font-weight:100;">{{list[4]}}</strong> 个点赞币</p>
                 <p style="vertical-align: middle;margin-left: 45px;">用于销假 <strong style="color:blue;font-weight:100;">{{list[5]}}</strong> 个点赞币</p>
