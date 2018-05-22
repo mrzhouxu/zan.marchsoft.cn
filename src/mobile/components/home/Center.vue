@@ -84,7 +84,7 @@
                 <!-- <router-link to="/center/sign_out"> -->
                     <div class="my sign-out" @click="login_out">
                         <div class="small-icons"><img src="../../assets/img/user_eight.png"></div>
-                        <div class="per-text"><p>退出登录</p></div>
+                        <div class="per-text"><p>切换账号</p></div>
                     </div>
 
                 <!-- </router-link> -->
@@ -124,22 +124,23 @@ export default {
     },
     methods: {
         login_out(){
-            MessageBox.confirm('确定执行此操作?').then(action => {
-                axios.get("/user/login_out").then(res=>{
-                    // console.log(res.data)
-                    if(res.data.code == 0){
-                        Toast({
-                            message: '操作成功',
-                            iconClass: 'fa fa-check fa-5x'
-                        });
-                        this.$router.push('/sign/login');
-                    }
-                }).catch(err=>{
-                    // console.log(12)
-                })
-            }).catch(err=>{
-                // console.log(112)
-            });
+            this.$router.push('/sign/login');
+            // MessageBox.confirm('确定执行此操作?').then(action => {
+            //     axios.get("/user/login_out").then(res=>{
+            //         // console.log(res.data)
+            //         if(res.data.code == 0){
+            //             Toast({
+            //                 message: '操作成功',
+            //                 iconClass: 'fa fa-check fa-5x'
+            //             });
+            //             this.$router.push('/sign/login');
+            //         }
+            //     }).catch(err=>{
+            //         // console.log(12)
+            //     })
+            // }).catch(err=>{
+            //     // console.log(112)
+            // });
         },
 
         getInfo(){
