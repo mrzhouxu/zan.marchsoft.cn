@@ -5,7 +5,7 @@
         <mt-navbar class="page-part recive-navbar" v-model="selected">
             <mt-tab-item id="1">已使用({{dataUsed.length}})</mt-tab-item>
             <mt-tab-item id="2">未使用({{data.length}})</mt-tab-item>
-            <mt-tab-item id="3">已过期({{dataOld.length}})</mt-tab-item>
+            <!-- <mt-tab-item id="3">已过期({{dataOld.length}})</mt-tab-item> -->
         </mt-navbar>
 
         <!-- tab-container -->
@@ -72,7 +72,8 @@
                                 <img :src="'http://q1.qlogo.cn/g?b=qq&nk='+d.qq_account+'&s=100'" alt="头像">
                                 <span>{{d.name}} 给我点赞！</span>
                             </div>
-                            <span class="recive-card-time">{{d.endTime*1000 | timeago}}过期</span> 
+                            <!-- <span class="recive-card-time">{{d.endTime*1000 | timeago}}过期</span>  -->
+                            <span class="recive-card-time">永久有效</span> 
                         </div>
                         <p>原因：{{d.reason}}</p>
                         <!-- <div class="recive-card-message-down">
@@ -521,8 +522,8 @@ export default {
         });
         Promise.all([
             new Promise(this.getData),
-            new Promise(this.getDataUsed),
-            new Promise(this.getDataOld)
+            new Promise(this.getDataUsed)
+            // new Promise(this.getDataOld)
         ]).then(function(val){
             Indicator.close();
         });
