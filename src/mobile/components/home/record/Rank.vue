@@ -140,6 +140,7 @@ export default {
 
                     this.list = arr;
                     let f = 1;
+                    this.rank.length = 0;
                     for(var i in this.list){
                         if(i==0)
                             this.rank.push(1)

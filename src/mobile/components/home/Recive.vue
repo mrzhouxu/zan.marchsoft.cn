@@ -252,7 +252,7 @@
     .recive-card {
         /*height: 300px;*/
         background-color: #f5f5f5;
-        padding: 14px;
+        padding: 6px;
     }
 </style>
 <script>
